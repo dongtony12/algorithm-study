@@ -23,7 +23,7 @@ LeetCode 문제를 풀며 남긴 학습 기록입니다. **정답 코드만이 �
 
 - [배열 · 문자열](01-Array-String/README.md) — 9문제
 - [해시맵](02-Hashmap/README.md) — 2문제
-- [투 포인터](03-Two-Pointers/README.md) — 2문제
+- [투 포인터](03-Two-Pointers/README.md) — 3문제
 
 **개념 노트**
 
@@ -89,7 +89,7 @@ LeetCode 문제를 풀며 남긴 학습 기록입니다. **정답 코드만이 �
 |---|---|---|---|---|
 | 1 | 배열 · 문자열 | `01-Array-String` | 9 / 9 | ✅ **졸업** |
 | 2 | **해시맵** | `02-Hashmap` | **2 / 11** | 🔵 **진행 중** |
-| 3 | 투 포인터 | `03-Two-Pointers` | 2 / 5 | 🟡 보충 필요 |
+| 3 | 투 포인터 | `03-Two-Pointers` | 3 / 6 | 🟡 보충 필요 |
 | 4 | 슬라이딩 윈도우 | `04-Sliding-Window` | 0 / 4 | |
 | 5 | 스택 · 큐 | `05-Stack-Queue` | 0 / 6 | |
 | 6 | 이진 탐색 | `06-Binary-Search` | 0 / 6 | |
@@ -103,7 +103,7 @@ LeetCode 문제를 풀며 남긴 학습 기록입니다. **정답 코드만이 �
 | 14 | DP (1D) | `14-DP` | 0 / 5 | |
 | 부록 | 비트 · 수학 | `15-Bit-Math` | 0 / 6 | 짬짬이 |
 
-**총 13 / 94**
+**총 14 / 95**
 
 ---
 
@@ -145,6 +145,7 @@ LeetCode 문제를 풀며 남긴 학습 기록입니다. **정답 코드만이 �
 
 - [x] ★ [0125. Valid Palindrome](03-Two-Pointers/0125-valid-palindrome/README.md) — 08-03 통과
 - [x] ★ [0392. Is Subsequence](03-Two-Pointers/0392-is-subsequence/README.md) — 08-10 통과 (빈 문자열 3차 수정)
+- [x] **[0167. Two Sum II - Input Array Is Sorted](03-Two-Pointers/0167-two-sum-ii-input-array-is-sorted/README.md)** — 08-12 통과 (**Medium**, 사용자 지정 조기 투입. 지배 논증 피드백 2회)
 - [ ] 344. Reverse String — 보충
 - [ ] 283. Move Zeroes — 보충
 - [ ] 977. Squares of a Sorted Array — 보충
@@ -321,6 +322,7 @@ LeetCode 문제를 풀며 남긴 학습 기록입니다. **정답 코드만이 �
 | [0014. Longest Common Prefix](01-Array-String/0014-longest-common-prefix/README.md) | 08-12 (복습) | 08-17 | 1 |
 | [0028. Find the Index of the First Occurrence in a String](01-Array-String/0028-find-the-index-of-the-first-occurrence-in-a-string/README.md) | 08-12 (복습) | 08-17 | 1 |
 | [0125. Valid Palindrome](03-Two-Pointers/0125-valid-palindrome/README.md) | 08-12 (복습) | 08-17 | 1 |
+| [0167. Two Sum II - Input Array Is Sorted](03-Two-Pointers/0167-two-sum-ii-input-array-is-sorted/README.md) | 08-12 | 08-17 | 0 |
 | [0088. Merge Sorted Array](01-Array-String/0088-merge-sorted-array/README.md) | 08-10 (복습) | 08-15 | 1 |
 | [0027. Remove Element](01-Array-String/0027-remove-element/README.md) | 08-10 (복습) | 08-15 | 1 |
 | [0392. Is Subsequence](03-Two-Pointers/0392-is-subsequence/README.md) | 08-10 | 08-15 | 0 |

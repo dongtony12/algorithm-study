@@ -49,7 +49,8 @@ function slugify(s) {
     .toLowerCase()
     .replace(/[^a-z0-9가-힣\s-]/g, '')
     .trim()
-    .replace(/\s+/g, '-')
+    .replace(/[\s-]+/g, '-') // 공백+하이픈 연속을 하나로 ("A - B" → "a-b")
+    .replace(/^-|-$/g, '')
 }
 
 /**

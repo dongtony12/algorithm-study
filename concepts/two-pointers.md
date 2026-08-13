@@ -41,14 +41,37 @@ while (left < right) {
 }
 ```
 
-| 문제 | 움직이는 규칙 |
-|---|---|
-| [0125. Valid Palindrome](../03-Two-Pointers/0125-valid-palindrome/README.md) | 무시할 문자는 건너뛰고, 일치하면 둘 다 좁힘 |
-| 167. Two Sum II (정렬된 배열) | 합이 크면 `right--`, 작으면 `left++` |
-| 11. Container With Most Water | 높이가 낮은 쪽을 안으로 |
-| 15. 3Sum | 하나 고정 + 나머지 양끝 |
+| 문제 | 움직이는 규칙 | 버려도 되는 근거 |
+|---|---|---|
+| [0125. Valid Palindrome](../03-Two-Pointers/0125-valid-palindrome/README.md) | 무시할 문자는 건너뛰고, 일치하면 둘 다 좁힘 | 대칭 구조 |
+| [0167. Two Sum II - Input Array Is Sorted](../03-Two-Pointers/0167-two-sum-ii-input-array-is-sorted/README.md) | 합이 크면 `right--`, 작으면 `left++` | **정렬** → 지배 논증 (아래) |
+| 11. Container With Most Water | 높이가 **낮은 쪽**을 안으로 | 낮은 쪽을 두면 폭만 줄어 넓이가 절대 안 커짐 |
+| 15. 3Sum | 하나 고정 + 나머지 양끝 | 167을 `n`번 반복 → `O(n²)` |
 
 **전제**: 대부분 **정렬되어 있거나 대칭 구조**여야 한다. 그래야 "어느 쪽을 움직일지" 판단할 수 있다.
+
+### 🔑 지배 논증 — 양끝 포인터가 "버려도 되는" 이유
+
+`left`/`right` 중 하나를 움직인다는 건 **그 원소를 영원히 버린다**는 뜻이다. 왜 안전한가?
+
+[0167. Two Sum II - Input Array Is Sorted](../03-Two-Pointers/0167-two-sum-ii-input-array-is-sorted/README.md) 기준:
+
+```
+numbers[right] 와 짝지을 수 있는 남은 수 중 가장 작은 것이 numbers[left]   ← ① 정렬 덕분
+그 조합조차 target을 초과했다                                             ← ②
+→ numbers[right] 는 남은 어떤 수와 짝지어도 target을 넘는다                ← ①+②
+→ numbers[right] 는 답에 포함될 수 없다  →  버려도 안전
+```
+
+> ### **"지금 최선의 조합조차 안 되면, 나머지는 볼 필요도 없다."**
+> [0121. Best Time to Buy and Sell Stock](../01-Array-String/0121-best-time-to-buy-and-sell-stock/README.md) 의 *"새 최저가가 나오면 예전 최저가는 어떤 시나리오에서도 다시 쓸 일이 없다"* 와 **완전히 같은 구조.** → [그리디 알고리즘](greedy.md)
+
+⚠️ **성립하는 유일한 이유는 "정렬"** 이다. 정렬이 없으면 `numbers[left]` 가 남은 것 중 가장 작다는 보장이 사라지고 **논증 전체가 무너진다.**
+
+**매 반복 최소 하나의 후보를 확정 제거**하므로 최대 `n`번 → `O(n)`.
+
+> 🔑 **양끝 포인터 문제를 풀 때 항상 물어라 — "이걸 버려도 되는 근거가 뭐지?"**
+> 답하지 못하면 감으로 푼 것이고, 조건이 살짝 바뀌면 바로 틀린다.
 
 ---
 
@@ -179,4 +202,4 @@ left=0~4 전부 ',' 건너뜀 → left=5 → 조건 5 <= 4 거짓 → 종료 →
 ## 관련 노트
 
 - [시간·공간 복잡도](complexity.md)
-- [0088. Merge Sorted Array](../01-Array-String/0088-merge-sorted-array/README.md) · [0027. Remove Element](../01-Array-String/0027-remove-element/README.md) · [0026. Remove Duplicates from Sorted Array](../01-Array-String/0026-remove-duplicates-from-sorted-array/README.md) · [0125. Valid Palindrome](../03-Two-Pointers/0125-valid-palindrome/README.md) · [0392. Is Subsequence](../03-Two-Pointers/0392-is-subsequence/README.md)
+- [0088. Merge Sorted Array](../01-Array-String/0088-merge-sorted-array/README.md) · [0027. Remove Element](../01-Array-String/0027-remove-element/README.md) · [0026. Remove Duplicates from Sorted Array](../01-Array-String/0026-remove-duplicates-from-sorted-array/README.md) · [0125. Valid Palindrome](../03-Two-Pointers/0125-valid-palindrome/README.md) · [0392. Is Subsequence](../03-Two-Pointers/0392-is-subsequence/README.md) · [0167. Two Sum II - Input Array Is Sorted](../03-Two-Pointers/0167-two-sum-ii-input-array-is-sorted/README.md)
