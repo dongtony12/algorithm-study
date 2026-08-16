@@ -45,7 +45,7 @@ while (left < right) {
 |---|---|---|
 | [0125. Valid Palindrome](../03-Two-Pointers/0125-valid-palindrome/README.md) | 무시할 문자는 건너뛰고, 일치하면 둘 다 좁힘 | 대칭 구조 |
 | [0167. Two Sum II - Input Array Is Sorted](../03-Two-Pointers/0167-two-sum-ii-input-array-is-sorted/README.md) | 합이 크면 `right--`, 작으면 `left++` | **정렬** → 지배 논증 (아래) |
-| 11. Container With Most Water | 높이가 **낮은 쪽**을 안으로 | 낮은 쪽을 두면 폭만 줄어 넓이가 절대 안 커짐 |
+| [0011. Container With Most Water](../03-Two-Pointers/0011-container-with-most-water/README.md) | 높이가 **낮은 쪽**을 안으로 | 낮은 쪽이 min을 결정 + 폭은 단조 감소 (아래) |
 | 15. 3Sum | 하나 고정 + 나머지 양끝 | 167을 `n`번 반복 → `O(n²)` |
 
 **전제**: 대부분 **정렬되어 있거나 대칭 구조**여야 한다. 그래야 "어느 쪽을 움직일지" 판단할 수 있다.
@@ -70,8 +70,28 @@ numbers[right] 와 짝지을 수 있는 남은 수 중 가장 작은 것이 numb
 
 **매 반복 최소 하나의 후보를 확정 제거**하므로 최대 `n`번 → `O(n)`.
 
-> 🔑 **양끝 포인터 문제를 풀 때 항상 물어라 — "이걸 버려도 되는 근거가 뭐지?"**
+#### 근거는 문제마다 다르다 — 형태만 같다
+
+| 문제 | 버려도 되는 근거 |
+|---|---|
+| [0167. Two Sum II - Input Array Is Sorted](../03-Two-Pointers/0167-two-sum-ii-input-array-is-sorted/README.md) | **정렬** — 남은 것 중 최소/최대가 보장됨 |
+| [0011. Container With Most Water](../03-Two-Pointers/0011-container-with-most-water/README.md) | **낮은 쪽이 min을 결정 + 폭은 단조 감소** — 정렬이 없어도 성립 |
+
+[0011. Container With Most Water](../03-Two-Pointers/0011-container-with-most-water/README.md) 의 논증:
+```
+height[i] 를 포함하는 남은 조합은 전부 (i, j),  j < k       ← 폭이 반드시 줄어든다
+높이 = min(height[i], height[j]) ≤ height[i]                 ← 높이는 절대 못 넘는다
+→ 두 항 모두 커질 수 없다 → 현재 넓이가 height[i] 의 최대치 → 이미 기록했으므로 버려도 안전
+```
+
+**높은 쪽을 옮기면 왜 안 되나**: `height[i]` 가 남아 min을 계속 제한하고 폭만 줄어든다 → 두 항 모두 안 커진다.
+**낮은 쪽을 옮겨야 높이 제한이 풀린다** — 넓이가 커질 수 있는 유일한 경로.
+
+> ### 🔑 양끝 포인터 문제를 풀 때 항상 물어라 — **"이걸 버려도 되는 근거가 뭐지?"**
 > 답하지 못하면 감으로 푼 것이고, 조건이 살짝 바뀌면 바로 틀린다.
+>
+> ⚠️ **"max만 저장하니까 상관없다"는 근거가 아니다.** 버린 후보가 정답이었으면 max에도 안 들어간다.
+> `max` 저장은 "본 것 중 최대"를 기억할 뿐 **안 본 것을 구제하지 않는다.**
 
 ---
 
@@ -202,4 +222,4 @@ left=0~4 전부 ',' 건너뜀 → left=5 → 조건 5 <= 4 거짓 → 종료 →
 ## 관련 노트
 
 - [시간·공간 복잡도](complexity.md)
-- [0088. Merge Sorted Array](../01-Array-String/0088-merge-sorted-array/README.md) · [0027. Remove Element](../01-Array-String/0027-remove-element/README.md) · [0026. Remove Duplicates from Sorted Array](../01-Array-String/0026-remove-duplicates-from-sorted-array/README.md) · [0125. Valid Palindrome](../03-Two-Pointers/0125-valid-palindrome/README.md) · [0392. Is Subsequence](../03-Two-Pointers/0392-is-subsequence/README.md) · [0167. Two Sum II - Input Array Is Sorted](../03-Two-Pointers/0167-two-sum-ii-input-array-is-sorted/README.md)
+- [0088. Merge Sorted Array](../01-Array-String/0088-merge-sorted-array/README.md) · [0027. Remove Element](../01-Array-String/0027-remove-element/README.md) · [0026. Remove Duplicates from Sorted Array](../01-Array-String/0026-remove-duplicates-from-sorted-array/README.md) · [0125. Valid Palindrome](../03-Two-Pointers/0125-valid-palindrome/README.md) · [0392. Is Subsequence](../03-Two-Pointers/0392-is-subsequence/README.md) · [0167. Two Sum II - Input Array Is Sorted](../03-Two-Pointers/0167-two-sum-ii-input-array-is-sorted/README.md) · [0011. Container With Most Water](../03-Two-Pointers/0011-container-with-most-water/README.md)
