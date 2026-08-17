@@ -11,7 +11,7 @@
 | 태그 | 횟수 | 마지막 | 문제 |
 |---|---|---|---|
 | 🔴 **#죽은코드방치** | 4 | 08-03 | [0027. Remove Element](01-Array-String/0027-remove-element/README.md) · [0121. Best Time to Buy and Sell Stock](01-Array-String/0121-best-time-to-buy-and-sell-stock/README.md) · [0058. Length of Last Word](01-Array-String/0058-length-of-last-word/README.md) · [0125. Valid Palindrome](03-Two-Pointers/0125-valid-palindrome/README.md) |
-| 🔴 **#복잡도차원뭉개기** | **4** | 08-12 | [0014. Longest Common Prefix](01-Array-String/0014-longest-common-prefix/README.md) ×2 · [0028. Find the Index of the First Occurrence in a String](01-Array-String/0028-find-the-index-of-the-first-occurrence-in-a-string/README.md) · [0392. Is Subsequence](03-Two-Pointers/0392-is-subsequence/README.md) |
+| 🔴 **#복잡도차원뭉개기** | **5** | 08-18 | [0014. Longest Common Prefix](01-Array-String/0014-longest-common-prefix/README.md) ×2 · [0028. Find the Index of the First Occurrence in a String](01-Array-String/0028-find-the-index-of-the-first-occurrence-in-a-string/README.md) · [0392. Is Subsequence](03-Two-Pointers/0392-is-subsequence/README.md) · [0001. Two Sum](02-Hashmap/0001-two-sum/README.md) |
 | ⚪ **#루프상한혼동** | 1 | 08-12 | [0014. Longest Common Prefix](01-Array-String/0014-longest-common-prefix/README.md) |
 | 🔴 **#변수명불명확** | **4** | 08-12 | [0169. Majority Element](01-Array-String/0169-majority-element/README.md) · [0013. Roman to Integer](01-Array-String/0013-roman-to-integer/README.md) · [0014. Longest Common Prefix](01-Array-String/0014-longest-common-prefix/README.md) · [0383. Ransom Note](02-Hashmap/0383-ransom-note/README.md) |
 | 🟡 **#Constraints미확인** | 2 | 08-10 | [0121. Best Time to Buy and Sell Stock](01-Array-String/0121-best-time-to-buy-and-sell-stock/README.md) · [0392. Is Subsequence](03-Two-Pointers/0392-is-subsequence/README.md) |
@@ -52,16 +52,26 @@
 - 2026-08-03 [0028. Find the Index of the First Occurrence in a String](01-Array-String/0028-find-the-index-of-the-first-occurrence-in-a-string/README.md) — `O(n × m)` 을 `O(n²)` 로 (2회 연속)
 - 2026-08-10 [0392. Is Subsequence](03-Two-Pointers/0392-is-subsequence/README.md) — `O(n)` 이라 답했으나 **`n`이 `s`인지 `t`인지 정의 없음**
 - 2026-08-12 [0014. Longest Common Prefix](01-Array-String/0014-longest-common-prefix/README.md) — **재발.** 복습에서 또 `O(n²)`. *"크기를 결정하는 값이 두 개다, 기호를 정의하라"* 고 **명시적으로 요청한 뒤에도** 뭉갬
+- 2026-08-18 [0001. Two Sum](02-Hashmap/0001-two-sum/README.md) — **반대 방향 실수.** 입력 배열이 **하나뿐인데** 축을 둘로 나눠 `O(m×n)` 이라 답함. 게다가 중첩 루프를 처음엔 `O(m+n)`(덧셈)으로 셌다
 
-> ⚠️ **4회 누적. 그중 2회가 같은 문제([0014. Longest Common Prefix](01-Array-String/0014-longest-common-prefix/README.md)).**
+> ### 🔑 판별 순서
+> ```
+> ① 크기를 결정하는 입력이 몇 개인가?
+>      1개 → 축도 1개.  억지로 m, k 로 나누지 않는다        ([0001. Two Sum](02-Hashmap/0001-two-sum/README.md) → O(n²))
+>      2개 → 기호를 둘 정의한다                             ([0383. Ransom Note](02-Hashmap/0383-ransom-note/README.md) → O(m+n))
+> ② 루프가 순차인가 중첩인가?
+>      순차(나란히) → 더한다     중첩(안에) → 곱한다
+> ```
+
+> ⚠️ **5회 누적 — 가장 많이 반복되는 실수.** 그중 2회가 같은 문제([0014. Longest Common Prefix](01-Array-String/0014-longest-common-prefix/README.md)).
 > **코드를 보기 전에, 문제를 읽자마자 먼저 적을 것:**
 > ```
-> 크기를 결정하는 입력이 몇 개인가?  →  m = ___,  k = ___
+> 크기를 결정하는 입력이 몇 개인가?  →  (1개면) n = ___   /   (2개면) m = ___,  k = ___
 > ```
-> 이걸 안 적고 복잡도를 말하기 시작하면 반드시 뭉개게 된다.
+> 이걸 안 적고 복잡도를 말하기 시작하면 반드시 틀린다. **뭉개거나(2개→1개), 없는 축을 만들거나(1개→2개).**
 
 **대책 — 복잡도를 쓰기 전 3단계**
-1. **입력이 몇 개인가?** 둘이면 기호를 둘 정의한다 (`m` = 개수, `n` = 길이 …)
+1. **입력이 몇 개인가?** 1개면 축도 1개. 2개면 기호를 둘 정의한다
 2. **매 반복 반드시 증가하는 변수는?** 그게 반복 횟수의 상한이다 (`while` 조건에 쓰인 변수가 아니다)
 3. **축이 하나만 남으면 어느 쪽인지 명시**한다 — `O(n)` (X) → `O(n), n = t.length` (O)
 

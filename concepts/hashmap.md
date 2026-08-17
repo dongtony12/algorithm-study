@@ -119,6 +119,47 @@ mapA의 키만 돌면 → a 하나뿐, 1 === 1 → true  ❌   정답은 false
 
 `Map` 은 `size` · `keys()` · `entries()` 를 이미 제공하므로 **별도 `Set` 을 만들 필요가 없다.**
 
+---
+
+## ⚠️ `Map`을 만드는 순간 중복 키는 하나로 뭉쳐진다
+
+```js
+map.set(3, 0)      // {3 → 0}
+map.set(3, 1)      // {3 → 1}   ← 덮어써짐. 인덱스 0이 사라진다
+```
+
+**원본 개수만큼 순회해야 한다면, 배열을 순회하고 맵은 조회용으로만 쓴다.**
+
+[0001. Two Sum](../02-Hashmap/0001-two-sum/README.md) 에서 맵을 순회했다가 중복 케이스가 전부 깨졌다:
+
+| 입력 | 정답 | 맵 순회 방식 |
+|---|---|---|
+| `[3,3]` t=6 | `[0,1]` | undefined ❌ |
+| `[0,4,3,0]` t=0 | `[0,3]` | undefined ❌ |
+| `[-1,-1]` t=-2 | `[0,1]` | undefined ❌ |
+
+### 🔑 "조회 후 삽입" 1패스 관용구
+
+```js
+const seen = new Map()                    // 지금까지 본 값 → 인덱스
+for (let i = 0; i < nums.length; i++) {
+  const need = target - nums[i]
+  if (seen.has(need)) return [seen.get(need), i]   // ① 먼저 조회
+  seen.set(nums[i], i)                              // ② 그다음 삽입
+}
+```
+
+**순서가 핵심이다.** 삽입을 먼저 하면 자기 자신이 조회에 걸린다.
+
+```
+i번째에서 조회할 때 seen에는 i보다 앞선 인덱스만 있다
+   → 자기 자신과 짝지을 일이 원천적으로 없다   (조건 추가 불필요)
+   → 중복 값도 안전하다
+```
+
+**맵의 방향도 확인할 것** — 조회하려는 게 "값"이면 **`값 → 인덱스`** 여야 한다.
+`인덱스 → 값` 으로 만들면 그냥 배열과 같아서 조회가 `O(n)` 이다.
+
 ### 객체를 카운팅에 쓰면 안 되는 이유
 
 | | 객체 `{}` | `Map` |
@@ -181,7 +222,7 @@ const alphabet = new Array(26).fill(0); // 항상 26칸 → O(1)
 | [0013. Roman to Integer](../01-Array-String/0013-roman-to-integer/README.md) | 객체 (고정 룩업) | 고정 크기 = `O(1)` 공간 |
 | [0383. Ransom Note](../02-Hashmap/0383-ransom-note/README.md) | `Map` 카운팅 → **배열 26칸** | `<=` (같으면 통과), `?? 0` 으로 "없음"과 "0" 통합 |
 | [0242. Valid Anagram](../02-Hashmap/0242-valid-anagram/README.md) | `Map` 카운팅 → **배열 26칸 `+/-`** | **`size` 비교 + 키별 값 비교** 둘 다 필요 |
-| 1. Two Sum | `Map` (값 → 인덱스) | 한 번 순회로 짝 찾기 |
+| [0001. Two Sum](../02-Hashmap/0001-two-sum/README.md) | `Map` (**값 → 인덱스**) | **조회 후 삽입** 1패스 — 자기 자신·중복 문제가 동시에 해결 |
 | 205. Isomorphic Strings / 290. Word Pattern | `Map` **양방향** | 단방향만 하면 반례 |
 | 202. Happy Number | `Set` (사이클 탐지) | |
 | 219. Contains Duplicate II | `Map` (값 → 최근 인덱스) | |
