@@ -60,6 +60,18 @@ count[ch.charCodeAt(0) - 97]++;
 | `Map` 1개 + 차감 | 258ms |
 | **배열 26칸** | **28ms** |
 
+[0242. Valid Anagram](../02-Hashmap/0242-valid-anagram/README.md) (m = n = 5×10⁴, 500회) — **같은 결론**:
+
+| 버전 | 시간 | 복잡도 |
+|---|---|---|
+| `Map` 2개 | 507ms | `O(m+n)` |
+| `Map` 1개 + 차감 | 511ms | `O(m+n)` |
+| **배열 26칸 `+/-`** | **40ms** | `O(m+n)` |
+| 정렬 비교 | 1658ms | **`O(n log n)`** |
+
+> ⚠️ **`Map` 개수를 줄여도 속도는 그대로다.** 병목은 "맵 개수"가 아니라 **문자열 해싱** 자체.
+> 배열로 바꿔야 10배가 나온다.
+
 복잡도는 셋 다 `O(m + n)` / `O(1)` 로 **동일한데 실측은 10배 차이.**
 
 | | 비용 |
@@ -70,6 +82,42 @@ count[ch.charCodeAt(0) - 97]++;
 > ### 🔑 `Map`은 **키가 뭐가 올지 모를 때** 쓰는 것
 > 소문자 26 · 대소문자+숫자 62 · ASCII 128 · 숫자 0~9 → **전부 배열로.**
 > 오프셋: 소문자 `-97`, 대문자 `-65`, 숫자 `-48` (→ [0125. Valid Palindrome](../03-Two-Pointers/0125-valid-palindrome/README.md) ASCII 표)
+>
+> ⚠️ **전제가 깨지면 `Map`으로 돌아간다.** [0242. Valid Anagram](../02-Hashmap/0242-valid-anagram/README.md) Follow-up(유니코드 입력)이 그 예 —
+> `'가'.charCodeAt(0) - 97` 은 26을 훌쩍 넘으므로 26칸 배열이 즉시 무너진다.
+> 이모지·결합문자까지 정확히 세려면 `Intl.Segmenter` 가 필요하다 (→ [0058. Length of Last Word](../01-Array-String/0058-length-of-last-word/README.md))
+
+---
+
+## ⚠️ 두 맵이 같은지 비교하기
+
+`Map` 에는 **깊은 비교가 없다.**
+
+```js
+mapA === mapB    // 항상 false (참조 비교)
+mapA == mapB     // 마찬가지
+```
+
+**확인할 게 두 가지다** — 하나만 보면 틀린다:
+
+```js
+if (mapA.size !== mapB.size) return false          // ① 키 개수
+for (const [k, v] of mapA) {                        // ② 키별 값
+  if (v !== mapB.get(k)) return false
+}
+return true
+```
+
+**왜 ①이 필요한가** ([0242. Valid Anagram](../02-Hashmap/0242-valid-anagram/README.md)):
+```
+mapA = { a: 1 }          (s = "a")
+mapB = { a: 1, b: 1 }    (t = "ab")
+
+mapA의 키만 돌면 → a 하나뿐, 1 === 1 → true  ❌   정답은 false
+```
+> **한쪽 맵의 키만 도는 건, 반대쪽에만 있는 키를 못 본다.**
+
+`Map` 은 `size` · `keys()` · `entries()` 를 이미 제공하므로 **별도 `Set` 을 만들 필요가 없다.**
 
 ### 객체를 카운팅에 쓰면 안 되는 이유
 
@@ -132,7 +180,7 @@ const alphabet = new Array(26).fill(0); // 항상 26칸 → O(1)
 | [0169. Majority Element](../01-Array-String/0169-majority-element/README.md) | `Map` | 단, 최적해는 Boyer-Moore로 `O(1)` 공간 |
 | [0013. Roman to Integer](../01-Array-String/0013-roman-to-integer/README.md) | 객체 (고정 룩업) | 고정 크기 = `O(1)` 공간 |
 | [0383. Ransom Note](../02-Hashmap/0383-ransom-note/README.md) | `Map` 카운팅 → **배열 26칸** | `<=` (같으면 통과), `?? 0` 으로 "없음"과 "0" 통합 |
-| 242. Valid Anagram | `Map` 카운팅 | 정렬 비교 `O(n log n)` 과 비교 |
+| [0242. Valid Anagram](../02-Hashmap/0242-valid-anagram/README.md) | `Map` 카운팅 → **배열 26칸 `+/-`** | **`size` 비교 + 키별 값 비교** 둘 다 필요 |
 | 1. Two Sum | `Map` (값 → 인덱스) | 한 번 순회로 짝 찾기 |
 | 205. Isomorphic Strings / 290. Word Pattern | `Map` **양방향** | 단방향만 하면 반례 |
 | 202. Happy Number | `Set` (사이클 탐지) | |
