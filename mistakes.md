@@ -11,15 +11,17 @@
 | 태그 | 횟수 | 마지막 | 문제 |
 |---|---|---|---|
 | 🔴 **#죽은코드방치** | 4 | 08-03 | [0027. Remove Element](01-Array-String/0027-remove-element/README.md) · [0121. Best Time to Buy and Sell Stock](01-Array-String/0121-best-time-to-buy-and-sell-stock/README.md) · [0058. Length of Last Word](01-Array-String/0058-length-of-last-word/README.md) · [0125. Valid Palindrome](03-Two-Pointers/0125-valid-palindrome/README.md) |
-| 🔴 **#복잡도차원뭉개기** | **5** | 08-18 | [0014. Longest Common Prefix](01-Array-String/0014-longest-common-prefix/README.md) ×2 · [0028. Find the Index of the First Occurrence in a String](01-Array-String/0028-find-the-index-of-the-first-occurrence-in-a-string/README.md) · [0392. Is Subsequence](03-Two-Pointers/0392-is-subsequence/README.md) · [0001. Two Sum](02-Hashmap/0001-two-sum/README.md) |
-| ⚪ **#루프상한혼동** | 1 | 08-12 | [0014. Longest Common Prefix](01-Array-String/0014-longest-common-prefix/README.md) |
+| 🔴 **#복잡도차원뭉개기** | **6** | 08-19 | [0014. Longest Common Prefix](01-Array-String/0014-longest-common-prefix/README.md) ×2 · [0028. Find the Index of the First Occurrence in a String](01-Array-String/0028-find-the-index-of-the-first-occurrence-in-a-string/README.md) · [0392. Is Subsequence](03-Two-Pointers/0392-is-subsequence/README.md) · [0001. Two Sum](02-Hashmap/0001-two-sum/README.md) · [2996. Smallest Missing Integer Greater Than Sequential Prefix Sum](02-Hashmap/2996-smallest-missing-integer-greater-than-sequential-prefix-sum/README.md) |
+| 🟡 **#루프상한혼동** | 2 | 08-19 | [0014. Longest Common Prefix](01-Array-String/0014-longest-common-prefix/README.md) ×2 |
+| ⚪ **#패턴오적용** | 1 | 08-19 | [0392. Is Subsequence](03-Two-Pointers/0392-is-subsequence/README.md) |
+| 🟡 **#쓰기동작누락** | 2 | 08-19 | [0026. Remove Duplicates from Sorted Array](01-Array-String/0026-remove-duplicates-from-sorted-array/README.md) ×2 |
 | 🔴 **#변수명불명확** | **4** | 08-12 | [0169. Majority Element](01-Array-String/0169-majority-element/README.md) · [0013. Roman to Integer](01-Array-String/0013-roman-to-integer/README.md) · [0014. Longest Common Prefix](01-Array-String/0014-longest-common-prefix/README.md) · [0383. Ransom Note](02-Hashmap/0383-ransom-note/README.md) |
 | 🟡 **#Constraints미확인** | 2 | 08-10 | [0121. Best Time to Buy and Sell Stock](01-Array-String/0121-best-time-to-buy-and-sell-stock/README.md) · [0392. Is Subsequence](03-Two-Pointers/0392-is-subsequence/README.md) |
 | 🟡 **#엣지케이스누락** | 2 | 08-10 | [0125. Valid Palindrome](03-Two-Pointers/0125-valid-palindrome/README.md) · [0392. Is Subsequence](03-Two-Pointers/0392-is-subsequence/README.md) |
 | 🟡 **#공간복잡도오판** | 2 | 08-03 | [0013. Roman to Integer](01-Array-String/0013-roman-to-integer/README.md) · [0014. Longest Common Prefix](01-Array-String/0014-longest-common-prefix/README.md) |
 | 🟡 **#우연히맞는코드** | 2 | 08-03 | [0088. Merge Sorted Array](01-Array-String/0088-merge-sorted-array/README.md) · [0013. Roman to Integer](01-Array-String/0013-roman-to-integer/README.md) |
 | 🔴 **#쓰기포인터오해** | **3** | 08-12 | [0026. Remove Duplicates from Sorted Array](01-Array-String/0026-remove-duplicates-from-sorted-array/README.md) ×2 · [0088. Merge Sorted Array](01-Array-String/0088-merge-sorted-array/README.md) |
-| 🔴 **#인덱스오프바이원** | 3 | 08-11 | [0026. Remove Duplicates from Sorted Array](01-Array-String/0026-remove-duplicates-from-sorted-array/README.md) · [0028. Find the Index of the First Occurrence in a String](01-Array-String/0028-find-the-index-of-the-first-occurrence-in-a-string/README.md) · [2996. Smallest Missing Integer Greater Than Sequential Prefix Sum](02-Hashmap/2996-smallest-missing-integer-greater-than-sequential-prefix-sum/README.md) |
+| 🔴 **#인덱스오프바이원** | **4** | 08-19 | [0026. Remove Duplicates from Sorted Array](01-Array-String/0026-remove-duplicates-from-sorted-array/README.md) · [0028. Find the Index of the First Occurrence in a String](01-Array-String/0028-find-the-index-of-the-first-occurrence-in-a-string/README.md) · [2996. Smallest Missing Integer Greater Than Sequential Prefix Sum](02-Hashmap/2996-smallest-missing-integer-greater-than-sequential-prefix-sum/README.md) ×2 |
 | ⚪ **#센티널값** | 1 | 08-03 | [0121. Best Time to Buy and Sell Stock](01-Array-String/0121-best-time-to-buy-and-sell-stock/README.md) |
 | ⚪ **#함수참조vs호출** | 1 | 08-03 | [0125. Valid Palindrome](03-Two-Pointers/0125-valid-palindrome/README.md) |
 | ⚪ **#숨은반복문** | 1 | 08-03 | [0169. Majority Element](01-Array-String/0169-majority-element/README.md) |
@@ -53,6 +55,7 @@
 - 2026-08-10 [0392. Is Subsequence](03-Two-Pointers/0392-is-subsequence/README.md) — `O(n)` 이라 답했으나 **`n`이 `s`인지 `t`인지 정의 없음**
 - 2026-08-12 [0014. Longest Common Prefix](01-Array-String/0014-longest-common-prefix/README.md) — **재발.** 복습에서 또 `O(n²)`. *"크기를 결정하는 값이 두 개다, 기호를 정의하라"* 고 **명시적으로 요청한 뒤에도** 뭉갬
 - 2026-08-18 [0001. Two Sum](02-Hashmap/0001-two-sum/README.md) — **반대 방향 실수.** 입력 배열이 **하나뿐인데** 축을 둘로 나눠 `O(m×n)` 이라 답함. 게다가 중첩 루프를 처음엔 `O(m+n)`(덧셈)으로 셌다
+- 2026-08-19 [2996. Smallest Missing Integer Greater Than Sequential Prefix Sum](02-Hashmap/2996-smallest-missing-integer-greater-than-sequential-prefix-sum/README.md) — **복습에서 재발.** 08-11에도 `O(M+n)` 으로 틀렸던 문제인데 또 `O(m+n)` → `O(m×n)`. 입력은 `nums` 하나뿐
 
 > ### 🔑 판별 순서
 > ```
@@ -63,7 +66,8 @@
 >      순차(나란히) → 더한다     중첩(안에) → 곱한다
 > ```
 
-> ⚠️ **5회 누적 — 가장 많이 반복되는 실수.** 그중 2회가 같은 문제([0014. Longest Common Prefix](01-Array-String/0014-longest-common-prefix/README.md)).
+> ⚠️ **6회 누적 — 압도적 1위.** [0014. Longest Common Prefix](01-Array-String/0014-longest-common-prefix/README.md) · [2996. Smallest Missing Integer Greater Than Sequential Prefix Sum](02-Hashmap/2996-smallest-missing-integer-greater-than-sequential-prefix-sum/README.md) 는 **각각 2회씩** 같은 문제에서 반복했다.
+> **매번 지적받은 뒤에는 맞히지만, 처음 쓸 때 습관이 안 잡혀 있다.**
 > **코드를 보기 전에, 문제를 읽자마자 먼저 적을 것:**
 > ```
 > 크기를 결정하는 입력이 몇 개인가?  →  (1개면) n = ___   /   (2개면) m = ___,  k = ___
@@ -175,6 +179,7 @@ Constraints에서 반드시 볼 두 가지:
 - 2026-08-02 [0026. Remove Duplicates from Sorted Array](01-Array-String/0026-remove-duplicates-from-sorted-array/README.md) — `k = 1` 로 시작해놓고 `i = 0` 부터 읽음
 - 2026-08-03 [0028. Find the Index of the First Occurrence in a String](01-Array-String/0028-find-the-index-of-the-first-occurrence-in-a-string/README.md) — 시작 위치 개수 `n - m + 1` 의 `+1`
 - 2026-08-11 [2996. Smallest Missing Integer Greater Than Sequential Prefix Sum](02-Hashmap/2996-smallest-missing-integer-greater-than-sequential-prefix-sum/README.md) — 두 번째 루프를 `j = i` 부터 시작해 sequential prefix 구간(`nums[0..i-1]`)을 검사에서 누락. `[5]` → `5` 반환(정답 `6`). `j = i - 1` 로 한 칸을 살려야 했다
+- 2026-08-19 [2996. Smallest Missing Integer Greater Than Sequential Prefix Sum](02-Hashmap/2996-smallest-missing-integer-greater-than-sequential-prefix-sum/README.md) — **복습에서 재발.** *"sequential 원소값들은 제외"* 로 prefix 구간을 통째로 버림 → `[5]` 또 오답. **교정: 버리는 기준은 인덱스가 아니라 값** (`x`보다 작은 값만 버린다)
 
 **대책**: **시작점을 바꿨으면 짝이 되는 쪽도 같이 확인.** 경계는 작은 예시(길이 1~3)로 손으로 세본다.
 
@@ -188,6 +193,10 @@ Constraints에서 반드시 볼 두 가지:
 > 이중 루프에서 **각 변수의 역할은 알고 있는데 상한만 서로 뒤바뀐** 경우. `#인덱스오프바이원`(±1 경계)과는 다르다.
 
 - 2026-08-12 [0014. Longest Common Prefix](01-Array-String/0014-longest-common-prefix/README.md) — 접근 단계에서 *"바깥=열(글자 위치), 안쪽=행(문자열들)"* 을 정확히 써놓고, 구현에서 `i < strs.length` / `j < minLength` 로 뒤집음 → `strs[3]` → `undefined` → 💥 TypeError
+- 2026-08-19 [0014. Longest Common Prefix](01-Array-String/0014-longest-common-prefix/README.md) — **재발.** *"i는 k까지, j는 m까지"* 라고 **직전 메시지에서 짚어준 뒤에도** 또 뒤집음. `strs[i][0]` 로 인덱스 순서까지 반대
+
+> ⚠️ **머리로는 아는데 손이 뒤집는다.** 이해의 문제가 아니라 **표기 습관**의 문제다.
+> 접근 단계에서 역할을 정확히 서술하고도 구현에서 뒤집히는 게 2회 연속.
 
 **대책**: **이중 루프는 각 변수 옆에 한 단어로 역할을 적는다.**
 ```ts
@@ -195,6 +204,43 @@ for (let i = 0; i < minLength; i++) {        // i = 글자 위치 (열)
     for (let j = 0; j < strs.length; j++) {  // j = 문자열 번호 (행)
 ```
 접근 단계에서 쓴 단어("열/행", "바깥/안쪽")를 **코드에 그대로 옮겨 적으면** 안 헷갈린다.
+
+---
+
+## #패턴오적용
+
+> 직전에 푼 문제의 패턴을 **전제 확인 없이** 가져온다. 자료구조는 익숙한데 문제의 성질이 다르다.
+
+- 2026-08-19 [0392. Is Subsequence](03-Two-Pointers/0392-is-subsequence/README.md) — 복습 접근 1차에서 **26칸 배열 개수 세기**를 시도. 직전 [0242. Valid Anagram](02-Hashmap/0242-valid-anagram/README.md) · [0383. Ransom Note](02-Hashmap/0383-ransom-note/README.md) 의 패턴. `s="aec"`, `t="abcde"` 반례로 걸러짐(개수는 맞지만 순서가 어긋남)
+
+**대책 — 패턴을 가져오기 전에 전제를 확인한다**
+```
+개수 세기(26칸 배열 / Map)  →  "순서가 답에 영향을 주는가?"  영향 있으면 못 쓴다
+양끝 투 포인터              →  "정렬되어 있거나 대칭인가?"
+이진 탐색                   →  "정렬되어 있는가?"
+```
+> 🔑 **익숙한 도구가 아니라 문제의 성질이 도구를 정한다.**
+> [0242. Valid Anagram](02-Hashmap/0242-valid-anagram/README.md) 은 *"순서가 답에 영향을 주지 않는다"* 가 논증의 핵심이었고, [0392. Is Subsequence](03-Two-Pointers/0392-is-subsequence/README.md) 는 정반대다.
+
+---
+
+## #쓰기동작누락
+
+> 읽기-쓰기 포인터 패턴에서 **조건은 맞는데 `nums[k] = nums[i]` 가 빠진다.** `k++` 만 하고 배열은 안 건드린다.
+
+- 2026-08-12 [0026. Remove Duplicates from Sorted Array](01-Array-String/0026-remove-duplicates-from-sorted-array/README.md) — 복습 접근 1차. `k++` 만 나열
+- 2026-08-19 [0026. Remove Duplicates from Sorted Array](01-Array-String/0026-remove-duplicates-from-sorted-array/README.md) — **또 재발.** 재차 물어도 *"항상 `i++` 진행"* 이라 답해 두 번 연속 놓침
+
+**원인**: `k` 를 **"카운터"로만** 보기 때문.
+```
+k 를 카운터로만 보면    →  k++ 만 하면 될 것 같다        (쓰기 누락)
+k 를 쓰기 위치로 보면   →  "거기에 뭘 쓰지?" 가 자동으로 따라온다
+```
+
+> 🔑 **`nums[k++] = nums[i]` 이 한 줄이 "이 값을 살린다"는 동작 자체다.** `k++` 는 그 부수효과.
+> 접근을 쓸 때 자문: **"이 알고리즘에서 '값을 살린다'는 동작은 어느 줄인가?"**
+
+→ [투 포인터](concepts/two-pointers.md) · `#쓰기포인터오해`(비교 대상을 잘못 잡음)와는 다른 실수다
 
 ---
 

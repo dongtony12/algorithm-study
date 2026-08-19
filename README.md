@@ -61,14 +61,33 @@ LeetCode 문제를 풀며 남긴 학습 기록입니다. **정답 코드만이 �
 **전체 주제 Easy를 끝낸 뒤** Medium 라운드.
 ⚠️ **예외 — 그래프 · 백트래킹 · 힙**: Easy가 거의 없어(백트래킹은 사실상 전무) 입문 Medium 2~3개를 Easy 라운드에 포함.
 
-### 복습 — **마지막 풀이일 + 5일** (2026-08-12 변경)
-- **가장 최근에 푼 날(최초 풀이든 복습이든) 기준 5일 뒤**에 다시 푼다. 복습할 때마다 다음 날짜가 5일 뒤로 밀리는 **롤링 방식**
-- 재풀이 시 **이전 코드를 보지 않고** 백지에서 다시 작성
-- 복습에서도 **접근을 한 줄 먼저** 말한 뒤 코드로 간다 (손이 기억하는 건지 개념을 기억하는 건지 구분됨)
-- 30분 넘게 막히면 답을 보되, 본 다음 반드시 **닫고 백지에서 재작성**
-- 막히면 그날 기준으로 다시 +5일
+### 복습 — **확장 간격 + 일일 상한 4건** (2026-08-18 변경)
 
-> 이전 방식(+1일 / +7일 / +30일 3단계)은 폐기. 단계가 많아 연체가 쌓이고 어느 단계인지 관리가 번거로웠다.
+```
+1일 → 3일 → 7일 → 21일 → 60일 → 🎓 졸업
+
+통과 (힌트 0 + 복잡도 정확 + 이전 실수 미재발)  →  다음 단계로
+막힘 (힌트 필요 / 오답 / 복잡도 틀림 / 실수 재발)  →  1일로 리셋
+```
+
+- **일일 상한 4건.** 넘치면 다음 날로 밀되 **연체가 오래된 것부터**
+- 재풀이 시 **이전 코드를 보지 않고** 백지에서 다시 작성
+- 복습에서도 **접근 + 예상 복잡도를 먼저** 낸 뒤 코드로 간다
+- 30분 넘게 막히면 답을 보되, 본 다음 반드시 **닫고 백지에서 재작성**
+
+#### 왜 고정 간격을 버렸나
+
+**문제 수에 비례해 부하가 무한히 커진다.**
+
+| | 일일 복습량 |
+|---|---|
+| 고정 5일 × 96문제 | **19.2건** (하루 4~5시간) |
+| 확장 간격 (대부분 60일 도달 시) | **약 1.6건** |
+
+그리고 **어려운 문제는 자주, 쉬운 문제는 뜸하게** 보게 되어 시간이 약한 곳에 집중된다.
+고정 간격은 [0088. Merge Sorted Array](01-Array-String/0088-merge-sorted-array/README.md)(2연속 완벽 통과)와 [0014. Longest Common Prefix](01-Array-String/0014-longest-common-prefix/README.md)(복습에서 또 실수)를 **똑같이** 대했다.
+
+> 폐기 이력: `+1/+7/+30 3단계`(08-02~08-12) → `고정 5일`(08-12~08-18) → **확장 간격**(08-18~)
 
 ---
 
@@ -312,27 +331,33 @@ LeetCode 문제를 풀며 남긴 학습 기록입니다. **정답 코드만이 �
 
 ## 복습 대기열
 
-**마지막 풀이일 + 5일.** 복습하면 그 날짜 기준으로 다시 5일 뒤로 갱신한다.
+**단계**: `1일 → 3일 → 7일 → 21일 → 60일 → 🎓`  ·  **일일 상한 4건** (연체 오래된 순)
 
-| 문제 | 마지막 풀이일 | 다음 복습일 | 복습 횟수 |
-|---|---|---|---|
-| [0169. Majority Element](01-Array-String/0169-majority-element/README.md) | 08-12 (복습) | 08-17 | 1 |
-| [0121. Best Time to Buy and Sell Stock](01-Array-String/0121-best-time-to-buy-and-sell-stock/README.md) | 08-12 (복습) | 08-17 | 1 |
-| [0013. Roman to Integer](01-Array-String/0013-roman-to-integer/README.md) | 08-12 (복습) | 08-17 | 1 |
-| [0058. Length of Last Word](01-Array-String/0058-length-of-last-word/README.md) | 08-12 (복습) | 08-17 | 1 |
-| [0014. Longest Common Prefix](01-Array-String/0014-longest-common-prefix/README.md) | 08-12 (복습) | 08-17 | 1 |
-| [0028. Find the Index of the First Occurrence in a String](01-Array-String/0028-find-the-index-of-the-first-occurrence-in-a-string/README.md) | 08-12 (복습) | 08-17 | 1 |
-| [0125. Valid Palindrome](03-Two-Pointers/0125-valid-palindrome/README.md) | 08-12 (복습) | 08-17 | 1 |
-| [0167. Two Sum II - Input Array Is Sorted](03-Two-Pointers/0167-two-sum-ii-input-array-is-sorted/README.md) | 08-12 | 08-17 | 0 |
-| [0088. Merge Sorted Array](01-Array-String/0088-merge-sorted-array/README.md) | 08-10 (복습) | 08-15 | 1 |
-| [0027. Remove Element](01-Array-String/0027-remove-element/README.md) | 08-10 (복습) | 08-15 | 1 |
-| [0392. Is Subsequence](03-Two-Pointers/0392-is-subsequence/README.md) | 08-10 | 08-15 | 0 |
-| [2996. Smallest Missing Integer Greater Than Sequential Prefix Sum](02-Hashmap/2996-smallest-missing-integer-greater-than-sequential-prefix-sum/README.md) | 08-11 | 08-16 | 0 |
-| [0026. Remove Duplicates from Sorted Array](01-Array-String/0026-remove-duplicates-from-sorted-array/README.md) | 08-12 (복습) | 08-17 | 1 |
-| [0383. Ransom Note](02-Hashmap/0383-ransom-note/README.md) | 08-12 | 08-17 | 0 |
-| [0011. Container With Most Water](03-Two-Pointers/0011-container-with-most-water/README.md) | 08-16 | 08-21 | 0 |
-| [0242. Valid Anagram](02-Hashmap/0242-valid-anagram/README.md) | 08-17 | 08-22 | 0 |
-| [0001. Two Sum](02-Hashmap/0001-two-sum/README.md) | 08-18 | 08-23 | 0 |
+> **2026-08-18 재편**: 고정 5일 → 확장 간격으로 전환하며 단계를 소급 배정했다.
+> - **복습 1회 통과 + 실수 미재발** → `3일` 단계에서 시작
+> - **복습 0회** 또는 **직전 복습에서 실수 재발** → `1일` 단계
+>
+> 밀려 있던 16건은 **연체가 오래된 순으로 하루 4건씩** 분산 배치했다.
+
+| 문제 | 마지막 풀이일 | 단계 | 다음 복습일 | 배정 사유 |
+|---|---|---|---|---|
+| [0392. Is Subsequence](03-Two-Pointers/0392-is-subsequence/README.md) | 08-19 (복습1) | 3일 | 08-22 | 통과 · 실수 4개 미재발 |
+| [2996. Smallest Missing Integer Greater Than Sequential Prefix Sum](02-Hashmap/2996-smallest-missing-integer-greater-than-sequential-prefix-sum/README.md) | 08-19 (복습1) | 1일 | 08-20 | 접근에서 실수 2개 재발 → 리셋 |
+| [0026. Remove Duplicates from Sorted Array](01-Array-String/0026-remove-duplicates-from-sorted-array/README.md) | 08-19 (복습2) | 1일 | 08-20 | `#쓰기동작누락` 재발 → 리셋 |
+| [0014. Longest Common Prefix](01-Array-String/0014-longest-common-prefix/README.md) | 08-19 (복습2) | 1일 | 08-20 | `#루프상한혼동` 재발 → 리셋 |
+| [0028. Find the Index of the First Occurrence in a String](01-Array-String/0028-find-the-index-of-the-first-occurrence-in-a-string/README.md) | 08-12 (복습1) | 1일 | 08-19 | `#복잡도차원뭉개기` 재발 |
+| [0383. Ransom Note](02-Hashmap/0383-ransom-note/README.md) | 08-12 | 1일 | 08-19 | 복습 0회 |
+| [0167. Two Sum II - Input Array Is Sorted](03-Two-Pointers/0167-two-sum-ii-input-array-is-sorted/README.md) | 08-12 | 1일 | 08-19 | 복습 0회 |
+| [0088. Merge Sorted Array](01-Array-String/0088-merge-sorted-array/README.md) | 08-10 (복습1) | 3일 | 08-19 | 통과 · 실수 4개 미재발 |
+| [0027. Remove Element](01-Array-String/0027-remove-element/README.md) | 08-10 (복습1) | 3일 | 08-20 | 통과 · 실수 2개 미재발 |
+| [0169. Majority Element](01-Array-String/0169-majority-element/README.md) | 08-12 (복습1) | 3일 | 08-20 | 통과 · 실수 4개 미재발 |
+| [0121. Best Time to Buy and Sell Stock](01-Array-String/0121-best-time-to-buy-and-sell-stock/README.md) | 08-12 (복습1) | 3일 | 08-20 | 통과 · 실수 3개 미재발 |
+| [0013. Roman to Integer](01-Array-String/0013-roman-to-integer/README.md) | 08-12 (복습1) | 3일 | 08-20 | 통과 · 실수 3개 미재발 |
+| [0058. Length of Last Word](01-Array-String/0058-length-of-last-word/README.md) | 08-12 (복습1) | 3일 | 08-21 | 통과 · 공간 `O(n)`→`O(1)` 개선 |
+| [0125. Valid Palindrome](03-Two-Pointers/0125-valid-palindrome/README.md) | 08-12 (복습1) | 3일 | 08-21 | 통과 · 실수 4개 미재발 |
+| [0011. Container With Most Water](03-Two-Pointers/0011-container-with-most-water/README.md) | 08-16 | 1일 | 08-21 | 복습 0회 |
+| [0242. Valid Anagram](02-Hashmap/0242-valid-anagram/README.md) | 08-17 | 1일 | 08-21 | 복습 0회 |
+| [0001. Two Sum](02-Hashmap/0001-two-sum/README.md) | 08-18 | 1일 | 08-22 | 복습 0회 |
 
 ---
 

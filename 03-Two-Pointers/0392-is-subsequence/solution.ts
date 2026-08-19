@@ -1,19 +1,15 @@
 function isSubsequence(s: string, t: string): boolean {
-    let k = 0   // s의 포인터
-    let i = 0   // t의 포인터
+    let i = 0
+    let j = 0
 
-    while (k < s.length) {
-        if (i === t.length) {
-            return false          // t를 다 썼는데 s가 남음
+    while (i < s.length) {
+        if (j === t.length) {
+            return false
         }
-
-        if (s[k] === t[i]) {
-            i++
-            k++
-        } else {
+        if (s[i] === t[j]) {
             i++
         }
+        j++
     }
-
-    return true                   // s를 다 소진 = 성공
+    return true
 }
