@@ -10,11 +10,19 @@
 | 신호 | 예 |
 |---|---|
 | **"있나 없나"를 반복해서 묻는다** | [2996. Smallest Missing Integer Greater Than Sequential Prefix Sum](../02-Hashmap/2996-smallest-missing-integer-greater-than-sequential-prefix-sum/README.md) |
-| **개수를 세야 한다** | [0169. Majority Element](../01-Array-String/0169-majority-element/README.md), 242. Valid Anagram |
-| **짝/대응을 찾아야 한다** | 1. Two Sum, 205. Isomorphic Strings |
+| **개수를 세야 한다** | [0169. Majority Element](../01-Array-String/0169-majority-element/README.md), [0242. Valid Anagram](../02-Hashmap/0242-valid-anagram/README.md) |
+| **짝/대응을 찾아야 한다** | [0001. Two Sum](../02-Hashmap/0001-two-sum/README.md), [0205. Isomorphic Strings](../02-Hashmap/0205-isomorphic-strings/README.md) |
 
 > 🔑 **루프 안에서 `includes` / `indexOf` / `filter` / `find` 를 부르고 있다면 거의 항상 해시로 바꿀 수 있다.**
 > 그 순간 `O(n²)` 이 `O(n)` 이 된다. → [0169. Majority Element](../01-Array-String/0169-majority-element/README.md) 의 `#숨은반복문`
+>
+> ⚠️ **단, "루프 안에 있다"가 아니라 "몇 번 실행되는가"를 봐야 한다.**
+> | | 안쪽 `O(n)` 연산이 몇 번 실행되나 | 결과 |
+> |---|---|---|
+> | [0169. Majority Element](../01-Array-String/0169-majority-element/README.md) — `for` 안의 `filter` | **`n`에 비례** | `O(n²)` |
+> | [0205. Isomorphic Strings](../02-Hashmap/0205-isomorphic-strings/README.md) — `!has` 분기 안의 `[...values()].includes()` | **최대 128번(ASCII 종류 수, 상수)** | `O(n)` |
+>
+> 205는 **알파벳이 유한하다는 전제**가 구해준다. 유니코드라면 `O(n²)` 이 된다.
 
 ---
 
@@ -223,7 +231,7 @@ const alphabet = new Array(26).fill(0); // 항상 26칸 → O(1)
 | [0383. Ransom Note](../02-Hashmap/0383-ransom-note/README.md) | `Map` 카운팅 → **배열 26칸** | `<=` (같으면 통과), `?? 0` 으로 "없음"과 "0" 통합 |
 | [0242. Valid Anagram](../02-Hashmap/0242-valid-anagram/README.md) | `Map` 카운팅 → **배열 26칸 `+/-`** | **`size` 비교 + 키별 값 비교** 둘 다 필요 |
 | [0001. Two Sum](../02-Hashmap/0001-two-sum/README.md) | `Map` (**값 → 인덱스**) | **조회 후 삽입** 1패스 — 자기 자신·중복 문제가 동시에 해결 |
-| 205. Isomorphic Strings / 290. Word Pattern | `Map` **양방향** | 단방향만 하면 반례 |
+| [0205. Isomorphic Strings](../02-Hashmap/0205-isomorphic-strings/README.md) / 290. Word Pattern | `Map` **양방향** | `"ab"`/`"aa"` — 단방향만 하면 통과해버린다 |
 | 202. Happy Number | `Set` (사이클 탐지) | |
 | 219. Contains Duplicate II | `Map` (값 → 최근 인덱스) | |
 | 217. Contains Duplicate | `Set` | |
