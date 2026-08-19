@@ -22,7 +22,7 @@ LeetCode 문제를 풀며 남긴 학습 기록입니다. **정답 코드만이 �
 ## 폴더
 
 - [배열 · 문자열](01-Array-String/README.md) — 9문제
-- [해시맵](02-Hashmap/README.md) — 5문제
+- [해시맵](02-Hashmap/README.md) — 6문제
 - [투 포인터](03-Two-Pointers/README.md) — 4문제
 
 **개념 노트**
@@ -107,7 +107,7 @@ LeetCode 문제를 풀며 남긴 학습 기록입니다. **정답 코드만이 �
 | # | 주제 | 폴더 | 진행 | 상태 |
 |---|---|---|---|---|
 | 1 | 배열 · 문자열 | `01-Array-String` | 9 / 9 | ✅ **졸업** |
-| 2 | **해시맵** | `02-Hashmap` | **5 / 11** | 🔵 **진행 중** |
+| 2 | **해시맵** | `02-Hashmap` | **6 / 11** | 🔵 **진행 중** |
 | 3 | 투 포인터 | `03-Two-Pointers` | 4 / 7 | 🟡 보충 필요 |
 | 4 | 슬라이딩 윈도우 | `04-Sliding-Window` | 0 / 4 | |
 | 5 | 스택 · 큐 | `05-Stack-Queue` | 0 / 6 | |
@@ -122,7 +122,7 @@ LeetCode 문제를 풀며 남긴 학습 기록입니다. **정답 코드만이 �
 | 14 | DP (1D) | `14-DP` | 0 / 5 | |
 | 부록 | 비트 · 수학 | `15-Bit-Math` | 0 / 6 | 짬짬이 |
 
-**총 18 / 96**
+**총 19 / 96**
 
 ---
 
@@ -151,7 +151,7 @@ LeetCode 문제를 풀며 남긴 학습 기록입니다. **정답 코드만이 �
 - [x] ★ [0242. Valid Anagram](02-Hashmap/0242-valid-anagram/README.md) — 08-17 통과 (접근 피드백 2회 → 구현 1발, 배열 26칸 최적화까지)
 - [x] ★ [0001. Two Sum](02-Hashmap/0001-two-sum/README.md) — 08-18 통과 (접근 피드백 3회 — 필터 오류·복잡도·맵 방향/시점)
 - [x] ★ [0205. Isomorphic Strings](02-Hashmap/0205-isomorphic-strings/README.md) — 08-19 통과 (접근 피드백 1회 — 역방향 검사 누락)
-- [ ] ★ 290. Word Pattern
+- [x] ★ [0290. Word Pattern](02-Hashmap/0290-word-pattern/README.md) — 08-19 통과 (접근 피드백 1회, 205 구조 재사용 + 길이 검사 추가)
 - [ ] ★ 202. Happy Number
 - [ ] ★ 219. Contains Duplicate II
 - [ ] 217. Contains Duplicate — 보충
@@ -359,6 +359,7 @@ LeetCode 문제를 풀며 남긴 학습 기록입니다. **정답 코드만이 �
 | [0242. Valid Anagram](02-Hashmap/0242-valid-anagram/README.md) | 08-17 | 1일 | 08-21 | 복습 0회 |
 | [0001. Two Sum](02-Hashmap/0001-two-sum/README.md) | 08-18 | 1일 | 08-22 | 복습 0회 |
 | [0205. Isomorphic Strings](02-Hashmap/0205-isomorphic-strings/README.md) | 08-19 | 1일 | 08-20 | 복습 0회 |
+| [0290. Word Pattern](02-Hashmap/0290-word-pattern/README.md) | 08-19 | 1일 | 08-20 | 복습 0회 |
 
 ---
 
