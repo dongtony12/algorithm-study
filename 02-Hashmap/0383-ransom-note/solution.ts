@@ -1,27 +1,25 @@
 function canConstruct(ransomNote: string, magazine: string): boolean {
-    const arr1 = new Map()      // ⚠️ 이름: noteCount 가 맞다
-    const arr2 = new Map()      // ⚠️ 이름: magazineCount 가 맞다
+    const noteMap = new Map()
+    const magazineMap = new Map()
 
     for (let i = 0; i < ransomNote.length; i++) {
-        if (arr1.has(ransomNote[i])) {
-            arr1.set(ransomNote[i], arr1.get(ransomNote[i]) + 1)
+        if (noteMap.has(ransomNote[i])) {
+            noteMap.set(ransomNote[i], noteMap.get(ransomNote[i]) + 1)
         } else {
-            arr1.set(ransomNote[i], 1)
+            noteMap.set(ransomNote[i], 1)
         }
     }
 
-    for (let j = 0; j < magazine.length; j++) {
-        if (arr2.has(magazine[j])) {
-            arr2.set(magazine[j], arr2.get(magazine[j]) + 1)
+    for (let i = 0; i < magazine.length; i++) {
+        if (magazineMap.has(magazine[i])) {
+            magazineMap.set(magazine[i], magazineMap.get(magazine[i]) + 1)
         } else {
-            arr2.set(magazine[j], 1)
+            magazineMap.set(magazine[i], 1)
         }
     }
 
-    for (let [key, value] of arr1) {
-        if (arr2.has(key) && (value <= arr2.get(key))) {
-            continue
-        } else {
+    for (const [nk, nv] of noteMap) {
+        if (nv > (magazineMap.get(nk) ?? 0)) {
             return false
         }
     }

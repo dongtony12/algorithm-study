@@ -13,7 +13,8 @@
 | 🔴 **#죽은코드방치** | 4 | 08-03 | [0027. Remove Element](01-Array-String/0027-remove-element/README.md) · [0121. Best Time to Buy and Sell Stock](01-Array-String/0121-best-time-to-buy-and-sell-stock/README.md) · [0058. Length of Last Word](01-Array-String/0058-length-of-last-word/README.md) · [0125. Valid Palindrome](03-Two-Pointers/0125-valid-palindrome/README.md) |
 | 🔴 **#복잡도차원뭉개기** | **6** | 08-19 | [0014. Longest Common Prefix](01-Array-String/0014-longest-common-prefix/README.md) ×2 · [0028. Find the Index of the First Occurrence in a String](01-Array-String/0028-find-the-index-of-the-first-occurrence-in-a-string/README.md) · [0392. Is Subsequence](03-Two-Pointers/0392-is-subsequence/README.md) · [0001. Two Sum](02-Hashmap/0001-two-sum/README.md) · [2996. Smallest Missing Integer Greater Than Sequential Prefix Sum](02-Hashmap/2996-smallest-missing-integer-greater-than-sequential-prefix-sum/README.md) |
 | 🟡 **#루프상한혼동** | 2 | 08-19 | [0014. Longest Common Prefix](01-Array-String/0014-longest-common-prefix/README.md) ×2 |
-| ⚪ **#패턴오적용** | 1 | 08-19 | [0392. Is Subsequence](03-Two-Pointers/0392-is-subsequence/README.md) |
+| 🟡 **#패턴오적용** | 2 | 08-20 | [0392. Is Subsequence](03-Two-Pointers/0392-is-subsequence/README.md) · [0383. Ransom Note](02-Hashmap/0383-ransom-note/README.md) |
+| ⚪ **#복사후미변경** | 1 | 08-20 | [0383. Ransom Note](02-Hashmap/0383-ransom-note/README.md) |
 | 🟡 **#쓰기동작누락** | 2 | 08-19 | [0026. Remove Duplicates from Sorted Array](01-Array-String/0026-remove-duplicates-from-sorted-array/README.md) ×2 |
 | 🔴 **#변수명불명확** | **4** | 08-12 | [0169. Majority Element](01-Array-String/0169-majority-element/README.md) · [0013. Roman to Integer](01-Array-String/0013-roman-to-integer/README.md) · [0014. Longest Common Prefix](01-Array-String/0014-longest-common-prefix/README.md) · [0383. Ransom Note](02-Hashmap/0383-ransom-note/README.md) |
 | 🟡 **#Constraints미확인** | 2 | 08-10 | [0121. Best Time to Buy and Sell Stock](01-Array-String/0121-best-time-to-buy-and-sell-stock/README.md) · [0392. Is Subsequence](03-Two-Pointers/0392-is-subsequence/README.md) |
@@ -211,6 +212,7 @@ for (let i = 0; i < minLength; i++) {        // i = 글자 위치 (열)
 
 > 직전에 푼 문제의 패턴을 **전제 확인 없이** 가져온다. 자료구조는 익숙한데 문제의 성질이 다르다.
 
+- 2026-08-20 [0383. Ransom Note](02-Hashmap/0383-ransom-note/README.md) — 복습 접근 1차에서 [0242. Valid Anagram](02-Hashmap/0242-valid-anagram/README.md) 의 **"정확히 동일"** 조건을 가져옴. 383은 *"만들 수 있나"* 라 `<=` 여야 한다 (`"a"`/`"ab"` 반례)
 - 2026-08-19 [0392. Is Subsequence](03-Two-Pointers/0392-is-subsequence/README.md) — 복습 접근 1차에서 **26칸 배열 개수 세기**를 시도. 직전 [0242. Valid Anagram](02-Hashmap/0242-valid-anagram/README.md) · [0383. Ransom Note](02-Hashmap/0383-ransom-note/README.md) 의 패턴. `s="aec"`, `t="abcde"` 반례로 걸러짐(개수는 맞지만 순서가 어긋남)
 
 **대책 — 패턴을 가져오기 전에 전제를 확인한다**
@@ -241,6 +243,23 @@ k 를 쓰기 위치로 보면   →  "거기에 뭘 쓰지?" 가 자동으로 �
 > 접근을 쓸 때 자문: **"이 알고리즘에서 '값을 살린다'는 동작은 어느 줄인가?"**
 
 → [투 포인터](concepts/two-pointers.md) · `#쓰기포인터오해`(비교 대상을 잘못 잡음)와는 다른 실수다
+
+---
+
+## #복사후미변경
+
+> 같은 구조의 코드를 복사해 붙인 뒤 **바꿔야 할 이름 중 일부만** 고친다. 동작은 하는데 값이 조용히 틀린다.
+
+- 2026-08-20 [0383. Ransom Note](02-Hashmap/0383-ransom-note/README.md) — 두 번째 카운팅 루프에서 `magazineMap.set(magazine[i], noteMap.get(magazine[i]) + 1)`. `has`/`set` 은 바꿨는데 **`get` 하나만 `noteMap` 그대로**. 랜덤 20만건 중 **7,030건 불일치**
+
+**대책 두 가지**
+1. **복사 전에 "바꿔야 할 이름이 몇 군데인지" 센다.** 383은 4군데였고 3군데만 바뀌었다
+2. **관용구로 분기 자체를 없앤다** — 바꿀 이름이 한 줄에 모이면 빠뜨릴 여지가 준다
+```js
+map.set(k, (map.get(k) ?? 0) + 1)      // has 분기가 사라진다
+```
+
+> ⚠️ **눈으로는 거의 안 잡힌다.** 카운팅 루프가 둘 이상이면 제출 전에 **각 루프가 어느 맵을 쓰는지** 한 번 훑을 것.
 
 ---
 

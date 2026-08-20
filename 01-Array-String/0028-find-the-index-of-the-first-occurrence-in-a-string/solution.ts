@@ -1,15 +1,20 @@
 function strStr(haystack: string, needle: string): number {
-    for (let i = 0; i < haystack.length; i++) {
-        let isCorrect = false
+    const n = haystack.length
+    const m = needle.length
 
-        if (haystack[i] === needle[0]) {          // 첫 글자가 맞을 때만 안쪽 진입
-            for (let j = 0; j < needle.length; j++) {
-                if (haystack[i+j] !== needle[j]) { isCorrect = false; break }
-                else { isCorrect = true }
+    for (let i = 0; i <= n-m; i++) {
+        let occurCount = 0
+
+        for (let j = i; j < m + i; j++) {
+            if (haystack[j] === needle[j-i]) {
+                occurCount++
             }
         }
 
-        if (isCorrect) return i
+        if (occurCount === m) {
+            return i
+        }
     }
+
     return -1
 }

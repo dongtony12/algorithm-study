@@ -22,7 +22,7 @@ LeetCode 문제를 풀며 남긴 학습 기록입니다. **정답 코드만이 �
 ## 폴더
 
 - [배열 · 문자열](01-Array-String/README.md) — 9문제
-- [해시맵](02-Hashmap/README.md) — 6문제
+- [해시맵](02-Hashmap/README.md) — 7문제
 - [투 포인터](03-Two-Pointers/README.md) — 4문제
 
 **개념 노트**
@@ -107,7 +107,7 @@ LeetCode 문제를 풀며 남긴 학습 기록입니다. **정답 코드만이 �
 | # | 주제 | 폴더 | 진행 | 상태 |
 |---|---|---|---|---|
 | 1 | 배열 · 문자열 | `01-Array-String` | 9 / 9 | ✅ **졸업** |
-| 2 | **해시맵** | `02-Hashmap` | **6 / 11** | 🔵 **진행 중** |
+| 2 | **해시맵** | `02-Hashmap` | **7 / 11** | 🔵 **진행 중** |
 | 3 | 투 포인터 | `03-Two-Pointers` | 4 / 7 | 🟡 보충 필요 |
 | 4 | 슬라이딩 윈도우 | `04-Sliding-Window` | 0 / 4 | |
 | 5 | 스택 · 큐 | `05-Stack-Queue` | 0 / 6 | |
@@ -122,7 +122,7 @@ LeetCode 문제를 풀며 남긴 학습 기록입니다. **정답 코드만이 �
 | 14 | DP (1D) | `14-DP` | 0 / 5 | |
 | 부록 | 비트 · 수학 | `15-Bit-Math` | 0 / 6 | 짬짬이 |
 
-**총 19 / 96**
+**총 20 / 96**
 
 ---
 
@@ -152,7 +152,7 @@ LeetCode 문제를 풀며 남긴 학습 기록입니다. **정답 코드만이 �
 - [x] ★ [0001. Two Sum](02-Hashmap/0001-two-sum/README.md) — 08-18 통과 (접근 피드백 3회 — 필터 오류·복잡도·맵 방향/시점)
 - [x] ★ [0205. Isomorphic Strings](02-Hashmap/0205-isomorphic-strings/README.md) — 08-19 통과 (접근 피드백 1회 — 역방향 검사 누락)
 - [x] ★ [0290. Word Pattern](02-Hashmap/0290-word-pattern/README.md) — 08-19 통과 (접근 피드백 1회, 205 구조 재사용 + 길이 검사 추가)
-- [ ] ★ 202. Happy Number
+- [x] ★ [0202. Happy Number](02-Hashmap/0202-happy-number/README.md) — 08-20 통과 (첫 log n 문제, 접근 피드백 3회 + 구현 버그 1회)
 - [ ] ★ 219. Contains Duplicate II
 - [ ] 217. Contains Duplicate — 보충
 - [ ] 349. Intersection of Two Arrays — 보충
@@ -345,10 +345,10 @@ LeetCode 문제를 풀며 남긴 학습 기록입니다. **정답 코드만이 �
 | [2996. Smallest Missing Integer Greater Than Sequential Prefix Sum](02-Hashmap/2996-smallest-missing-integer-greater-than-sequential-prefix-sum/README.md) | 08-19 (복습1) | 1일 | 08-20 | 접근에서 실수 2개 재발 → 리셋 |
 | [0026. Remove Duplicates from Sorted Array](01-Array-String/0026-remove-duplicates-from-sorted-array/README.md) | 08-19 (복습2) | 1일 | 08-20 | `#쓰기동작누락` 재발 → 리셋 |
 | [0014. Longest Common Prefix](01-Array-String/0014-longest-common-prefix/README.md) | 08-19 (복습2) | 1일 | 08-20 | `#루프상한혼동` 재발 → 리셋 |
-| [0028. Find the Index of the First Occurrence in a String](01-Array-String/0028-find-the-index-of-the-first-occurrence-in-a-string/README.md) | 08-12 (복습1) | 1일 | 08-19 | `#복잡도차원뭉개기` 재발 |
-| [0383. Ransom Note](02-Hashmap/0383-ransom-note/README.md) | 08-12 | 1일 | 08-19 | 복습 0회 |
-| [0167. Two Sum II - Input Array Is Sorted](03-Two-Pointers/0167-two-sum-ii-input-array-is-sorted/README.md) | 08-12 | 1일 | 08-19 | 복습 0회 |
-| [0088. Merge Sorted Array](01-Array-String/0088-merge-sorted-array/README.md) | 08-10 (복습1) | 3일 | 08-19 | 통과 · 실수 4개 미재발 |
+| [0028. Find the Index of the First Occurrence in a String](01-Array-String/0028-find-the-index-of-the-first-occurrence-in-a-string/README.md) | 08-20 (복습2) | 3일 | 08-23 | 통과 · 피드백 0회, 두 실수 첫 클리어 |
+| [0383. Ransom Note](02-Hashmap/0383-ransom-note/README.md) | 08-20 (복습1) | 1일 | 08-21 | `#복사후미변경` 버그 → 유지 |
+| [0167. Two Sum II - Input Array Is Sorted](03-Two-Pointers/0167-two-sum-ii-input-array-is-sorted/README.md) | 08-20 (복습1) | 1일 | 08-21 | `return` 누락 → 유지 |
+| [0088. Merge Sorted Array](01-Array-String/0088-merge-sorted-array/README.md) | 08-20 (복습2) | 7일 | 08-27 | 통과 · 피드백 0회, 실수 4개 2연속 미재발 |
 | [0027. Remove Element](01-Array-String/0027-remove-element/README.md) | 08-10 (복습1) | 3일 | 08-20 | 통과 · 실수 2개 미재발 |
 | [0169. Majority Element](01-Array-String/0169-majority-element/README.md) | 08-12 (복습1) | 3일 | 08-20 | 통과 · 실수 4개 미재발 |
 | [0121. Best Time to Buy and Sell Stock](01-Array-String/0121-best-time-to-buy-and-sell-stock/README.md) | 08-12 (복습1) | 3일 | 08-20 | 통과 · 실수 3개 미재발 |
@@ -360,6 +360,7 @@ LeetCode 문제를 풀며 남긴 학습 기록입니다. **정답 코드만이 �
 | [0001. Two Sum](02-Hashmap/0001-two-sum/README.md) | 08-18 | 1일 | 08-22 | 복습 0회 |
 | [0205. Isomorphic Strings](02-Hashmap/0205-isomorphic-strings/README.md) | 08-19 | 1일 | 08-20 | 복습 0회 |
 | [0290. Word Pattern](02-Hashmap/0290-word-pattern/README.md) | 08-19 | 1일 | 08-20 | 복습 0회 |
+| [0202. Happy Number](02-Hashmap/0202-happy-number/README.md) | 08-20 | 1일 | 08-21 | 복습 0회 |
 
 ---
 

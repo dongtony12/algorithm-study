@@ -194,4 +194,77 @@ for (고정할 첫 번째 수) {
 
 ## 복습 기록
 
-**다음 복습**: 2026-08-17 (마지막 풀이일 + 5일) — **"왜 버려도 되는지"를 먼저 말한 뒤** 코드로 갈 것
+**다음 복습**: 2026-08-21 (`return` 누락 → `1일` 단계 유지)
+
+### 2026-08-20 (1회차) — 동작 통과, **TS 컴파일 실패(`return` 누락)**
+
+고정 10건 + 랜덤 30만건(해 유일 입력) 실패 0. 포인터 완주(3×10⁴) 2000회 45ms.
+복잡도 `O(n)` / `O(1)` 정확.
+
+```ts
+function twoSum(numbers: number[], target: number): number[] {
+  let i = 0
+  let k = numbers.length - 1
+
+  while (i < k) {
+    if (numbers[i] + numbers[k] < target) {
+        i++
+    } else if (numbers[i] + numbers[k] > target) {
+        k--
+    } else {
+        return [i+1, k+1]
+    }
+  }
+}                                    // ← return 이 없다
+```
+
+#### ✅ 08-12 개선점 반영
+
+| 08-12에 남긴 개선점 | 08-20 |
+|---|---|
+| `A - B !== 0` → `A !== B` | **`else` 로 정리** ✅ 뺄셈 사라짐 |
+| **`i < k` 가드** (없으면 무한루프) | **반영** ✅ |
+| 1-indexed `+1` | ✅ 유지 |
+| 같은 덧셈 반복 계산 | 3회 → 2회 (부분 개선) |
+
+08-12 코드는 `target - (...) !== 0` 이라 **정답이 없으면 무한루프**였는데, 이번엔 `i < k` 로 종료 조건을 포인터 관계로 잡았다.
+
+#### ✅ 지배 논증 완성 — 08-12보다 나아짐
+
+08-12에는 *"해가 하나뿐이라서"*, *"결과 배열 length가 2라서"* 로 틀렸는데, 이번엔 **정렬을 근거로** 양방향을 다 설명했다. 빈칸 보강으로 완성:
+
+```
+numbers[i] 와 짝지을 수 있는 남은 수 중 가장 큰 것이 numbers[k] 다.
+그 조합조차 target에 도달하지 못했다.
+→ numbers[i] 는 남은 어떤 수와 짝지어도 항상 작다.
+→ 버려도 안전
+```
+
+#### ⚠️ TypeScript — `return` 누락
+
+```
+error TS2366: Function lacks ending return statement
+              and return type does not include 'undefined'.
+```
+
+| 환경 | 결과 |
+|---|---|
+| `strictNullChecks` off (LeetCode) | ✅ 통과 |
+| **TS7 기본 (strict)** | ❌ 에러 |
+
+**루프가 끝까지 돌면 반환값이 없다.** 문제가 *"정답은 정확히 하나"* 를 보장하므로 실제로 도달하지 않지만 **TS는 그 보장을 모른다.**
+08-12 코드에는 `return []` 이 있었는데 이번에 빠졌다. → [0013. Roman to Integer](../../01-Array-String/0013-roman-to-integer/README.md) 의 TS 함정과 같은 성격
+
+#### 남은 개선 — `sum` 을 변수로
+
+```ts
+while (i < k) {
+    const sum = numbers[i] + numbers[k]      // 한 번만
+    if (sum === target) return [i + 1, k + 1]
+    if (sum > target) k--
+    else i++
+}
+return []
+```
+
+**판정**: `return` 누락 → `1일` 단계 유지 (다음 복습 08-21)

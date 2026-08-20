@@ -252,3 +252,101 @@ if (!조건) return false                          // ✅ 절반이 사라진다
 - [ ] +1일 (2026-08-13) — 백지 재작성. **Map 하나 + 차감 방식**으로
 - [ ] +7일 (2026-08-19) — 배열 26칸 버전으로. `charCodeAt(i) - 97` 을 안 보고 쓸 수 있는지
 - [ ] +30일 (2026-09-11)
+
+### 2026-08-20 (1회차) — 통과, 접근 피드백 1회 + **구현 버그 1회**
+
+고정 14건 + 랜덤 30만건 불일치 0. 최대 입력(각 10⁵) 20회 34ms. 복잡도 `O(m + n)` / `O(1)` 정확.
+
+```ts
+function canConstruct(ransomNote: string, magazine: string): boolean {
+    const noteMap = new Map()
+    const magazineMap = new Map()
+
+    for (let i = 0; i < ransomNote.length; i++) {
+        if (noteMap.has(ransomNote[i])) {
+            noteMap.set(ransomNote[i], noteMap.get(ransomNote[i]) + 1)
+        } else {
+            noteMap.set(ransomNote[i], 1)
+        }
+    }
+
+    for (let i = 0; i < magazine.length; i++) {
+        if (magazineMap.has(magazine[i])) {
+            magazineMap.set(magazine[i], magazineMap.get(magazine[i]) + 1)
+        } else {
+            magazineMap.set(magazine[i], 1)
+        }
+    }
+
+    for (const [nk, nv] of noteMap) {
+        if (nv > (magazineMap.get(nk) ?? 0)) {
+            return false
+        }
+    }
+
+    return true
+}
+```
+
+#### ✅ `#변수명불명확` 클리어
+
+이 문제가 그 태그의 **4회차**를 찍었던 자리(`arr1`, `arr2` — Map인데 `arr`)인데, 이번엔 **`noteMap` / `magazineMap`** 으로 역할이 드러나게 썼다.
+
+| 08-12 실수 | 08-20 |
+|---|---|
+| `arr1`, `arr2` `#변수명불명확` | **`noteMap`, `magazineMap`** ✅ |
+| `continue` + `else` 중복 | 없음 ✅ |
+| 복잡도 축 2개 정확 | ✅ 유지 |
+
+#### ⚠️ 접근 — `242` 의 "동일" 조건을 가져왔다 `#패턴오적용`
+
+1차 접근: *"magazine의 key value와 ransomNote의 key value가 **동일하면** true"*
+
+```
+ransomNote = "a",  magazine = "ab"
+noteMap = { a: 1 },  magMap = { a: 1, b: 1 }   →  동일하지 않지만 정답은 true
+```
+
+| | 묻는 것 | 조건 |
+|---|---|---|
+| [0242. Valid Anagram](../0242-valid-anagram/README.md) | "정확히 같은 구성인가" | 개수 일치 + 키 집합 일치 |
+| **383 (이 문제)** | **"만들 수 있나"** | **`noteCount[ch] <= magCount[ch]`** |
+
+사흘 전 [0242. Valid Anagram](../0242-valid-anagram/README.md) 을 풀며 그쪽 패턴이 덮어씌워졌다. 어제 [0392. Is Subsequence](../../03-Two-Pointers/0392-is-subsequence/README.md) 와 같은 형태.
+
+지적 후 *"포함"* 의 의미였다고 정정했고, `"aa"`/`"ab"` 로 **개수까지 포함해야** 함을 확인하자 `<=` 로 확정.
+
+#### 🆕 새 실수 — 복사 후 한 곳 미변경 `#복사후미변경`
+
+```ts
+// 첫 루프 (정확)
+noteMap.set(ransomNote[i], noteMap.get(ransomNote[i]) + 1)
+
+// 둘째 루프 (버그)
+magazineMap.set(magazine[i], noteMap.get(magazine[i]) + 1)
+//                           ^^^^^^^ magazineMap 이어야 함
+```
+
+**루프를 복사하면서 `has`/`set` 은 바꿨는데 `get` 하나만 안 바뀌었다.**
+
+```
+note="aaa" mag="aa"   →  noteMap={a:3}
+  i=0: 'a' 없음 → magMap.set('a', 1)
+  i=1: 'a' 있음 → magMap.set('a', noteMap.get('a') + 1) = 3+1 = 4   ← 엉뚱한 맵
+  → magMap = {a:4},  3 > 4 거짓  →  true      ❌  정답 false
+```
+
+**랜덤 20만건 중 7,030건 불일치.** 눈으로는 거의 안 보이는 종류다.
+
+> ### 🔑 같은 구조를 복사할 때는 **"바꿔야 할 이름이 몇 군데인지" 먼저 센다**
+> 여기선 `magazine[i]` · `magazineMap.has` · `magazineMap.set` · `magazineMap.get` — **네 군데**였고 세 군데만 바뀌었다.
+
+**관용구로 원천 차단된다** (08-12 노트에 이미 정리해둔 것):
+
+```ts
+magazineMap.set(magazine[i], (magazineMap.get(magazine[i]) ?? 0) + 1)
+```
+
+`has` 분기가 사라지면서 **바꿀 이름이 한 줄에 모인다.** 실제로 세 번째 루프에서는 `?? 0` 을 썼으면서 카운팅 루프에는 안 썼다.
+
+**판정**: 구현 버그 1회 → `1일` 단계 유지 (다음 복습 08-21)

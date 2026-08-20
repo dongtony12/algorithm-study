@@ -233,7 +233,7 @@ const alphabet = new Array(26).fill(0); // 항상 26칸 → O(1)
 | [0001. Two Sum](../02-Hashmap/0001-two-sum/README.md) | `Map` (**값 → 인덱스**) | **조회 후 삽입** 1패스 — 자기 자신·중복 문제가 동시에 해결 |
 | [0205. Isomorphic Strings](../02-Hashmap/0205-isomorphic-strings/README.md) | `Map` **양방향** | `"ab"`/`"aa"` — 단방향만 하면 통과해버린다 |
 | [0290. Word Pattern](../02-Hashmap/0290-word-pattern/README.md) | `Map` **양방향** (문자↔단어) | **길이 검사 필수** (205와 달리 보장 없음). 단어는 상한이 없어 `values()` 스캔이 진짜 `O(n²)` |
-| 202. Happy Number | `Set` (사이클 탐지) | |
+| [0202. Happy Number](../02-Hashmap/0202-happy-number/README.md) | `Set` (사이클 탐지) | 값이 유한 집합(1~810) 안에서만 도니 반드시 반복된다 · **첫 `log n` 문제** |
 | 219. Contains Duplicate II | `Map` (값 → 최근 인덱스) | |
 | 217. Contains Duplicate | `Set` | |
 | 349. Intersection of Two Arrays | `Set` | |

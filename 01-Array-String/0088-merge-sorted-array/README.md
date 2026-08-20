@@ -273,3 +273,53 @@ arr.push(...big)   // big이 십수만 개면 RangeError: Maximum call stack siz
 | `i >= 0` 가드 누락 `#우연히맞는코드` | **가드 포함** ✅ |
 
 **`while (j >= 0)` 인 이유도 스스로 설명함**: 루프의 임무는 `nums2`를 전부 배치하는 것. `j`가 소진되면 남은 `nums1[0..i]`는 이미 제자리라 옮길 필요가 없다. 반대로 `i`가 먼저 소진되면 `nums2`는 아직 남아 있으므로 계속 돌아야 한다 → 지켜볼 쪽은 `j` 뿐. (`i >= 0` 가드가 필요한 것도 정확히 이 상황 때문)
+
+### 2026-08-20 (2회차) — 통과, **피드백 0회** · `3일` → `7일` 단계
+
+고정 11건 + 랜덤 30만건 불일치 0. 최대 입력(m+n=200) 10만회 28ms.
+복잡도 `O(m + n)` / `O(1)` 정확 — Follow-up 충족.
+
+```ts
+function merge(nums1: number[], m: number, nums2: number[], n: number): void {
+    const length = m + n          // ⚠️ 미사용 변수
+    let i = m-1
+    let j = n-1
+    let k = m+n-1
+
+    while (j >= 0) {
+        if (i >= 0 && nums1[i] > nums2[j]) {
+            nums1[k] = nums1[i]
+            i--
+            k--
+        } else {
+            nums1[k] = nums2[j]
+            j--
+            k--
+        }
+    }
+}
+```
+
+#### ✅ 과거 실수 4개 — **두 번 연속 미재발**
+
+| 실수 | 08-02 | 08-10 복습 | **08-20 복습** |
+|---|---|---|---|
+| `nums2` 훼손 `#입력훼손` | ❌ | ✅ | ✅ (테스트로 검증) |
+| 정렬 조건 무시하고 `sort` `#정렬조건미활용` | ❌ | ✅ | ✅ |
+| `else` 에서 `i--` `#쓰기포인터오해` | ❌ | ✅ | ✅ |
+| `i >= 0` 가드 누락 `#우연히맞는코드` | ❌ | ✅ | ✅ |
+
+**뒤에서부터 투 포인터 구조를 백지에서 정확히 재현.** `while (j >= 0)` 종료 조건도 그대로.
+
+#### ⚠️ 미사용 변수
+
+```ts
+const length = m + n     // 선언만 하고 안 씀 (k 초기화에 m+n-1 을 직접 사용)
+```
+
+`#죽은코드방치` 계열 — [0027. Remove Element](../0027-remove-element/README.md) 실수 노트의 *"`let i = 0` 미사용 변수 방치"* 와 같은 형태.
+**동작엔 영향이 없어 스스로는 못 잡는 종류.** 통과 직후 *"이 줄 지워도 되나?"* 를 한 줄씩 묻는 게 유일한 대책.
+
+*(정답 코드의 스타일 이슈라 카운트는 올리지 않음 — 08-20 판단. [0027. Remove Element](../0027-remove-element/README.md) `i++` 중복 · [2996. Smallest Missing Integer Greater Than Sequential Prefix Sum](../../02-Hashmap/2996-smallest-missing-integer-greater-than-sequential-prefix-sum/README.md) `test` 때와 동일 기준)*
+
+**판정**: 피드백 0회 + 실수 미재발 → `3일` → **`7일` 단계** (다음 복습 08-27)
