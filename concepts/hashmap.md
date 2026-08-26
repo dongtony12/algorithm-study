@@ -234,8 +234,8 @@ const alphabet = new Array(26).fill(0); // 항상 26칸 → O(1)
 | [0205. Isomorphic Strings](../02-Hashmap/0205-isomorphic-strings/README.md) | `Map` **양방향** | `"ab"`/`"aa"` — 단방향만 하면 통과해버린다 |
 | [0290. Word Pattern](../02-Hashmap/0290-word-pattern/README.md) | `Map` **양방향** (문자↔단어) | **길이 검사 필수** (205와 달리 보장 없음). 단어는 상한이 없어 `values()` 스캔이 진짜 `O(n²)` |
 | [0202. Happy Number](../02-Hashmap/0202-happy-number/README.md) | `Set` (사이클 탐지) | 값이 유한 집합(1~810) 안에서만 도니 반드시 반복된다 · **첫 `log n` 문제** |
-| 219. Contains Duplicate II | `Map` (값 → 최근 인덱스) | |
-| 217. Contains Duplicate | `Set` | |
+| [0219. Contains Duplicate II](../02-Hashmap/0219-contains-duplicate-ii/README.md) | `Set` + **슬라이딩 윈도우** | 최근 k개만 기억 — **버리는 동작**이 생기면 윈도우다 |
+| [0217. Contains Duplicate](../02-Hashmap/0217-contains-duplicate/README.md) | `Set` | `new Set(arr).size !== arr.length` — 단 **조기 종료가 안 된다** |
 | 349. Intersection of Two Arrays | `Set` | |
 | 387. First Unique Character in a String | `Map` 카운팅 | |
 
