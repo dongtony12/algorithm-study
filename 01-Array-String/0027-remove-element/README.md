@@ -201,3 +201,59 @@ while (i < nums.length) {
 > 08-02에 쓴 `for (const num of nums)` 버전은 읽기 인덱스를 언어에 맡겨 이 문제가 아예 없었다.
 
 *(정답 코드이고 스타일 이슈라 `#죽은코드방치` 카운트에는 포함하지 않음)*
+
+### 2026-08-26 (2회차) — 통과, **피드백 0회** · `3일` → `7일` 단계
+
+고정 12건 + 랜덤 30만건 불일치 0. 최대 입력 20만회 20ms. 복잡도 `O(n)` / `O(1)` 정확.
+
+```ts
+function removeElement(nums: number[], val: number): number {
+    let i = 0
+    let k = 0
+
+    while (i < nums.length) {
+        if (nums[i] !== val) {
+            nums[k] = nums[i]
+            i++
+            k++
+        } else {
+            i++
+        }
+    }
+
+    return k
+}
+```
+
+#### ✅ 실수 2개 두 번 연속 미재발
+
+| 08-02 실수 | 08-10 복습 | **08-26 복습** |
+|---|---|---|
+| `let i = 0` 미사용 변수 `#죽은코드방치` | ✅ | ✅ `i` 를 실제로 사용 |
+| `continue` + `else` 중복 | ✅ | ✅ |
+
+쓰기 동작(`nums[k] = nums[i]`)도 정확히 있고, 불변식 `k ≤ i` 도 지켜진다.
+같은 날 [0026. Remove Duplicates from Sorted Array](../0026-remove-duplicates-from-sorted-array/README.md) 에서 `#쓰기동작누락` 을 클리어한 것과 일관된다.
+
+#### 스타일 — `i++` 가 양쪽 분기에 중복 (08-10에도 같은 지적)
+
+```ts
+if (nums[i] !== val) { nums[k] = nums[i]; i++; k++ }
+else                 { i++ }
+```
+
+**양쪽 분기에 똑같은 줄이 있으면 밖으로 뺀다:**
+
+```ts
+while (i < nums.length) {
+    if (nums[i] !== val) nums[k++] = nums[i]
+    i++
+}
+```
+
+`else` 분기가 통째로 사라지고 *"`i` 는 무조건 전진한다"* 는 불변식이 코드에 드러난다.
+→ 같은 형태를 [0392. Is Subsequence](../../03-Two-Pointers/0392-is-subsequence/README.md) 에서도 지적했다.
+
+*(정답 코드의 스타일이라 카운트 미포함 — 08-10 판단과 동일)*
+
+**판정**: 피드백 0회 + 실수 미재발 → `3일` → **`7일` 단계** (다음 복습 09-02)

@@ -1,6 +1,6 @@
 function missingInteger(nums: number[]): number {
     let x = nums[0]
-    let numSet = new Set(nums)
+    let numsSet = new Set(nums)
 
     for (let i = 1; i < nums.length; i++) {
         if (nums[i] === nums[i-1] + 1) {
@@ -10,7 +10,7 @@ function missingInteger(nums: number[]): number {
         }
     }
 
-    while (numSet.has(x)) {
+    while (numsSet.has(x)) {
         x++
     }
 

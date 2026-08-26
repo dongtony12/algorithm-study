@@ -71,6 +71,9 @@ LeetCode 문제를 풀며 남긴 학습 기록입니다. **정답 코드만이 �
 ```
 
 - **일일 상한 4건.** 넘치면 다음 날로 밀되 **연체가 오래된 것부터**
+- **주말(토·일)은 계산에서 제외** (2026-08-26 추가)
+  - **연체 일수는 평일만 센다** — 금요일 예정이 수요일에 밀렸으면 연체 3일(달력 5일 X)
+  - **다음 복습일이 토·일이면 그다음 월요일로 미룬다** — 안 그러면 월요일에 자동으로 연체가 된다
 - 재풀이 시 **이전 코드를 보지 않고** 백지에서 다시 작성
 - 복습에서도 **접근 + 예상 복잡도를 먼저** 낸 뒤 코드로 간다
 - 30분 넘게 막히면 답을 보되, 본 다음 반드시 **닫고 백지에서 재작성**
@@ -341,15 +344,15 @@ LeetCode 문제를 풀며 남긴 학습 기록입니다. **정답 코드만이 �
 
 | 문제 | 마지막 풀이일 | 단계 | 다음 복습일 | 배정 사유 |
 |---|---|---|---|---|
-| [0392. Is Subsequence](03-Two-Pointers/0392-is-subsequence/README.md) | 08-19 (복습1) | 3일 | 08-22 | 통과 · 실수 4개 미재발 |
-| [2996. Smallest Missing Integer Greater Than Sequential Prefix Sum](02-Hashmap/2996-smallest-missing-integer-greater-than-sequential-prefix-sum/README.md) | 08-19 (복습1) | 1일 | 08-20 | 접근에서 실수 2개 재발 → 리셋 |
-| [0026. Remove Duplicates from Sorted Array](01-Array-String/0026-remove-duplicates-from-sorted-array/README.md) | 08-19 (복습2) | 1일 | 08-20 | `#쓰기동작누락` 재발 → 리셋 |
-| [0014. Longest Common Prefix](01-Array-String/0014-longest-common-prefix/README.md) | 08-19 (복습2) | 1일 | 08-20 | `#루프상한혼동` 재발 → 리셋 |
-| [0028. Find the Index of the First Occurrence in a String](01-Array-String/0028-find-the-index-of-the-first-occurrence-in-a-string/README.md) | 08-20 (복습2) | 3일 | 08-23 | 통과 · 피드백 0회, 두 실수 첫 클리어 |
+| [0392. Is Subsequence](03-Two-Pointers/0392-is-subsequence/README.md) | 08-19 (복습1) | 3일 | 08-24 | 통과 · 실수 4개 미재발 (08-22 토 → 월 이동) |
+| [2996. Smallest Missing Integer Greater Than Sequential Prefix Sum](02-Hashmap/2996-smallest-missing-integer-greater-than-sequential-prefix-sum/README.md) | 08-26 (복습2) | 1일 | 08-27 | `break` 누락 → 유지 |
+| [0026. Remove Duplicates from Sorted Array](01-Array-String/0026-remove-duplicates-from-sorted-array/README.md) | 08-26 (복습3) | 3일 | 08-31 | 통과 · `#쓰기동작누락` 클리어 (08-29 토 → 월 이동) |
+| [0014. Longest Common Prefix](01-Array-String/0014-longest-common-prefix/README.md) | 08-26 (복습3) | 3일 | 08-31 | 통과 · `#루프상한혼동` 클리어 (08-29 토 → 월 이동) |
+| [0028. Find the Index of the First Occurrence in a String](01-Array-String/0028-find-the-index-of-the-first-occurrence-in-a-string/README.md) | 08-20 (복습2) | 3일 | 08-24 | 통과 · 피드백 0회, 두 실수 첫 클리어 (08-23 일 → 월 이동) |
 | [0383. Ransom Note](02-Hashmap/0383-ransom-note/README.md) | 08-20 (복습1) | 1일 | 08-21 | `#복사후미변경` 버그 → 유지 |
 | [0167. Two Sum II - Input Array Is Sorted](03-Two-Pointers/0167-two-sum-ii-input-array-is-sorted/README.md) | 08-20 (복습1) | 1일 | 08-21 | `return` 누락 → 유지 |
 | [0088. Merge Sorted Array](01-Array-String/0088-merge-sorted-array/README.md) | 08-20 (복습2) | 7일 | 08-27 | 통과 · 피드백 0회, 실수 4개 2연속 미재발 |
-| [0027. Remove Element](01-Array-String/0027-remove-element/README.md) | 08-10 (복습1) | 3일 | 08-20 | 통과 · 실수 2개 미재발 |
+| [0027. Remove Element](01-Array-String/0027-remove-element/README.md) | 08-26 (복습2) | 7일 | 09-02 | 통과 · 피드백 0회, 실수 2개 2연속 미재발 |
 | [0169. Majority Element](01-Array-String/0169-majority-element/README.md) | 08-12 (복습1) | 3일 | 08-20 | 통과 · 실수 4개 미재발 |
 | [0121. Best Time to Buy and Sell Stock](01-Array-String/0121-best-time-to-buy-and-sell-stock/README.md) | 08-12 (복습1) | 3일 | 08-20 | 통과 · 실수 3개 미재발 |
 | [0013. Roman to Integer](01-Array-String/0013-roman-to-integer/README.md) | 08-12 (복습1) | 3일 | 08-20 | 통과 · 실수 3개 미재발 |
@@ -357,7 +360,7 @@ LeetCode 문제를 풀며 남긴 학습 기록입니다. **정답 코드만이 �
 | [0125. Valid Palindrome](03-Two-Pointers/0125-valid-palindrome/README.md) | 08-12 (복습1) | 3일 | 08-21 | 통과 · 실수 4개 미재발 |
 | [0011. Container With Most Water](03-Two-Pointers/0011-container-with-most-water/README.md) | 08-16 | 1일 | 08-21 | 복습 0회 |
 | [0242. Valid Anagram](02-Hashmap/0242-valid-anagram/README.md) | 08-17 | 1일 | 08-21 | 복습 0회 |
-| [0001. Two Sum](02-Hashmap/0001-two-sum/README.md) | 08-18 | 1일 | 08-22 | 복습 0회 |
+| [0001. Two Sum](02-Hashmap/0001-two-sum/README.md) | 08-18 | 1일 | 08-24 | 복습 0회 (08-22 토 → 월 이동) |
 | [0205. Isomorphic Strings](02-Hashmap/0205-isomorphic-strings/README.md) | 08-19 | 1일 | 08-20 | 복습 0회 |
 | [0290. Word Pattern](02-Hashmap/0290-word-pattern/README.md) | 08-19 | 1일 | 08-20 | 복습 0회 |
 | [0202. Happy Number](02-Hashmap/0202-happy-number/README.md) | 08-20 | 1일 | 08-21 | 복습 0회 |
