@@ -219,7 +219,7 @@ for (const num of nums) {
 
 ## 복습 기록
 
-**다음 복습**: 2026-08-17 (마지막 풀이일 + 5일)
+**다음 복습**: 2026-09-03 (통과 → `7일` 단계)
 
 ### 2026-08-12 (1회차) — 통과, 접근 피드백 3회
 
@@ -278,3 +278,55 @@ function majorityElement(nums: number[]): number {
 동작에는 문제없다. `count = 0` 으로 시작하므로 **첫 반복에서 반드시 덮어써진다.** 초기값이 뭐든 무관.
 다만 [0121. Best Time to Buy and Sell Stock](../0121-best-time-to-buy-and-sell-stock/README.md) 의 `Infinity` 관용구는 **최솟값 탐색용**이고 여기선 그 의미가 아니다. 의도가 드러나는 건 `let candidate = nums[0]`.
 → **"이 초기값이 왜 안전한가"를 설명할 수 있으면 둘 다 정답.**
+
+### 2026-08-27 (2회차) — 통과, **피드백 0회** · `3일` → `7일` 단계
+
+고정 12건 + 랜덤 30만건(과반 보장 생성 후 셔플) 불일치 0. 최대 입력(5×10⁴) 300회 10ms.
+복잡도 `O(n)` / `O(1)` — **요구 없이 먼저 제시**. Follow-up 충족.
+
+```ts
+function majorityElement(nums: number[]): number {
+   let candidate = 0
+   let count = 0
+
+   for (const num of nums) {
+    if (count === 0) {
+        candidate = num
+    }
+
+    if (candidate === num) {
+        count++
+    } else {
+        count--
+    }
+   }
+
+   return candidate
+}
+```
+
+#### ✅ 과거 실수 5개 전부 미재발
+
+| 실수 | 08-03 | 08-12 복습 | **08-27 복습** |
+|---|---|---|---|
+| `filter` 를 `for` 안에서 → `O(n²)` `#숨은반복문` | ❌ | ✅ | ✅ |
+| 삼항 연산자를 문장처럼 사용 | ❌ | ✅ | ✅ |
+| 변수명 `newArr`/`arr1`/`temp` `#변수명불명확` | ❌ | ✅ | ✅ |
+| 복잡도 명시 누락 | ❌ | ✅ | ✅ |
+| `infinity` 오타 (대문자 `I`) | — | ❌ | ✅ |
+
+**Boyer-Moore 구조를 백지에서 피드백 0회로 재현.**
+
+#### `candidate = 0` 초기값이 왜 안전한가 — 스스로 설명
+
+> *"`count` 가 0일 때 `candidate` 는 항상 `num` 으로 초기화되기 때문"*
+
+`count = 0` 으로 시작하므로 **첫 반복에서 반드시 덮어써진다.** 초기값은 한 번도 비교에 쓰이지 않는다.
+
+> 🔑 **[0121. Best Time to Buy and Sell Stock](../0121-best-time-to-buy-and-sell-stock/README.md) 의 `low = 0` 과 대비된다.**
+> 거기선 초기값이 **실제로 비교에 쓰여서** `#센티널값` 버그가 났다 (`[0,5]` → 오답).
+> 여기선 안 쓰이므로 `0` 이어도 안전하다. **"초기값이 비교에 쓰이는가"가 판단 기준.**
+
+의도가 드러나게 `candidate = nums[0]` 을 쓰기도 한다. **왜 안전한지 설명할 수 있으면 둘 다 정답.**
+
+**판정**: 피드백 0회 + 실수 미재발 + 근거 설명 → `3일` → **`7일` 단계** (다음 복습 09-03)

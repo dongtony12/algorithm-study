@@ -19,10 +19,11 @@
 | 🔴 **#변수명불명확** | **4** | 08-12 | [0169. Majority Element](01-Array-String/0169-majority-element/README.md) · [0013. Roman to Integer](01-Array-String/0013-roman-to-integer/README.md) · [0014. Longest Common Prefix](01-Array-String/0014-longest-common-prefix/README.md) · [0383. Ransom Note](02-Hashmap/0383-ransom-note/README.md) |
 | 🟡 **#Constraints미확인** | 2 | 08-10 | [0121. Best Time to Buy and Sell Stock](01-Array-String/0121-best-time-to-buy-and-sell-stock/README.md) · [0392. Is Subsequence](03-Two-Pointers/0392-is-subsequence/README.md) |
 | 🟡 **#엣지케이스누락** | 2 | 08-10 | [0125. Valid Palindrome](03-Two-Pointers/0125-valid-palindrome/README.md) · [0392. Is Subsequence](03-Two-Pointers/0392-is-subsequence/README.md) |
-| 🟡 **#공간복잡도오판** | 2 | 08-03 | [0013. Roman to Integer](01-Array-String/0013-roman-to-integer/README.md) · [0014. Longest Common Prefix](01-Array-String/0014-longest-common-prefix/README.md) |
+| 🟠 **#공간복잡도오판** | 3 | **08-27** | [0013. Roman to Integer](01-Array-String/0013-roman-to-integer/README.md) · [0014. Longest Common Prefix](01-Array-String/0014-longest-common-prefix/README.md) · **[0205. Isomorphic Strings](02-Hashmap/0205-isomorphic-strings/README.md)** |
 | 🟡 **#우연히맞는코드** | 2 | 08-03 | [0088. Merge Sorted Array](01-Array-String/0088-merge-sorted-array/README.md) · [0013. Roman to Integer](01-Array-String/0013-roman-to-integer/README.md) |
 | 🔴 **#쓰기포인터오해** | **3** | 08-12 | [0026. Remove Duplicates from Sorted Array](01-Array-String/0026-remove-duplicates-from-sorted-array/README.md) ×2 · [0088. Merge Sorted Array](01-Array-String/0088-merge-sorted-array/README.md) |
 | 🔴 **#인덱스오프바이원** | **4** | 08-19 | [0026. Remove Duplicates from Sorted Array](01-Array-String/0026-remove-duplicates-from-sorted-array/README.md) · [0028. Find the Index of the First Occurrence in a String](01-Array-String/0028-find-the-index-of-the-first-occurrence-in-a-string/README.md) · [2996. Smallest Missing Integer Greater Than Sequential Prefix Sum](02-Hashmap/2996-smallest-missing-integer-greater-than-sequential-prefix-sum/README.md) ×2 |
+| ⚪ **#그리디증명생략** | 1 | 08-27 | [0122. Best Time to Buy and Sell Stock II](01-Array-String/0122-best-time-to-buy-and-sell-stock-ii/README.md) |
 | ⚪ **#센티널값** | 1 | 08-03 | [0121. Best Time to Buy and Sell Stock](01-Array-String/0121-best-time-to-buy-and-sell-stock/README.md) |
 | ⚪ **#함수참조vs호출** | 1 | 08-03 | [0125. Valid Palindrome](03-Two-Pointers/0125-valid-palindrome/README.md) |
 | ⚪ **#숨은반복문** | 1 | 08-03 | [0169. Majority Element](01-Array-String/0169-majority-element/README.md) |
@@ -137,10 +138,24 @@ Constraints에서 반드시 볼 두 가지:
 
 - 2026-08-03 [0013. Roman to Integer](01-Array-String/0013-roman-to-integer/README.md) — **고정 크기** 룩업 테이블(항상 13개)을 `O(n)` 으로 오판
 - 2026-08-03 [0014. Longest Common Prefix](01-Array-String/0014-longest-common-prefix/README.md) — 자료구조를 안 만들었는데 `O(n)` 으로 판단
+- 2026-08-27 [0205. Isomorphic Strings](02-Hashmap/0205-isomorphic-strings/README.md) — **ASCII 128개 상한**인 두 맵을 `O(n)` 으로 오판 (24일 만에 재발)
 
 **대책 — 두 가지만 묻는다**
 1. **"배열/Map을 만들었나?"** 안 만들었으면 `O(1)`
 2. 만들었다면 **"입력이 커지면 이것도 같이 커지나?"** — 안 커지면(알파벳 26칸, 룩업 13개) `O(1)`
+
+> ### 🔑 유한 알파벳 = `O(1)`
+> **키가 나올 수 있는 값의 종류가 유한하면**, 그 위에 세운 맵/배열은 입력 길이와 무관하게 상한이 있다.
+>
+> | 키의 종류 | 상한 | |
+> |---|---|---|
+> | 소문자 알파벳 | 26 | `O(1)` |
+> | 십진수 숫자 | 10 | `O(1)` |
+> | **ASCII 문자** | **128** | **`O(1)`** |
+> | 로마 숫자 기호 | 7 | `O(1)` |
+> | **임의의 정수 / 문자열** | **없음** | **`O(n)`** ← [0169. Majority Element](01-Array-String/0169-majority-element/README.md) |
+>
+> 문제의 Constraints에 *"lowercase English letters"*, *"ASCII"*, *"digits"* 가 있으면 **알파벳이 유한하다는 신호**다.
 
 *(반환값은 공간복잡도에서 제외하는 게 관례)*
 
@@ -260,6 +275,27 @@ map.set(k, (map.get(k) ?? 0) + 1)      // has 분기가 사라진다
 ```
 
 > ⚠️ **눈으로는 거의 안 잡힌다.** 카운팅 루프가 둘 이상이면 제출 전에 **각 루프가 어느 맵을 쓰는지** 한 번 훑을 것.
+
+---
+
+## #그리디증명생략
+
+> 그리디로 **정답을 맞혔지만 왜 최적인지 설명하지 못한다.** "알기 때문에" 로 넘어간다.
+
+- 2026-08-27 [0122. Best Time to Buy and Sell Stock II](01-Array-String/0122-best-time-to-buy-and-sell-stock-ii/README.md) — *"이득 날 때마다 다 더한 게 무조건 최대라는 걸 알기 때문에"* → 결론은 맞지만 근거 없음
+
+**왜 위험한가**: 그리디는 *"매 순간 최선 = 전체 최선"* 이라는 가정을 깐다. 이 가정은 **대부분의 문제에서 틀린다.**
+같은 규칙("이득 날 때마다 판다")이 [0121. Best Time to Buy and Sell Stock](01-Array-String/0121-best-time-to-buy-and-sell-stock/README.md) 에서는 `7` 을 내놓지만 **정답은 `5`** 다. 제약 하나(거래 1회)가 그리디를 깨뜨렸다.
+
+**대책 — 셋 중 하나를 반드시 말한다** → [그리디 알고리즘](concepts/greedy.md)
+
+| 답의 형태 | 증명법 |
+|---|---|
+| 합/총량 | **상한 논법** — 천장을 계산하고 ① 아무도 못 넘고 ② 내가 닿는다를 보인다 |
+| 선택 순서 | **교환 논증** — 최적해의 첫 선택을 내 선택으로 바꿔도 손해 없음 |
+| 후보 버리기 | **지배 논증** — 이 후보는 다른 후보보다 항상 나쁘거나 같다 |
+
+> 면접에서 그리디 문제는 **반드시** *"왜 그게 최대인지 증명해 보세요"* 가 따라온다. 코드가 맞아도 여기서 갈린다.
 
 ---
 

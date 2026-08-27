@@ -1,19 +1,15 @@
 function isIsomorphic(s: string, t: string): boolean {
-    const stringMap = new Map()
+    const sToTMap = new Map()
+    const tToSMap = new Map()
+    const length = s.length
 
-    for (let i = 0; i < s.length; i++) {
-        if (!stringMap.has(s[i])) {              // 해당 키값이 없다면
-            // 키가 없으면서 이전에 mapping된 value도 없어야 함
-            if ([...stringMap.values()].includes(t[i])) {
-                return false
-            }
-            stringMap.set(s[i], t[i])
-        } else {                                  // 키가 있다면
-            if (stringMap.get(s[i]) !== t[i]) {
-                return false
-            }
-        }
+    for (let i = 0; i < length; i++) if (!sToTMap.has(s[i])) sToTMap.set(s[i], t[i])
+    for (let i = 0; i < length; i++) if (!tToSMap.has(t[i])) tToSMap.set(t[i], s[i])
+
+    for (let i = 0; i < length; i++) {
+        if (sToTMap.get(s[i]) === t[i]) {
+            if (tToSMap.get(t[i]) !== s[i]) return false
+        } else return false
     }
-
     return true
 }

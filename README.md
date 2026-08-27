@@ -21,7 +21,7 @@ LeetCode 문제를 풀며 남긴 학습 기록입니다. **정답 코드만이 �
 
 ## 폴더
 
-- [배열 · 문자열](01-Array-String/README.md) — 9문제
+- [배열 · 문자열](01-Array-String/README.md) — 10문제
 - [해시맵](02-Hashmap/README.md) — 9문제
 - [투 포인터](03-Two-Pointers/README.md) — 4문제
 
@@ -109,7 +109,7 @@ LeetCode 문제를 풀며 남긴 학습 기록입니다. **정답 코드만이 �
 
 | # | 주제 | 폴더 | 진행 | 상태 |
 |---|---|---|---|---|
-| 1 | 배열 · 문자열 | `01-Array-String` | 9 / 9 | ✅ **졸업** |
+| 1 | 배열 · 문자열 | `01-Array-String` | 10 / 10 | ✅ **졸업** (+보충 1) |
 | 2 | **해시맵** | `02-Hashmap` | **9 / 11** | 🔵 **진행 중** |
 | 3 | 투 포인터 | `03-Two-Pointers` | 4 / 7 | 🟡 보충 필요 |
 | 4 | 슬라이딩 윈도우 | `04-Sliding-Window` | 0 / 4 | |
@@ -125,7 +125,7 @@ LeetCode 문제를 풀며 남긴 학습 기록입니다. **정답 코드만이 �
 | 14 | DP (1D) | `14-DP` | 0 / 5 | |
 | 부록 | 비트 · 수학 | `15-Bit-Math` | 0 / 6 | 짬짬이 |
 
-**총 22 / 96**
+**총 23 / 97**
 
 ---
 
@@ -140,6 +140,7 @@ LeetCode 문제를 풀며 남긴 학습 기록입니다. **정답 코드만이 �
 - [x] ★ [0058. Length of Last Word](01-Array-String/0058-length-of-last-word/README.md) — 08-03 통과
 - [x] ★ [0014. Longest Common Prefix](01-Array-String/0014-longest-common-prefix/README.md) — 08-03 통과 (힌트 3단계)
 - [x] ★ [0028. Find the Index of the First Occurrence in a String](01-Array-String/0028-find-the-index-of-the-first-occurrence-in-a-string/README.md) — 08-03 통과
+- [x] [0122. Best Time to Buy and Sell Stock II](01-Array-String/0122-best-time-to-buy-and-sell-stock-ii/README.md) — 08-27 통과 (Medium·보충, 그리디 요청) — **피드백 0회**, 증명은 미제시
 
 > **졸업 판정**: 08-10 복습에서 [0088. Merge Sorted Array](01-Array-String/0088-merge-sorted-array/README.md) · [0027. Remove Element](01-Array-String/0027-remove-element/README.md) 를 백지 재작성 **2연속 통과** (힌트 0, 복잡도 정확, 과거 실수 6개 전부 미재발)
 
@@ -353,15 +354,16 @@ LeetCode 문제를 풀며 남긴 학습 기록입니다. **정답 코드만이 �
 | [0167. Two Sum II - Input Array Is Sorted](03-Two-Pointers/0167-two-sum-ii-input-array-is-sorted/README.md) | 08-20 (복습1) | 1일 | 08-21 | `return` 누락 → 유지 |
 | [0088. Merge Sorted Array](01-Array-String/0088-merge-sorted-array/README.md) | 08-20 (복습2) | 7일 | 08-27 | 통과 · 피드백 0회, 실수 4개 2연속 미재발 |
 | [0027. Remove Element](01-Array-String/0027-remove-element/README.md) | 08-26 (복습2) | 7일 | 09-02 | 통과 · 피드백 0회, 실수 2개 2연속 미재발 |
-| [0169. Majority Element](01-Array-String/0169-majority-element/README.md) | 08-12 (복습1) | 3일 | 08-20 | 통과 · 실수 4개 미재발 |
-| [0121. Best Time to Buy and Sell Stock](01-Array-String/0121-best-time-to-buy-and-sell-stock/README.md) | 08-12 (복습1) | 3일 | 08-20 | 통과 · 실수 3개 미재발 |
-| [0013. Roman to Integer](01-Array-String/0013-roman-to-integer/README.md) | 08-12 (복습1) | 3일 | 08-20 | 통과 · 실수 3개 미재발 |
+| [0169. Majority Element](01-Array-String/0169-majority-element/README.md) | 08-27 (복습2) | 7일 | 09-03 | 통과 · 피드백 0회, 실수 5개 미재발 |
+| [0121. Best Time to Buy and Sell Stock](01-Array-String/0121-best-time-to-buy-and-sell-stock/README.md) | 08-27 (복습2) | 7일 | 09-03 | 통과 · 피드백 0회, 실수 4개 미재발 |
+| [0013. Roman to Integer](01-Array-String/0013-roman-to-integer/README.md) | 08-27 (복습2) | 7일 | 09-03 | 통과 · 피드백 0회, 문자비교 함정 회피 |
 | [0058. Length of Last Word](01-Array-String/0058-length-of-last-word/README.md) | 08-12 (복습1) | 3일 | 08-21 | 통과 · 공간 `O(n)`→`O(1)` 개선 |
 | [0125. Valid Palindrome](03-Two-Pointers/0125-valid-palindrome/README.md) | 08-12 (복습1) | 3일 | 08-21 | 통과 · 실수 4개 미재발 |
 | [0011. Container With Most Water](03-Two-Pointers/0011-container-with-most-water/README.md) | 08-16 | 1일 | 08-21 | 복습 0회 |
 | [0242. Valid Anagram](02-Hashmap/0242-valid-anagram/README.md) | 08-17 | 1일 | 08-21 | 복습 0회 |
 | [0001. Two Sum](02-Hashmap/0001-two-sum/README.md) | 08-18 | 1일 | 08-24 | 복습 0회 (08-22 토 → 월 이동) |
-| [0205. Isomorphic Strings](02-Hashmap/0205-isomorphic-strings/README.md) | 08-19 | 1일 | 08-20 | 복습 0회 |
+| [0205. Isomorphic Strings](02-Hashmap/0205-isomorphic-strings/README.md) | 08-27 (복습1) | 3일 | 08-31 | 통과 · 역방향 검사 획득, 공간복잡도 오판 |
+| [0122. Best Time to Buy and Sell Stock II](01-Array-String/0122-best-time-to-buy-and-sell-stock-ii/README.md) | 08-27 | 1일 | 08-28 | 신규 · 복습 0회 |
 | [0290. Word Pattern](02-Hashmap/0290-word-pattern/README.md) | 08-19 | 1일 | 08-20 | 복습 0회 |
 | [0202. Happy Number](02-Hashmap/0202-happy-number/README.md) | 08-20 | 1일 | 08-21 | 복습 0회 |
 | [0219. Contains Duplicate II](02-Hashmap/0219-contains-duplicate-ii/README.md) | 08-26 | 1일 | 08-27 | 복습 0회 |

@@ -12,4 +12,5 @@
 | [0058. Length of Last Word](0058-length-of-last-word/README.md) | Easy | 2026-08-03 | 통과 (첫 시도) |
 | [0088. Merge Sorted Array](0088-merge-sorted-array/README.md) | Easy | 2026-08-02 | 통과 (첫 시도) |
 | [0121. Best Time to Buy and Sell Stock](0121-best-time-to-buy-and-sell-stock/README.md) | Easy | 2026-08-03 | 브루트포스(TLE) → 그리디로 통과 |
+| [0122. Best Time to Buy and Sell Stock II](0122-best-time-to-buy-and-sell-stock-ii/README.md) | Medium | 2026-08-27 | 통과 (피드백 0회) |
 | [0169. Majority Element](0169-majority-element/README.md) | Easy | 2026-08-03 | 통과 (브루트포스 → Boyer-Moore까지 도달) |

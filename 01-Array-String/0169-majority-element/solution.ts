@@ -1,18 +1,18 @@
 function majorityElement(nums: number[]): number {
-    let candidate = Infinity
-    let count = 0
+   let candidate = 0
+   let count = 0
 
-    for (const num of nums) {
-        if (count === 0) {
-            candidate = num
-        }
-
-        if (candidate === num) {
-            count++
-        } else {
-            count--
-        }
+   for (const num of nums) {
+    if (count === 0) {
+        candidate = num
     }
 
-    return candidate
+    if (candidate === num) {
+        count++
+    } else {
+        count--
+    }
+   }
+
+   return candidate
 }

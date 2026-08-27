@@ -1,15 +1,16 @@
 function maxProfit(prices: number[]): number {
-    let profit = 0
-    let min = Infinity // 구매하는날의 최솟값
+  let profit = 0
+  let minBuyPrice = Infinity
 
-    for (const price of prices) {
-        if (price < min) {
-            min = price
-        }
-        if (profit < price - min) {
-            profit = price - min
-        }
+  for (const price of prices) {
+    if (price < minBuyPrice) {
+        minBuyPrice = price
     }
 
-    return profit
+    if (profit < price - minBuyPrice) {
+        profit = price - minBuyPrice
+    }
+  }
+
+  return profit
 }
