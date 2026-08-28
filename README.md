@@ -22,7 +22,7 @@ LeetCode 문제를 풀며 남긴 학습 기록입니다. **정답 코드만이 �
 ## 폴더
 
 - [배열 · 문자열](01-Array-String/README.md) — 10문제
-- [해시맵](02-Hashmap/README.md) — 9문제
+- [해시맵](02-Hashmap/README.md) — 10문제
 - [투 포인터](03-Two-Pointers/README.md) — 4문제
 
 **개념 노트**
@@ -127,7 +127,7 @@ LeetCode 문제를 풀며 남긴 학습 기록입니다. **정답 코드만이 �
 | # | 주제 | 폴더 | 진행 | 상태 |
 |---|---|---|---|---|
 | 1 | 배열 · 문자열 | `01-Array-String` | 10 / 10 | ✅ **졸업** (+보충 1) |
-| 2 | **해시맵** | `02-Hashmap` | **9 / 11** | 🔵 **진행 중** |
+| 2 | **해시맵** | `02-Hashmap` | **10 / 11** | 🔵 **진행 중** |
 | 3 | 투 포인터 | `03-Two-Pointers` | 4 / 7 | 🟡 보충 필요 |
 | 4 | 슬라이딩 윈도우 | `04-Sliding-Window` | 0 / 4 | |
 | 5 | 스택 · 큐 | `05-Stack-Queue` | 0 / 6 | |
@@ -142,7 +142,7 @@ LeetCode 문제를 풀며 남긴 학습 기록입니다. **정답 코드만이 �
 | 14 | DP (1D) | `14-DP` | 0 / 5 | |
 | 부록 | 비트 · 수학 | `15-Bit-Math` | 0 / 6 | 짬짬이 |
 
-**총 23 / 97**
+**총 24 / 97**
 
 ---
 
@@ -176,7 +176,7 @@ LeetCode 문제를 풀며 남긴 학습 기록입니다. **정답 코드만이 �
 - [x] ★ [0202. Happy Number](02-Hashmap/0202-happy-number/README.md) — 08-20 통과 (첫 log n 문제, 접근 피드백 3회 + 구현 버그 1회)
 - [x] ★ [0219. Contains Duplicate II](02-Hashmap/0219-contains-duplicate-ii/README.md) — 08-26 통과 (Set + 슬라이딩 윈도우, 접근 피드백 3회)
 - [x] [0217. Contains Duplicate](02-Hashmap/0217-contains-duplicate/README.md) — 08-26 통과 (보충, **피드백 0회 · 구현 1발**)
-- [ ] 349. Intersection of Two Arrays — 보충
+- [x] [0349. Intersection of Two Arrays](02-Hashmap/0349-intersection-of-two-arrays/README.md) — 08-28 통과 (보충, **피드백 0회 · 구현 1발**, `O(min(n,|Σ|))` 정리)
 - [ ] 387. First Unique Character in a String — 보충
 
 ---
@@ -385,6 +385,7 @@ LeetCode 문제를 풀며 남긴 학습 기록입니다. **정답 코드만이 �
 | [0202. Happy Number](02-Hashmap/0202-happy-number/README.md) | 08-20 | 1일 | 08-21 | 복습 0회 |
 | [0219. Contains Duplicate II](02-Hashmap/0219-contains-duplicate-ii/README.md) | 08-26 | 1일 | 08-27 | 복습 0회 |
 | [0217. Contains Duplicate](02-Hashmap/0217-contains-duplicate/README.md) | 08-26 | 1일 | 08-27 | 복습 0회 |
+| [0349. Intersection of Two Arrays](02-Hashmap/0349-intersection-of-two-arrays/README.md) | 08-28 | 1일 | 08-31 | 신규 · 복습 0회 |
 
 ---
 

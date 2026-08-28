@@ -11,5 +11,6 @@
 | [0219. Contains Duplicate II](0219-contains-duplicate-ii/README.md) | Easy | 2026-08-26 | 통과 (접근 피드백 3회 — 범위를 윈도우로 좁히는 부분) |
 | [0242. Valid Anagram](0242-valid-anagram/README.md) | Easy | 2026-08-17 | 통과 (접근 피드백 2회 → 구현 1발) |
 | [0290. Word Pattern](0290-word-pattern/README.md) | Easy | 2026-08-19 | 통과 (접근 피드백 1회 — 무엇의 길이를 비교하는지) |
+| [0349. Intersection of Two Arrays](0349-intersection-of-two-arrays/README.md) | Easy | 2026-08-28 | 통과 (**피드백 0회**) |
 | [0383. Ransom Note](0383-ransom-note/README.md) | Easy | 2026-08-12 | 통과 (**접근 설계 3회 피드백 후 구현 1발**) |
 | [2996. Smallest Missing Integer Greater Than Sequential Prefix Sum](2996-smallest-missing-integer-greater-than-sequential-prefix-sum/README.md) | Easy | 2026-08-11 | **1차 오답**(검사 범위) → 수정 후 통과. 힌트 0단계 (반례 지적만) |
