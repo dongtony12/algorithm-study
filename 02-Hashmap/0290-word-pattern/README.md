@@ -135,3 +135,119 @@ Constraints가 **앞뒤 공백 없음 + 단어 사이 공백 정확히 1개**를
 ## 복습 기록
 
 **다음 복습**: 2026-08-20 (`1일` 단계) — **왜 길이 검사가 `205` 에는 없고 여기만 있는지**를 먼저 말할 것
+
+---
+
+## 복습 기록
+
+**다음 복습**: 2026-08-31 (`1일` 단계 유지 · 평일 기준)
+
+### 2026-08-28 (1회차) — ❌ **1차 오답** (길이 검사 누락) → 수정 후 통과
+
+```
+1차:  고정 9/12   ·  랜덤 20만건 불일치 1679건
+      최초 반례: pattern="b"  s="dog fish"   기대=false  실제=true
+2차:  고정 12/12  ·  랜덤 30만건 불일치 0건
+```
+
+[0205. Isomorphic Strings](../0205-isomorphic-strings/README.md) 의 양방향 맵 구조는 정확히 재현했으나 **길이 검사가 통째로 빠졌다.**
+08-19 최초 풀이에서 지적받았던 바로 그 지점이다.
+
+#### 왜 통과해버렸나 — 두 방향으로 깨진다
+
+**① `pattern` 이 더 길 때 — `undefined` 끼리 짝이 맞는다**
+
+`pattern = "abc"`, `s = "dog cat"` → `sWord = ["dog","cat"]`, `length = 3`
+
+```
+i=2 에서 sWord[2] 는 undefined
+
+patternToS: a→dog, b→cat, c→undefined      ← undefined 를 값으로 저장
+sToPattern: dog→a, cat→b, undefined→c      ← undefined 를 키로 저장
+
+검사 i=2:
+  patternToS['c']  === sWord[2]     →  undefined === undefined   ✅ 통과
+  sToPattern[undefined] === 'c'     →  'c' === 'c'               ✅ 통과
+```
+
+**`undefined` 를 정상 값처럼 양방향에 저장해놓고 자기 자신과 비교하니 당연히 맞는다.**
+맵은 *"이건 존재하지 않는 단어"* 라는 걸 모른다.
+
+**② `s` 가 더 길 때 — 남는 단어를 아예 안 본다**
+
+`pattern = "ab"`, `s = "dog cat fish"` → 세 루프 전부 `pattern.length`인 `2`까지만 돈다.
+**`"fish"` 는 한 번도 조회되지 않는다.** 검사에 참여하지 못하는 데이터는 어떤 검사를 짜도 못 잡는다.
+
+#### 근본 원인 — `#패턴오적용` (전제 미확인)
+
+```
+0205 Constraints:  t.length == s.length      ← 길이가 같음을 문제가 보장
+0290 Constraints:  그런 보장이 없음
+```
+
+`0205` 코드가 길이 검사를 안 해도 됐던 건 **문제가 대신 보장해줬기 때문**이다. 그 보장이 사라졌는데 코드는 그대로 왔다.
+
+> 이 노트에 이미 같은 지적이 있다 — *"`0205`의 `[...values()].includes()` 를 그대로 가져오면 안 된다. 전제가 깨지면 무너진다."*
+> **같은 함정에 다른 항목으로 걸렸다.**
+
+> ⚠️ 08-19에는 *"두 개의 사이즈가 다르면 false"* 라고 했는데 그때 지적받은 게 **"무엇의 길이인가"** 였다.
+> **`맵의 size` 가 아니라 `pattern.length` vs `단어 개수`.** 양방향 맵은 항상 짝지어 넣으므로 두 맵의 `size`는 언제나 같아서 아무것도 못 잡는다.
+
+---
+
+#### ⚠️ 가드 절의 위치 — 맨 위로
+
+수정본은 **맵 두 개를 다 만든 뒤에** 길이를 검사한다. `split` 직후에 이미 알 수 있는 사실인데, 답이 정해진 뒤에도 맵을 끝까지 채운다.
+
+```
+길이 불일치 입력 (pattern 300 / 단어 600) × 20000회
+  맵 다 만들고 검사: 377ms
+  가드 먼저        : 164ms      ← 2.3배
+```
+
+> ### 🔑 가드 절(guard clause)은 **알게 되는 즉시**
+> *"이 조건이면 볼 것도 없다"* 는 판단은 **판단이 가능해지는 가장 이른 지점**에 둔다.
+> 성능은 부수 효과고, 진짜 이득은 **아래 코드가 "길이는 같다"를 전제로 읽힌다**는 것.
+
+가드가 위에 있으면 `patternToSMap.set(pattern[i], sWord[i])` 에서 **`undefined` 가 저장될 일 자체가 없어진다.** 지금은 잘못된 값을 맵에 넣어두고 나중에 버리는 셈.
+
+---
+
+#### ✅ 공간복잡도 `O(n)` — 이번엔 정확
+
+어제 [0205. Isomorphic Strings](../0205-isomorphic-strings/README.md) 에서 `O(n)` 은 **틀렸고**, 오늘 `O(n)` 은 **맞다.** 같은 답인데 결과가 갈린다.
+
+| | 맵의 키 | 종류의 상한 | 공간 |
+|---|---|---|---|
+| [0205. Isomorphic Strings](../0205-isomorphic-strings/README.md) | ASCII 문자 | **128개** | **`O(1)`** |
+| **290** | **단어** | **없음** | **`O(n)`** ✅ |
+
+→ [시간·공간 복잡도](../../concepts/complexity.md) 「유한 알파벳 위의 자료구조는 `O(1)`」
+
+---
+
+#### 루프 3개 → 1개 (0205와 동일한 지적)
+
+```ts
+function wordPattern(pattern: string, s: string): boolean {
+    const words = s.split(' ')
+    if (pattern.length !== words.length) return false
+
+    const charToWord = new Map<string, string>()
+    const wordToChar = new Map<string, string>()
+
+    for (let i = 0; i < pattern.length; i++) {
+        const c = pattern[i], w = words[i]
+        if (charToWord.has(c)) { if (charToWord.get(c) !== w) return false }
+        else {
+            if (wordToChar.has(w)) return false      // w가 다른 문자에 이미 예약됨
+            charToWord.set(c, w); wordToChar.set(w, c)
+        }
+    }
+    return true
+}
+```
+
+`"abba"` / `"dog dog dog dog"` 는 **2번째 단어에서 즉시 종료**.
+
+**판정**: 1차 오답 → `1일` 단계 **유지** (다음 08-31 월)

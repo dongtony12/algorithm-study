@@ -7,11 +7,9 @@ function lengthOfLastWord(s: string): number {
             isStartChar = true
             result++
         }
-
         if (s[i].charCodeAt(0) === 32 && isStartChar) {
             return result
         }
     }
-
     return result
 }

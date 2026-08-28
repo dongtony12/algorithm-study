@@ -13,7 +13,7 @@
 | 🔴 **#죽은코드방치** | 4 | 08-03 | [0027. Remove Element](01-Array-String/0027-remove-element/README.md) · [0121. Best Time to Buy and Sell Stock](01-Array-String/0121-best-time-to-buy-and-sell-stock/README.md) · [0058. Length of Last Word](01-Array-String/0058-length-of-last-word/README.md) · [0125. Valid Palindrome](03-Two-Pointers/0125-valid-palindrome/README.md) |
 | 🔴 **#복잡도차원뭉개기** | **6** | 08-19 | [0014. Longest Common Prefix](01-Array-String/0014-longest-common-prefix/README.md) ×2 · [0028. Find the Index of the First Occurrence in a String](01-Array-String/0028-find-the-index-of-the-first-occurrence-in-a-string/README.md) · [0392. Is Subsequence](03-Two-Pointers/0392-is-subsequence/README.md) · [0001. Two Sum](02-Hashmap/0001-two-sum/README.md) · [2996. Smallest Missing Integer Greater Than Sequential Prefix Sum](02-Hashmap/2996-smallest-missing-integer-greater-than-sequential-prefix-sum/README.md) |
 | 🟡 **#루프상한혼동** | 2 | 08-19 | [0014. Longest Common Prefix](01-Array-String/0014-longest-common-prefix/README.md) ×2 |
-| 🟡 **#패턴오적용** | 2 | 08-20 | [0392. Is Subsequence](03-Two-Pointers/0392-is-subsequence/README.md) · [0383. Ransom Note](02-Hashmap/0383-ransom-note/README.md) |
+| 🟠 **#패턴오적용** | 3 | **08-28** | [0392. Is Subsequence](03-Two-Pointers/0392-is-subsequence/README.md) · [0383. Ransom Note](02-Hashmap/0383-ransom-note/README.md) · **[0290. Word Pattern](02-Hashmap/0290-word-pattern/README.md)** |
 | ⚪ **#복사후미변경** | 1 | 08-20 | [0383. Ransom Note](02-Hashmap/0383-ransom-note/README.md) |
 | 🟡 **#쓰기동작누락** | 2 | 08-19 | [0026. Remove Duplicates from Sorted Array](01-Array-String/0026-remove-duplicates-from-sorted-array/README.md) ×2 |
 | 🔴 **#변수명불명확** | **4** | 08-12 | [0169. Majority Element](01-Array-String/0169-majority-element/README.md) · [0013. Roman to Integer](01-Array-String/0013-roman-to-integer/README.md) · [0014. Longest Common Prefix](01-Array-String/0014-longest-common-prefix/README.md) · [0383. Ransom Note](02-Hashmap/0383-ransom-note/README.md) |
@@ -23,7 +23,7 @@
 | 🟡 **#우연히맞는코드** | 2 | 08-03 | [0088. Merge Sorted Array](01-Array-String/0088-merge-sorted-array/README.md) · [0013. Roman to Integer](01-Array-String/0013-roman-to-integer/README.md) |
 | 🔴 **#쓰기포인터오해** | **3** | 08-12 | [0026. Remove Duplicates from Sorted Array](01-Array-String/0026-remove-duplicates-from-sorted-array/README.md) ×2 · [0088. Merge Sorted Array](01-Array-String/0088-merge-sorted-array/README.md) |
 | 🔴 **#인덱스오프바이원** | **4** | 08-19 | [0026. Remove Duplicates from Sorted Array](01-Array-String/0026-remove-duplicates-from-sorted-array/README.md) · [0028. Find the Index of the First Occurrence in a String](01-Array-String/0028-find-the-index-of-the-first-occurrence-in-a-string/README.md) · [2996. Smallest Missing Integer Greater Than Sequential Prefix Sum](02-Hashmap/2996-smallest-missing-integer-greater-than-sequential-prefix-sum/README.md) ×2 |
-| ⚪ **#그리디증명생략** | 1 | 08-27 | [0122. Best Time to Buy and Sell Stock II](01-Array-String/0122-best-time-to-buy-and-sell-stock-ii/README.md) |
+| 🟡 **#그리디증명생략** | 2 | **08-28** | [0122. Best Time to Buy and Sell Stock II](01-Array-String/0122-best-time-to-buy-and-sell-stock-ii/README.md) · **[0011. Container With Most Water](03-Two-Pointers/0011-container-with-most-water/README.md)** |
 | ⚪ **#센티널값** | 1 | 08-03 | [0121. Best Time to Buy and Sell Stock](01-Array-String/0121-best-time-to-buy-and-sell-stock/README.md) |
 | ⚪ **#함수참조vs호출** | 1 | 08-03 | [0125. Valid Palindrome](03-Two-Pointers/0125-valid-palindrome/README.md) |
 | ⚪ **#숨은반복문** | 1 | 08-03 | [0169. Majority Element](01-Array-String/0169-majority-element/README.md) |
@@ -229,13 +229,19 @@ for (let i = 0; i < minLength; i++) {        // i = 글자 위치 (열)
 
 - 2026-08-20 [0383. Ransom Note](02-Hashmap/0383-ransom-note/README.md) — 복습 접근 1차에서 [0242. Valid Anagram](02-Hashmap/0242-valid-anagram/README.md) 의 **"정확히 동일"** 조건을 가져옴. 383은 *"만들 수 있나"* 라 `<=` 여야 한다 (`"a"`/`"ab"` 반례)
 - 2026-08-19 [0392. Is Subsequence](03-Two-Pointers/0392-is-subsequence/README.md) — 복습 접근 1차에서 **26칸 배열 개수 세기**를 시도. 직전 [0242. Valid Anagram](02-Hashmap/0242-valid-anagram/README.md) · [0383. Ransom Note](02-Hashmap/0383-ransom-note/README.md) 의 패턴. `s="aec"`, `t="abcde"` 반례로 걸러짐(개수는 맞지만 순서가 어긋남)
+- 2026-08-28 [0290. Word Pattern](02-Hashmap/0290-word-pattern/README.md) — 전날 푼 [0205. Isomorphic Strings](02-Hashmap/0205-isomorphic-strings/README.md) 의 양방향 맵을 그대로 가져오며 **길이 검사를 빠뜨림**. 205는 `t.length == s.length` 를 **Constraints가 보장**하지만 290은 보장이 없다 (`"b"`/`"dog fish"` 반례, 20만건 중 1679건 실패)
 
 **대책 — 패턴을 가져오기 전에 전제를 확인한다**
 ```
 개수 세기(26칸 배열 / Map)  →  "순서가 답에 영향을 주는가?"  영향 있으면 못 쓴다
 양끝 투 포인터              →  "정렬되어 있거나 대칭인가?"
 이진 탐색                   →  "정렬되어 있는가?"
+양방향 맵 (일대일 대응)     →  "두 입력의 길이가 같음이 보장되는가?"   ← 290
 ```
+
+> ⚠️ **가장 위험한 전제는 「Constraints가 대신 해주던 검사」다.**
+> 원래 문제에서 안 써도 됐던 코드는 **애초에 존재하지 않으므로** 옮길 때 빠진 걸 알아채기 어렵다.
+> 패턴을 재사용할 때는 **두 문제의 Constraints를 나란히 놓고 비교**할 것.
 > 🔑 **익숙한 도구가 아니라 문제의 성질이 도구를 정한다.**
 > [0242. Valid Anagram](02-Hashmap/0242-valid-anagram/README.md) 은 *"순서가 답에 영향을 주지 않는다"* 가 논증의 핵심이었고, [0392. Is Subsequence](03-Two-Pointers/0392-is-subsequence/README.md) 는 정반대다.
 
@@ -283,6 +289,13 @@ map.set(k, (map.get(k) ?? 0) + 1)      // has 분기가 사라진다
 > 그리디로 **정답을 맞혔지만 왜 최적인지 설명하지 못한다.** "알기 때문에" 로 넘어간다.
 
 - 2026-08-27 [0122. Best Time to Buy and Sell Stock II](01-Array-String/0122-best-time-to-buy-and-sell-stock-ii/README.md) — *"이득 날 때마다 다 더한 게 무조건 최대라는 걸 알기 때문에"* → 결론은 맞지만 근거 없음
+- 2026-08-28 [0011. Container With Most Water](03-Two-Pointers/0011-container-with-most-water/README.md) — 투 포인터 코드는 첫 시도에 정확했으나 *"왜 짧은 쪽을 버려도 되는가"* 를 제시하지 않음. **힌트 2회**(높이 축 → 너비 축) 후 지배 논증 완성
+
+> **이틀 연속 같은 자리.** 진전은 있다 — 08-27은 논증이 아예 없었고, 08-28은 유도하니 두 축을 다 찾아냈다. 다만 **묻기 전에 먼저 나와야** 한다.
+
+> 💡 **투 포인터 · 그리디 문제의 접근 서술에 이 한 줄을 고정으로 넣을 것:**
+> *"내가 버리는 후보는 ___ 때문에 지금 계산한 것보다 클 수 없다"*
+> 이 문장을 못 채우면 **아직 접근이 완성된 게 아니다.**
 
 **왜 위험한가**: 그리디는 *"매 순간 최선 = 전체 최선"* 이라는 가정을 깐다. 이 가정은 **대부분의 문제에서 틀린다.**
 같은 규칙("이득 날 때마다 판다")이 [0121. Best Time to Buy and Sell Stock](01-Array-String/0121-best-time-to-buy-and-sell-stock/README.md) 에서는 `7` 을 내놓지만 **정답은 `5`** 다. 제약 하나(거래 1회)가 그리디를 깨뜨렸다.

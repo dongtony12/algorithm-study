@@ -259,3 +259,100 @@ s[i] !== ' '      // 더 짧고 읽기 쉽다
 여기선 **공백 하나만** 비교하므로 문자 그대로가 낫다.
 
 > 🔑 **목적에 맞는 도구를 고른다.** `32` 라는 매직 넘버를 쓰면 읽는 사람이 "32가 뭐지?"를 한 번 거쳐야 한다.
+
+### 2026-08-28 (2회차) — 통과, 지적 3건(전부 스타일) · `3일` → `7일` 단계
+
+```
+고정 14/14  ·  랜덤 30만건 불일치 0건
+최악 입력 (1만자 단일 단어) × 2만회: 402ms
+```
+
+```ts
+function lengthOfLastWord(s: string): number {
+    let result = 0
+    let isStartChar = false
+
+    for (let i = s.length - 1; i >= 0; i--) {
+        if (s[i].charCodeAt(0) !== 32) {
+            isStartChar = true
+            result++
+        }
+        if (s[i].charCodeAt(0) === 32 && isStartChar) {
+            return result
+        }
+    }
+    return result
+}
+```
+
+#### ✅ 08-12의 `O(n)` → `O(1)` 개선을 지켜냈다
+
+`split()` · `trimEnd()` 로 새 배열/문자열을 만들지 않고 **뒤에서부터 훑어 `O(1)`** 로 끝냈다. 이 문제의 핵심.
+복잡도 `O(n)` / `O(1)` 스스로 정확히 제시.
+
+> 시간은 최악 `O(n)`(전체가 한 단어)이지만 실제로는 **`후행 공백 + 마지막 단어`** 만큼만 돈다. 조기 반환이 살아 있다.
+
+---
+
+#### ⚠️ 1. `charCodeAt(0) !== 32` 는 매직 넘버
+
+```
+charCodeAt(0) !== 32 : 7ms
+s[i] !== ' '         : 7ms      ← 동일
+```
+
+**성능 이득이 0.** `32`가 공백이라는 걸 아는 사람만 읽을 수 있는 코드가 됐다.
+
+> 💡 `charCodeAt` 이 **정당한 경우**는 따로 있다 — **문자를 인덱스로 쓸 때**.
+> ```ts
+> counts[s.charCodeAt(i) - 97]++      // 'a'~'z' → 0~25 배열 인덱스
+> ```
+> 이건 대체 불가능하다. 반면 **단순 비교**에 쓰면 얻는 것 없이 가독성만 잃는다.
+
+#### ⚠️ 2. 두 `if` 가 상호배타적 — `else if` 여야 한다
+
+```ts
+if (s[i].charCodeAt(0) !== 32) { … }                  // 공백이 아닐 때
+if (s[i].charCodeAt(0) === 32 && isStartChar) return  // 공백일 때
+```
+
+**같은 문자를 두 번 검사**한다. 첫 번째가 참이면 두 번째는 **반드시** 거짓이다.
+
+```ts
+if (s[i] !== ' ') { inWord = true; result++ }
+else if (inWord) return result
+```
+
+`=== 32` 검사가 통째로 사라지고 *"공백이 아니면 세고, 공백인데 이미 단어를 만났으면 끝"* 이 그대로 읽힌다.
+
+> [0027. Remove Element](../0027-remove-element/README.md) · [0392. Is Subsequence](../../03-Two-Pointers/0392-is-subsequence/README.md) 의 **"양쪽 분기에 똑같은 줄이 있으면 밖으로 뺀다"** 의 반대 형태:
+> **한쪽 분기의 조건이 다른 쪽의 부정이면 `else` 로 묶는다.**
+
+#### ⚠️ 3. `isStartChar` 라는 이름
+
+*"이 문자가 시작 문자인가"* 가 아니라 **"단어에 진입했는가"** 라는 **순회의 상태 플래그**다. 문자의 속성이 아니다.
+
+```ts
+let inWord = false        // 또는 foundWord
+```
+
+*(`#변수명불명확` 계열이나 동작 영향 없고 의도는 읽히므로 **카운트 미포함**)*
+
+---
+
+### 정리본
+
+```ts
+function lengthOfLastWord(s: string): number {
+    let result = 0
+    let inWord = false
+
+    for (let i = s.length - 1; i >= 0; i--) {
+        if (s[i] !== ' ') { inWord = true; result++ }
+        else if (inWord) return result
+    }
+    return result
+}
+```
+
+**판정**: 정답 + 공간 `O(1)` 유지 ✅ / 지적 전부 스타일 → `3일` → **`7일` 단계** (다음 **09-08** — 간격을 평일로 계산)

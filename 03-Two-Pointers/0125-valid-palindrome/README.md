@@ -272,3 +272,99 @@ return (ch >= 'A'.charCodeAt(0) && ch <= 'Z'.charCodeAt(0)) || ...
 (ch >= 'a' && ch <= 'z') || (ch >= 'A' && ch <= 'Z') || (ch >= '0' && ch <= '9')
 ```
 문자 비교도 **코드 순서를 따르므로** 동일하게 동작한다. `charCodeAt` 자체가 불필요.
+
+### 2026-08-28 (2회차) — 통과, **피드백 0회** · `3일` → `7일` 단계
+
+```
+고정 16/16  ·  랜덤 30만건 불일치 0건 (특수문자 30종 랜덤 조합)
+20만자 입력 교차검증 통과
+```
+
+```ts
+function isAlphanumeric(s: string): boolean {
+    const ch = s.charCodeAt(0)
+    return (ch >= 'A'.charCodeAt(0) && ch <= 'Z'.charCodeAt(0))
+        || (ch >= 'a'.charCodeAt(0) && ch <= 'z'.charCodeAt(0))
+        || (ch >= '0'.charCodeAt(0) && ch <= '9'.charCodeAt(0))
+}
+
+function isPalindrome(s: string): boolean {
+    let left = 0
+    let right = s.length - 1
+
+    while (left < right) {
+        if (!isAlphanumeric(s[left]))  { left++;  continue }
+        if (!isAlphanumeric(s[right])) { right--; continue }
+        if (s[left].toLowerCase() !== s[right].toLowerCase()) return false
+        left++; right--
+    }
+    return true
+}
+```
+
+#### ✅ 실수 4개 **2연속** 미재발
+
+| 08-03 실수 | 08-12 | **08-28** |
+|---|---|---|
+| `isAlnum` 호출 안 하고 참조만 `#함수참조vs호출` | ✅ | ✅ `isAlphanumeric(s[left])` |
+| 숫자(`0~9`) 범위 누락 `#엣지케이스누락` | ✅ | ✅ (`"0P"` 통과) |
+| `s.[left]` 오타 | ✅ | ✅ |
+| 디버깅 `console.log` 방치 `#죽은코드방치` | ✅ | ✅ |
+
+---
+
+#### 👀 같은 세션의 [0058. Length of Last Word](../../01-Array-String/0058-length-of-last-word/README.md) 와 **정반대 스타일**
+
+15분 사이에 푼 두 문제에서 정확히 반대로 썼다.
+
+```ts
+// 0058 — 몇 분 전
+if (s[i].charCodeAt(0) !== 32)                        // 32가 뭔지 모름   ❌
+
+// 0125 — 지금
+ch >= 'A'.charCodeAt(0) && ch <= 'Z'.charCodeAt(0)    // 뭘 비교하는지 보임  ✅
+```
+
+**여기 방식이 맞다.** 08-12에 매직 넘버 `65/90/97/122/48/57` 을 걷어내며 얻은 개선인데,
+**그게 이 문제에만 남아 있고 0058엔 적용되지 않았다.** → 원칙을 **문제별로 따로 기억**하고 있다는 신호.
+
+---
+
+#### 성능 — 흥미로운 결과 3가지 (20만자 × 50회)
+
+```
+제출본 ('A'.charCodeAt(0) 매번):  39ms
+상수로 뽑기                    :  33ms      ← 18% 빠름
+정규식 /[a-z0-9]/i.test        : 105ms      ← 2.7배 느림 (!)
+charCode 직접 소문자화         :  18ms      ← 2.2배 빠름
+```
+
+**① `'A'.charCodeAt(0)` 은 매번 다시 계산된다**
+
+호출마다 리터럴에서 `charCodeAt` 을 6번 호출한다. 상수로 뽑으면 가독성은 그대로 두고 그 비용만 사라진다.
+
+```ts
+const CODE_A = 'A'.charCodeAt(0), CODE_Z = 'Z'.charCodeAt(0)
+const CODE_a = 'a'.charCodeAt(0), CODE_z = 'z'.charCodeAt(0)
+const CODE_0 = '0'.charCodeAt(0), CODE_9 = '9'.charCodeAt(0)
+```
+
+> **매직 넘버를 없애는 방법이 "계산식으로 바꾸기"만 있는 게 아니다.** 이름을 주는 게 본질이고, 상수로 뽑으면 이름도 얻고 계산도 한 번만 한다.
+
+**② 정규식이 제일 느리다**
+
+`/[a-z0-9]/i.test(c)` 는 짧아서 많이 쓰지만, **문자 하나 검사하려고 정규식 엔진을 매번 호출**하는 비용이 범위 비교보다 훨씬 크다.
+
+> 🔑 **짧은 코드 ≠ 빠른 코드.** 정규식은 *"패턴이 복잡할 때"* 이득이지 `a-z0-9` 같은 단순 범위엔 손해다.
+
+**③ `s[left]` 는 문자열 객체를 만든다**
+
+JS엔 char 타입이 없어 `s[left]` 는 **길이 1짜리 새 문자열**이다. `.toLowerCase()` 가 거기서 또 하나 만든다.
+
+```ts
+s.charCodeAt(left)          // 숫자 하나 — 할당 없음
+```
+
+이게 2.2배 차이의 정체다. 다만 **가독성을 크게 해치므로 지금 코드로 충분** — `O(n)` 안의 상수 배수일 뿐이고 면접에서도 지금 버전이 더 좋은 답이다.
+
+**판정**: 정답 · 피드백 0회 · 실수 4개 2연속 미재발 · 매직 넘버 개선 유지 → `3일` → **`7일` 단계** (다음 **09-08** — 간격을 평일로 계산)

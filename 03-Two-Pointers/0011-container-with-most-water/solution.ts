@@ -1,28 +1,15 @@
 function maxArea(height: number[]): number {
-    let i = 0
-    let k = height.length - 1
+    let left = 0
+    let right = height.length - 1
+    let area = 0
 
-    let maxArea = 0
+    while (left < right) {
+        let width = right - left
+        let curArea = width * Math.min(height[left], height[right])
+        if (curArea > area) area = curArea
 
-    //x가 최대고 height가 클때인데 height는 2개의 value중 작은값
-    while (k > i){
-        let x = k - i
-        let y = 0
-
-        if(height[i] > height[k]){
-            y = height[k]
-            k--
-        }else {
-            y = height[i]
-            i++
-        }
-
-        let area = x * y
-
-        if(maxArea <= area) {
-            maxArea = area
-        }
+        if (height[left] < height[right]) left++
+        else right--
     }
-
-    return maxArea
+    return area
 }
