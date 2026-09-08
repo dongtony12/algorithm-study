@@ -128,7 +128,7 @@ LeetCode 문제를 풀며 남긴 학습 기록입니다. **정답 코드만이 �
 |---|---|---|---|---|
 | 1 | 배열 · 문자열 | `01-Array-String` | 10 / 10 | ✅ **졸업** (+보충 1) |
 | 2 | **해시맵** | `02-Hashmap` | **11 / 11** | 🟠 **졸업 판정 대기** |
-| 3 | 투 포인터 | `03-Two-Pointers` | 4 / 7 | 🟡 보충 필요 |
+| 3 | **투 포인터** | `03-Two-Pointers` | **4 / 5** | 🔵 **진행 중** (`15. 3Sum` 남음) |
 | 4 | 슬라이딩 윈도우 | `04-Sliding-Window` | 0 / 4 | |
 | 5 | 스택 · 큐 | `05-Stack-Queue` | 0 / 6 | |
 | 6 | 이진 탐색 | `06-Binary-Search` | 0 / 6 | |
@@ -142,7 +142,7 @@ LeetCode 문제를 풀며 남긴 학습 기록입니다. **정답 코드만이 �
 | 14 | DP (1D) | `14-DP` | 0 / 5 | |
 | 부록 | 비트 · 수학 | `15-Bit-Math` | 0 / 6 | 짬짬이 |
 
-**총 25 / 97**
+**총 25 / 95**
 
 ---
 
@@ -187,9 +187,14 @@ LeetCode 문제를 풀며 남긴 학습 기록입니다. **정답 코드만이 �
 - [x] ★ [0392. Is Subsequence](03-Two-Pointers/0392-is-subsequence/README.md) — 08-10 통과 (빈 문자열 3차 수정)
 - [x] **[0167. Two Sum II - Input Array Is Sorted](03-Two-Pointers/0167-two-sum-ii-input-array-is-sorted/README.md)** — 08-12 통과 (**Medium**, 사용자 지정 조기 투입. 지배 논증 피드백 2회)
 - [x] **[0011. Container With Most Water](03-Two-Pointers/0011-container-with-most-water/README.md)** — 08-16 통과 (**Medium**, 사용자 지정. 구현 1발이나 접근 단계 생략 → 논증 사후 보강)
-- [ ] 344. Reverse String — 보충
-- [ ] 283. Move Zeroes — 보충
-- [ ] 977. Squares of a Sorted Array — 보충
+- [ ] **15. 3Sum** — ⚠️ **Top150 누락분** (2026-09-08 추가). Medium. 정렬 + 투 포인터 + 중복 제거
+
+> **2026-09-08 정리**: Top150 투 포인터 챕터는 5문제(`125` `392` `167` `11` `15`)인데
+> 08-11 커리큘럼 작성 시 **`15. 3Sum` 이 누락**돼 있었다. 이걸 메우고 졸업 판정으로 간다.
+>
+> 기존 보충 후보 `344. Reverse String` · `283. Move Zeroes` · `977. Squares of a Sorted Array` 는
+> **제외**했다 — 전부 읽기-쓰기 포인터 계열로 [0027. Remove Element](01-Array-String/0027-remove-element/README.md) · [0026. Remove Duplicates from Sorted Array](01-Array-String/0026-remove-duplicates-from-sorted-array/README.md) 의 변주라
+> 새로 얻는 게 적다. 반면 `3Sum` 은 **난이도가 한 칸 올라가는** 문제이고 면접 빈출이다.
 
 ---
 
