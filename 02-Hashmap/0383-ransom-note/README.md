@@ -350,3 +350,96 @@ magazineMap.set(magazine[i], (magazineMap.get(magazine[i]) ?? 0) + 1)
 `has` 분기가 사라지면서 **바꿀 이름이 한 줄에 모인다.** 실제로 세 번째 루프에서는 `?? 0` 을 썼으면서 카운팅 루프에는 안 썼다.
 
 **판정**: 구현 버그 1회 → `1일` 단계 유지 (다음 복습 08-21)
+
+### 2026-09-08 (2회차) — 통과, **피드백 0회** · `1일` → `3일` 단계
+
+```
+고정 13/13  ·  랜덤 30만건 불일치 0건
+```
+
+```ts
+function canConstruct(ransomNote: string, magazine: string): boolean {
+    const array = new Array(26).fill(0)
+
+    for (let i = 0; i < ransomNote.length; i++) array[ransomNote[i].charCodeAt(0) - 97] += 1
+    for (let i = 0; i < magazine.length; i++)   array[magazine[i].charCodeAt(0) - 97]   -= 1
+
+    for (const num of array) if (num > 0) return false
+
+    return true
+}
+```
+
+---
+
+#### ⭐ `#패턴오적용` 을 끊었다 — 08-20 재발 지점
+
+**같은 세션에서 15분 전에 [0242. Valid Anagram](../0242-valid-anagram/README.md) 을 `!== 0` 으로 고쳤는데, 여기서는 `> 0` 을 썼다.** 이게 정확히 맞다.
+
+| | 조건 | 검사 |
+|---|---|---|
+| [0242. Valid Anagram](../0242-valid-anagram/README.md) | *"정확히 **같은가**"* | `!== 0` — **양쪽 다** 남으면 안 됨 |
+| **383 랜섬노트** | *"**만들 수 있는가**"* | **`> 0`** — magazine 이 **남는 건 괜찮음** |
+
+실측 대조:
+
+```
+[대조] 242의 !== 0 을 그대로 쓰면 불일치 533건
+       예: note="a", mag="aa"   기대=true  실제=false
+```
+
+`magazine` 에 `a` 가 하나 남았다고 실패 처리하면 안 된다. **여분은 그냥 안 쓰면 된다.**
+
+> 08-20 복습에서 **정확히 이 자리**에서 `#패턴오적용` 이 났었다(242의 "정확히 동일" 조건을 가져옴).
+> **오늘은 방금 그 문제를 풀고 온 상태에서도 안 끌려왔다.** 같은 날 242에서 4회로 올라간 것을 여기서 끊었다.
+
+#### 부호의 방향도 정확
+
+242와 **반대로** `ransomNote` 를 먼저 더하고 `magazine` 을 뺐다.
+
+```
+array[i] > 0   →  note 에 더 필요한데 magazine 에 없다   →  실패 ✅
+array[i] < 0   →  magazine 이 남는다                    →  괜찮음
+```
+
+**`>` 가 "부족하다"를 뜻하도록 부호를 맞춰둔 것.** 반대로 넣었으면 `< 0` 을 검사해야 했고, 그게 헷갈림의 원천이 된다.
+
+---
+
+#### 개선 여지 — 조기 종료
+
+```
+최악 입력 (note = "a"×10만, mag = "b"×10만) × 2000회
+  전부 세고 검사 (제출본): 461ms
+  조기 종료          : 173ms      ← 2.7배
+```
+
+지금은 **20만 글자를 전부 센 뒤에야** 판단한다. `note` 의 첫 글자 `a` 를 만나는 순간 이미 답이 나오는데도.
+
+```ts
+function canConstruct(ransomNote: string, magazine: string): boolean {
+    if (ransomNote.length > magazine.length) return false      // ← 가드
+
+    const counts = new Array<number>(26).fill(0)
+    for (let i = 0; i < magazine.length; i++) counts[magazine.charCodeAt(i) - 97]++
+
+    for (let i = 0; i < ransomNote.length; i++) {
+        if (--counts[ransomNote.charCodeAt(i) - 97] < 0) return false   // ← 부족해지는 즉시
+    }
+    return true
+}
+```
+
+세 가지가 바뀐다:
+
+1. **`magazine` 을 먼저 세고** → `ransomNote` 로 차감 (순서를 뒤집음)
+2. `--counts[...] < 0` — **감소 직후 바로 확인**해서 부족해지는 순간 종료
+3. **길이 가드** — `note` 가 더 길면 볼 것도 없이 `false`
+
+> 검증: 랜덤 30만건에서 제출본과 **불일치 0건**.
+> 복잡도는 여전히 `O(n + m)`. **최악은 동일하고 평균이 빨라지는** 종류의 개선이다.
+
+> 💡 `if (r.length > m.length) return false` 는 같은 날 [0242. Valid Anagram](../0242-valid-anagram/README.md) 에서 놓쳤던 그 가드다.
+> 여기서도 같은 자리에 들어가되 **`!==` 가 아니라 `>`** 인 게 차이 — 조건이 *"같아야"* 가 아니라 *"충분해야"* 이므로.
+
+**판정**: 정답 · 복잡도 정확 · 피드백 0회 · **`#패턴오적용` 회피** → `1일` → **`3일` 단계** (다음 09-11)

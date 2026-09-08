@@ -13,7 +13,7 @@
 | 🔴 **#죽은코드방치** | 4 | 08-03 | [0027. Remove Element](01-Array-String/0027-remove-element/README.md) · [0121. Best Time to Buy and Sell Stock](01-Array-String/0121-best-time-to-buy-and-sell-stock/README.md) · [0058. Length of Last Word](01-Array-String/0058-length-of-last-word/README.md) · [0125. Valid Palindrome](03-Two-Pointers/0125-valid-palindrome/README.md) |
 | 🔴 **#복잡도차원뭉개기** | **6** | 08-19 | [0014. Longest Common Prefix](01-Array-String/0014-longest-common-prefix/README.md) ×2 · [0028. Find the Index of the First Occurrence in a String](01-Array-String/0028-find-the-index-of-the-first-occurrence-in-a-string/README.md) · [0392. Is Subsequence](03-Two-Pointers/0392-is-subsequence/README.md) · [0001. Two Sum](02-Hashmap/0001-two-sum/README.md) · [2996. Smallest Missing Integer Greater Than Sequential Prefix Sum](02-Hashmap/2996-smallest-missing-integer-greater-than-sequential-prefix-sum/README.md) |
 | 🟡 **#루프상한혼동** | 2 | 08-19 | [0014. Longest Common Prefix](01-Array-String/0014-longest-common-prefix/README.md) ×2 |
-| 🟠 **#패턴오적용** | 3 | **08-28** | [0392. Is Subsequence](03-Two-Pointers/0392-is-subsequence/README.md) · [0383. Ransom Note](02-Hashmap/0383-ransom-note/README.md) · **[0290. Word Pattern](02-Hashmap/0290-word-pattern/README.md)** |
+| 🔴 **#패턴오적용** | **4** | **09-08** | [0392. Is Subsequence](03-Two-Pointers/0392-is-subsequence/README.md) · [0383. Ransom Note](02-Hashmap/0383-ransom-note/README.md) · [0290. Word Pattern](02-Hashmap/0290-word-pattern/README.md) · **[0242. Valid Anagram](02-Hashmap/0242-valid-anagram/README.md)** |
 | ⚪ **#복사후미변경** | 1 | 08-20 | [0383. Ransom Note](02-Hashmap/0383-ransom-note/README.md) |
 | 🟡 **#쓰기동작누락** | 2 | 08-19 | [0026. Remove Duplicates from Sorted Array](01-Array-String/0026-remove-duplicates-from-sorted-array/README.md) ×2 |
 | 🔴 **#변수명불명확** | **4** | 08-12 | [0169. Majority Element](01-Array-String/0169-majority-element/README.md) · [0013. Roman to Integer](01-Array-String/0013-roman-to-integer/README.md) · [0014. Longest Common Prefix](01-Array-String/0014-longest-common-prefix/README.md) · [0383. Ransom Note](02-Hashmap/0383-ransom-note/README.md) |
@@ -229,6 +229,7 @@ for (let i = 0; i < minLength; i++) {        // i = 글자 위치 (열)
 
 - 2026-08-20 [0383. Ransom Note](02-Hashmap/0383-ransom-note/README.md) — 복습 접근 1차에서 [0242. Valid Anagram](02-Hashmap/0242-valid-anagram/README.md) 의 **"정확히 동일"** 조건을 가져옴. 383은 *"만들 수 있나"* 라 `<=` 여야 한다 (`"a"`/`"ab"` 반례)
 - 2026-08-19 [0392. Is Subsequence](03-Two-Pointers/0392-is-subsequence/README.md) — 복습 접근 1차에서 **26칸 배열 개수 세기**를 시도. 직전 [0242. Valid Anagram](02-Hashmap/0242-valid-anagram/README.md) · [0383. Ransom Note](02-Hashmap/0383-ransom-note/README.md) 의 패턴. `s="aec"`, `t="abcde"` 반례로 걸러짐(개수는 맞지만 순서가 어긋남)
+- 2026-09-08 [0242. Valid Anagram](02-Hashmap/0242-valid-anagram/README.md) — **또 길이 검사 누락.** 마지막 검증 루프가 `letterNum > 0` 만 보아 `t` 에 문자가 남는 경우를 통과시킴 (`"ab"`/`"aab"` 반례, 30만건 중 **22% 실패**)
 - 2026-08-28 [0290. Word Pattern](02-Hashmap/0290-word-pattern/README.md) — 전날 푼 [0205. Isomorphic Strings](02-Hashmap/0205-isomorphic-strings/README.md) 의 양방향 맵을 그대로 가져오며 **길이 검사를 빠뜨림**. 205는 `t.length == s.length` 를 **Constraints가 보장**하지만 290은 보장이 없다 (`"b"`/`"dog fish"` 반례, 20만건 중 1679건 실패)
 
 **대책 — 패턴을 가져오기 전에 전제를 확인한다**
@@ -238,6 +239,11 @@ for (let i = 0; i < minLength; i++) {        // i = 글자 위치 (열)
 이진 탐색                   →  "정렬되어 있는가?"
 양방향 맵 (일대일 대응)     →  "두 입력의 길이가 같음이 보장되는가?"   ← 290
 ```
+
+> ### 🔑 두 입력을 비교하는 문제 = **길이 검사부터** (2026-09-08 추가)
+> *"두 개를 서로 비교한다"* 는 신호가 보이면 **코드 첫 줄이 길이 가드**여야 한다.
+> **애너그램 · 동형(isomorphic) · 일대일 대응 — 전부 「개수가 같아야 성립」하는 조건이다.**
+> 0290(08-28)과 0242(09-08), **열흘 사이 같은 실수 두 번.** 대책을 적어두는 것만으로는 안 잡혔다.
 
 > ⚠️ **가장 위험한 전제는 「Constraints가 대신 해주던 검사」다.**
 > 원래 문제에서 안 써도 됐던 코드는 **애초에 존재하지 않으므로** 옮길 때 빠진 걸 알아채기 어렵다.

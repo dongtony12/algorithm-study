@@ -1,14 +1,11 @@
 function twoSum(numbers: number[], target: number): number[] {
-  let i = 0
-  let k = numbers.length - 1
+    let i = 0
+    let k = numbers.length - 1
 
-  while (i < k) {
-    if (numbers[i] + numbers[k] < target) {
-        i++
-    } else if (numbers[i] + numbers[k] > target) {
-        k--
-    } else {
-        return [i+1, k+1]
+    while (numbers[i] + numbers[k] !== target) {
+        if (numbers[i] + numbers[k] > target) k--
+        else i++
     }
-  }
-}                                    // ← return 이 없다
+
+    return [i + 1, k + 1]
+}
