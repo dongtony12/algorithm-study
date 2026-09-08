@@ -19,7 +19,7 @@
 | 🔴 **#변수명불명확** | **4** | 08-12 | [0169. Majority Element](01-Array-String/0169-majority-element/README.md) · [0013. Roman to Integer](01-Array-String/0013-roman-to-integer/README.md) · [0014. Longest Common Prefix](01-Array-String/0014-longest-common-prefix/README.md) · [0383. Ransom Note](02-Hashmap/0383-ransom-note/README.md) |
 | 🟡 **#Constraints미확인** | 2 | 08-10 | [0121. Best Time to Buy and Sell Stock](01-Array-String/0121-best-time-to-buy-and-sell-stock/README.md) · [0392. Is Subsequence](03-Two-Pointers/0392-is-subsequence/README.md) |
 | 🟡 **#엣지케이스누락** | 2 | 08-10 | [0125. Valid Palindrome](03-Two-Pointers/0125-valid-palindrome/README.md) · [0392. Is Subsequence](03-Two-Pointers/0392-is-subsequence/README.md) |
-| 🟠 **#공간복잡도오판** | 3 | **08-27** | [0013. Roman to Integer](01-Array-String/0013-roman-to-integer/README.md) · [0014. Longest Common Prefix](01-Array-String/0014-longest-common-prefix/README.md) · **[0205. Isomorphic Strings](02-Hashmap/0205-isomorphic-strings/README.md)** |
+| 🔴 **#공간복잡도오판** | **4** | **09-08** | [0013. Roman to Integer](01-Array-String/0013-roman-to-integer/README.md) · [0014. Longest Common Prefix](01-Array-String/0014-longest-common-prefix/README.md) · [0205. Isomorphic Strings](02-Hashmap/0205-isomorphic-strings/README.md) · **[0387. First Unique Character in a String](02-Hashmap/0387-first-unique-character-in-a-string/README.md)** |
 | 🟡 **#우연히맞는코드** | 2 | 08-03 | [0088. Merge Sorted Array](01-Array-String/0088-merge-sorted-array/README.md) · [0013. Roman to Integer](01-Array-String/0013-roman-to-integer/README.md) |
 | 🔴 **#쓰기포인터오해** | **3** | 08-12 | [0026. Remove Duplicates from Sorted Array](01-Array-String/0026-remove-duplicates-from-sorted-array/README.md) ×2 · [0088. Merge Sorted Array](01-Array-String/0088-merge-sorted-array/README.md) |
 | 🔴 **#인덱스오프바이원** | **4** | 08-19 | [0026. Remove Duplicates from Sorted Array](01-Array-String/0026-remove-duplicates-from-sorted-array/README.md) · [0028. Find the Index of the First Occurrence in a String](01-Array-String/0028-find-the-index-of-the-first-occurrence-in-a-string/README.md) · [2996. Smallest Missing Integer Greater Than Sequential Prefix Sum](02-Hashmap/2996-smallest-missing-integer-greater-than-sequential-prefix-sum/README.md) ×2 |
@@ -139,6 +139,16 @@ Constraints에서 반드시 볼 두 가지:
 - 2026-08-03 [0013. Roman to Integer](01-Array-String/0013-roman-to-integer/README.md) — **고정 크기** 룩업 테이블(항상 13개)을 `O(n)` 으로 오판
 - 2026-08-03 [0014. Longest Common Prefix](01-Array-String/0014-longest-common-prefix/README.md) — 자료구조를 안 만들었는데 `O(n)` 으로 판단
 - 2026-08-27 [0205. Isomorphic Strings](02-Hashmap/0205-isomorphic-strings/README.md) — **ASCII 128개 상한**인 두 맵을 `O(n)` 으로 오판 (24일 만에 재발)
+- 2026-09-08 [0387. First Unique Character in a String](02-Hashmap/0387-first-unique-character-in-a-string/README.md) — 키가 **소문자 26가지뿐**인 `Map` 을 `O(n)` 으로 오판.
+  **같은 날 [0242. Valid Anagram](02-Hashmap/0242-valid-anagram/README.md) 에서는 `new Array(26)` 이라 `O(1)` 을 맞혔다** — 규칙은 아는데 **자료구조 모양에 판단이 끌려감**
+
+> ### 🔑 `Map` 이라고 `O(n)` 이 아니다 (2026-09-08 추가)
+> | | 자료구조 | 상한이 코드에 | 판단 |
+> |---|---|---|---|
+> | 0242 | `new Array(26)` | **보인다** | `O(1)` ✅ |
+> | 0387 | `new Map()` | **안 보인다** | `O(n)` 이라 답함 ❌ |
+>
+> **`Map`·`Set` 은 상한이 코드에 안 드러나서 놓치기 쉽다.** 자료구조를 보지 말고 **Constraints의 키 종류**를 볼 것.
 
 **대책 — 두 가지만 묻는다**
 1. **"배열/Map을 만들었나?"** 안 만들었으면 `O(1)`
