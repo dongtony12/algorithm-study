@@ -1,25 +1,21 @@
 function wordPattern(pattern: string, s: string): boolean {
-    const wordArray = s.split(' ')            // n개 공간
-    const patternToWord = new Map()
-    const wordToPattern = new Map()
+    const patternToSMap = new Map()
+    const sToPatternMap = new Map()
+    const length = pattern.length
+    const sWord = s.split(' ')
 
-    if (pattern.length !== wordArray.length) {
-        return false
+    for (let i = 0; i < length; i++)
+        if (!patternToSMap.has(pattern[i])) patternToSMap.set(pattern[i], sWord[i])
+
+    for (let i = 0; i < length; i++)
+        if (!sToPatternMap.has(sWord[i])) sToPatternMap.set(sWord[i], pattern[i])
+
+    if (sWord.length !== pattern.length) return false
+
+    for (let i = 0; i < length; i++) {
+        if (patternToSMap.get(pattern[i]) === sWord[i]) {
+            if (sToPatternMap.get(sWord[i]) !== pattern[i]) return false
+        } else return false
     }
-
-    for (let i = 0; i < pattern.length; i++) {
-        if (patternToWord.has(pattern[i])) {              // pattern[i]가 key에 있고
-            if (patternToWord.get(pattern[i]) !== wordArray[i]) {
-                return false                               // 가져온 value가 현재 단어와 다르면
-            }
-        } else {                                           // key에 없다면
-            if (wordToPattern.has(wordArray[i])) {         // 역방향이 이미 쓰였는지 먼저 확인
-                return false
-            }
-            patternToWord.set(pattern[i], wordArray[i])
-            wordToPattern.set(wordArray[i], pattern[i])
-        }
-    }
-
     return true
 }

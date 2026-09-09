@@ -155,3 +155,73 @@ return false
 ## 복습 기록
 
 **다음 복습**: 2026-08-27 (`1일` 단계) — **`0001. Two Sum` 과 뭐가 다른지**(기억할 범위)를 먼저 말한 뒤 코드로 갈 것
+
+### 2026-09-09 (1회차) — 🎓 **졸업 판정 1/2 · 통과** · `1일` → `3일` 단계
+
+```
+고정 14/14  (k=0 · 음수 · ±10^9 · 중복 인접 포함)
+랜덤 50만건 완전탐색과 불일치 0건
+k=0 집중 20만건 불일치 0건
+최대 입력 10만 × 200회: 2ms
+```
+
+```ts
+function containsNearbyDuplicate(nums: number[], k: number): boolean {
+    const numsSet = new Set()
+
+    for (let i = 0; i < nums.length; i++) {
+        if (numsSet.has(nums[i])) return true
+        numsSet.add(nums[i])
+        if (numsSet.size > k) numsSet.delete(nums[i-k])
+    }
+    return false
+}
+```
+
+**08-26에 접근 피드백 3회가 났던 문제인데 이번엔 힌트 0으로 정석 슬라이딩 윈도우를 재현.**
+
+#### ⭐ 이 코드가 왜 안전한가 — 두 가지
+
+**① `size > k` 로 윈도우를 유지해도 되는 이유**
+
+중복을 발견하는 **즉시 `return`** 하므로 **Set에 중복이 공존할 수 없다.**
+따라서 `size` 가 곧 윈도우 안의 원소 개수다. 매 반복 1개 추가 → `size+1 > k` 면 1개 삭제 → `size = min(i+1, k)` 로 유지.
+
+**② `k = 0` 에서 `nums[i-k]` 가 범위를 안 벗어나는 이유**
+
+`size > k` 는 `size = k+1` 일 때만 참이고, 그러려면 `i ≥ k` 여야 한다 → **`i-k ≥ 0` 자동 보장.**
+별도 가드가 필요 없는 구조. (`k=0` 이면 매 반복 추가하자마자 자기 자신을 지워 항상 `false` — 정답)
+
+---
+
+#### ⚠️ 공간 `O(n)` → **`O(min(n, k))`** · 유도 1회
+
+시작 전에 *"`n` 과 `k` 두 축이 있다"* 를 짚어줬는데도 `O(n)` 으로 답했다.
+
+**측정 — `n` 을 10만으로 고정하고 `k` 만 바꿈:**
+
+```
+n = 100,000 고정 (전부 서로 다른 값)
+
+  k =      0  →  Set 최대      0개
+  k =      1  →  Set 최대      1개
+  k =     10  →  Set 최대     10개
+  k =   1000  →  Set 최대   1000개
+  k = 100000  →  Set 최대 100000개
+```
+
+**`n` 은 안 변했는데 Set 크기가 `k` 를 그대로 따라간다.** `k=1` 이면 원소 1개 — `O(n)` 이라기엔 10만 배 차이.
+
+2차 답변 `O(k)` 도 아직 부족하다 — `k > n` 이면(`n=5, k=100000`) 원소가 5개뿐이라 `O(k)` 는 과대평가다.
+
+> ### 🔑 `min` 안의 두 값 중 하나가 **확실히 작을 때만** 접는다
+> ```
+> [0202. Happy Number](../0202-happy-number/README.md)                :  O(min(n, 810))    = O(1)   ← 810이 훨씬 작음
+> [2996. Smallest Missing Integer Greater Than Sequential Prefix Sum](../2996-smallest-missing-integer-greater-than-sequential-prefix-sum/README.md) :  O(min(50, 50)) = O(n)   ← 같음
+> [0349. Intersection of Two Arrays](../0349-intersection-of-two-arrays/README.md)  :  O(min(1000,1001)) = O(n)   ← n이 작음
+> 0219                                  :  O(min(n, k))              ← 어느 쪽도 이기지 못함, 그대로 둔다
+> ```
+> **둘 다 변수면 `min` 을 그대로 쓴다.** → [시간·공간 복잡도](../../concepts/complexity.md)
+
+**판정**: 알고리즘 힌트 0 · 코드 정확 · 과거 실수 미재발 → **졸업 판정 1/2 통과**
+공간복잡도 유도 1회는 `#공간복잡도오판`(주제 무관 항목)으로 별도 추적. `1일` → **`3일` 단계** (다음 09-14)

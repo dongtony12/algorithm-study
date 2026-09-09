@@ -251,3 +251,76 @@ function wordPattern(pattern: string, s: string): boolean {
 `"abba"` / `"dog dog dog dog"` 는 **2번째 단어에서 즉시 종료**.
 
 **판정**: 1차 오답 → `1일` 단계 **유지** (다음 08-31 월)
+
+### 2026-09-09 (2회차) — 🎓 **졸업 판정 2/2 · 통과** · `1일` → `3일` 단계
+
+```
+고정 14/14  ·  랜덤 40만건 불일치 0건
+```
+
+**08-28의 실수가 미재발.** 길이 검사가 처음부터 들어가 있고 `"abc"`/`"dog cat"`, `"ab"`/`"dog cat fish"` 같은 반례가 전부 잡힌다.
+
+```ts
+function wordPattern(pattern: string, s: string): boolean {
+    const patternToSMap = new Map()
+    const sToPatternMap = new Map()
+    const length = pattern.length
+    const sWord = s.split(' ')
+
+    for (let i = 0; i < length; i++)
+        if (!patternToSMap.has(pattern[i])) patternToSMap.set(pattern[i], sWord[i])
+
+    for (let i = 0; i < length; i++)
+        if (!sToPatternMap.has(sWord[i])) sToPatternMap.set(sWord[i], pattern[i])
+
+    if (sWord.length !== pattern.length) return false
+
+    for (let i = 0; i < length; i++) {
+        if (patternToSMap.get(pattern[i]) === sWord[i]) {
+            if (sToPatternMap.get(sWord[i]) !== pattern[i]) return false
+        } else return false
+    }
+    return true
+}
+```
+
+---
+
+#### ⚠️ 복잡도 — 축이 두 개다 · `#복잡도차원뭉개기` 8회
+
+`O(n)` / `O(n)` 이라 답했으나 `n` 이 무엇인지 정의가 없다.
+
+**측정 — `pattern` 을 고정하고 `s` 길이만 늘림:**
+
+```
+pattern 300 / s   899자 (짧은 단어)  →  159ms
+pattern 300 / s  3299자 (긴 단어)    →  226ms
+                 ↑ 단어 개수는 300개로 같은데 s 길이만 10배 → 시간 증가
+```
+
+**`pattern.length` 를 고정했는데도 `s.length` 가 늘자 느려진다.** `split` 과 **문자열 키 해싱**이 전체 문자 수에 비례하기 때문.
+
+```
+p = pattern.length  (≤ 300)
+L = s.length        (≤ 3000)
+
+시간  O(L)      ← split + 단어 해싱이 지배. p ≤ 단어 수이므로 L에 흡수
+공간  O(L)      ← sWord 배열 + 맵의 문자열 키가 s의 문자를 담는다
+```
+
+> 💡 **문자열을 Map 키로 쓸 때는 "키 길이"가 숨은 축이다.** 숫자 키는 해싱이 `O(1)` 이지만
+> 문자열 키는 **길이에 비례**한다. 단어 수가 같아도 단어가 길면 느려지는 이유.
+> → [해시맵](../../concepts/hashmap.md) · [시간·공간 복잡도](../../concepts/complexity.md)
+
+#### 가드 위치는 08-28과 동일
+
+```
+길이 불일치 입력 (pattern 300 / 단어 600) × 20000회
+  가드가 맵 뒤 (제출본): 373ms
+  가드 먼저          : 164ms      ← 2.3배
+```
+
+`split` 직후 알 수 있는 사실인데 맵 두 개를 다 채우고 나서 판단한다. *(정답이므로 판정에는 미반영)*
+
+**판정**: 알고리즘 힌트 0 · 코드 정확 · **08-28 실수 미재발** → **졸업 판정 2/2 통과 → 🎓 해시맵 졸업**
+`1일` → **`3일` 단계** (다음 09-14)

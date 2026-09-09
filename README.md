@@ -23,7 +23,7 @@ LeetCode 문제를 풀며 남긴 학습 기록입니다. **정답 코드만이 �
 
 - [배열 · 문자열](01-Array-String/README.md) — 10문제
 - [해시맵](02-Hashmap/README.md) — 11문제
-- [투 포인터](03-Two-Pointers/README.md) — 4문제
+- [투 포인터](03-Two-Pointers/README.md) — 5문제
 
 **개념 노트**
 
@@ -127,8 +127,8 @@ LeetCode 문제를 풀며 남긴 학습 기록입니다. **정답 코드만이 �
 | # | 주제 | 폴더 | 진행 | 상태 |
 |---|---|---|---|---|
 | 1 | 배열 · 문자열 | `01-Array-String` | 10 / 10 | ✅ **졸업** (+보충 1) |
-| 2 | **해시맵** | `02-Hashmap` | **11 / 11** | 🟠 **졸업 판정 대기** |
-| 3 | **투 포인터** | `03-Two-Pointers` | **4 / 5** | 🔵 **진행 중** (`15. 3Sum` 남음) |
+| 2 | 해시맵 | `02-Hashmap` | 11 / 11 | ✅ **졸업** |
+| 3 | **투 포인터** | `03-Two-Pointers` | **5 / 5** | 🟠 **졸업 판정 대기** |
 | 4 | 슬라이딩 윈도우 | `04-Sliding-Window` | 0 / 4 | |
 | 5 | 스택 · 큐 | `05-Stack-Queue` | 0 / 6 | |
 | 6 | 이진 탐색 | `06-Binary-Search` | 0 / 6 | |
@@ -142,7 +142,7 @@ LeetCode 문제를 풀며 남긴 학습 기록입니다. **정답 코드만이 �
 | 14 | DP (1D) | `14-DP` | 0 / 5 | |
 | 부록 | 비트 · 수학 | `15-Bit-Math` | 0 / 6 | 짬짬이 |
 
-**총 25 / 95**
+**총 26 / 95**
 
 ---
 
@@ -163,7 +163,7 @@ LeetCode 문제를 풀며 남긴 학습 기록입니다. **정답 코드만이 �
 
 ---
 
-## 2. 해시맵 — 🔵 진행 중
+## 2. 해시맵 — ✅ 졸업
 
 > **코테 최다 빈출.** "값 → 개수 / 위치 / 짝" 매핑을 `O(1)`로 하는 게 전부다. → [해시맵](concepts/hashmap.md)
 
@@ -179,6 +179,10 @@ LeetCode 문제를 풀며 남긴 학습 기록입니다. **정답 코드만이 �
 - [x] [0349. Intersection of Two Arrays](02-Hashmap/0349-intersection-of-two-arrays/README.md) — 08-28 통과 (보충, **피드백 0회 · 구현 1발**, `O(min(n,|Σ|))` 정리)
 - [x] [0387. First Unique Character in a String](02-Hashmap/0387-first-unique-character-in-a-string/README.md) — 09-08 통과 (보충, **피드백 0회 · 구현 1발**, 공간 `O(n)`→`O(1)` 오판)
 
+> **졸업 판정**: 09-09 [0219. Contains Duplicate II](02-Hashmap/0219-contains-duplicate-ii/README.md) · [0290. Word Pattern](02-Hashmap/0290-word-pattern/README.md) 을 백지 재작성 **2연속 통과**
+> (알고리즘 힌트 0회, 08-26 피드백 3회 · 08-28 오답이 났던 문제들)
+> ⚠️ 단, **복잡도**는 두 문제 모두 `n` 하나로 답해 유도가 필요했다 — `#복잡도차원뭉개기` · `#공간복잡도오판` 은 **주제와 무관한 항목**이라 별도 추적한다.
+
 ---
 
 ## 3. 투 포인터 — 🟡 보충 필요
@@ -187,7 +191,7 @@ LeetCode 문제를 풀며 남긴 학습 기록입니다. **정답 코드만이 �
 - [x] ★ [0392. Is Subsequence](03-Two-Pointers/0392-is-subsequence/README.md) — 08-10 통과 (빈 문자열 3차 수정)
 - [x] **[0167. Two Sum II - Input Array Is Sorted](03-Two-Pointers/0167-two-sum-ii-input-array-is-sorted/README.md)** — 08-12 통과 (**Medium**, 사용자 지정 조기 투입. 지배 논증 피드백 2회)
 - [x] **[0011. Container With Most Water](03-Two-Pointers/0011-container-with-most-water/README.md)** — 08-16 통과 (**Medium**, 사용자 지정. 구현 1발이나 접근 단계 생략 → 논증 사후 보강)
-- [ ] **15. 3Sum** — ⚠️ **Top150 누락분** (2026-09-08 추가). Medium. 정렬 + 투 포인터 + 중복 제거
+- [x] ★ **[0015. 3Sum](03-Two-Pointers/0015-3sum/README.md)** — 09-09 통과 (**Medium**, 접근 피드백 3회 → **구현 1발**, 중복 제거 완벽)
 
 > **2026-09-08 정리**: Top150 투 포인터 챕터는 5문제(`125` `392` `167` `11` `15`)인데
 > 08-11 커리큘럼 작성 시 **`15. 3Sum` 이 누락**돼 있었다. 이걸 메우고 졸업 판정으로 간다.
@@ -391,11 +395,12 @@ LeetCode 문제를 풀며 남긴 학습 기록입니다. **정답 코드만이 �
 | [0001. Two Sum](02-Hashmap/0001-two-sum/README.md) | 09-08 (복습1) | 3일 | 09-11 | 통과 · 피드백 0회, 조회 후 삽입 정확 |
 | [0205. Isomorphic Strings](02-Hashmap/0205-isomorphic-strings/README.md) | 08-27 (복습1) | 3일 | 09-10 | 통과 · 역방향 검사 획득, 공간복잡도 오판 |
 | [0122. Best Time to Buy and Sell Stock II](01-Array-String/0122-best-time-to-buy-and-sell-stock-ii/README.md) | 08-27 | 1일 | 09-08 | 신규 · 복습 0회 |
-| [0290. Word Pattern](02-Hashmap/0290-word-pattern/README.md) | 08-28 (복습1) | 1일 | 09-09 | ❌ 길이 검사 누락 → 수정 통과, 유지 |
+| [0290. Word Pattern](02-Hashmap/0290-word-pattern/README.md) | 09-09 (복습2) | 3일 | 09-14 | 🎓 졸업판정 2/2 · 실수 미재발 |
 | [0202. Happy Number](02-Hashmap/0202-happy-number/README.md) | 09-09 (복습1) | 1일 | 09-10 | 로직 통과 · 공간복잡도 오판 → 유지 |
-| [0219. Contains Duplicate II](02-Hashmap/0219-contains-duplicate-ii/README.md) | 08-26 | 1일 | 09-07 | 복습 0회 |
+| [0219. Contains Duplicate II](02-Hashmap/0219-contains-duplicate-ii/README.md) | 09-09 (복습1) | 3일 | 09-14 | 🎓 졸업판정 1/2 · 힌트 0 통과 |
 | [0217. Contains Duplicate](02-Hashmap/0217-contains-duplicate/README.md) | 08-26 | 1일 | 09-07 | 복습 0회 |
 | [0349. Intersection of Two Arrays](02-Hashmap/0349-intersection-of-two-arrays/README.md) | 08-28 | 1일 | 09-09 | 신규 · 복습 0회 |
+| [0015. 3Sum](03-Two-Pointers/0015-3sum/README.md) | 09-09 | 1일 | 09-10 | 신규 · Medium, 중복 제거 ① 방향 재확인 |
 | [0387. First Unique Character in a String](02-Hashmap/0387-first-unique-character-in-a-string/README.md) | 09-08 | 1일 | 09-09 | 신규 · 복습 0회 |
 
 ---
