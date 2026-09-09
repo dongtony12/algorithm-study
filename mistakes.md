@@ -11,7 +11,7 @@
 | 태그 | 횟수 | 마지막 | 문제 |
 |---|---|---|---|
 | 🔴 **#죽은코드방치** | 4 | 08-03 | [0027. Remove Element](01-Array-String/0027-remove-element/README.md) · [0121. Best Time to Buy and Sell Stock](01-Array-String/0121-best-time-to-buy-and-sell-stock/README.md) · [0058. Length of Last Word](01-Array-String/0058-length-of-last-word/README.md) · [0125. Valid Palindrome](03-Two-Pointers/0125-valid-palindrome/README.md) |
-| 🔴 **#복잡도차원뭉개기** | **6** | 08-19 | [0014. Longest Common Prefix](01-Array-String/0014-longest-common-prefix/README.md) ×2 · [0028. Find the Index of the First Occurrence in a String](01-Array-String/0028-find-the-index-of-the-first-occurrence-in-a-string/README.md) · [0392. Is Subsequence](03-Two-Pointers/0392-is-subsequence/README.md) · [0001. Two Sum](02-Hashmap/0001-two-sum/README.md) · [2996. Smallest Missing Integer Greater Than Sequential Prefix Sum](02-Hashmap/2996-smallest-missing-integer-greater-than-sequential-prefix-sum/README.md) |
+| 🔴 **#복잡도차원뭉개기** | **7** | **09-09** | [0014. Longest Common Prefix](01-Array-String/0014-longest-common-prefix/README.md) ×2 · [0028. Find the Index of the First Occurrence in a String](01-Array-String/0028-find-the-index-of-the-first-occurrence-in-a-string/README.md) · [0392. Is Subsequence](03-Two-Pointers/0392-is-subsequence/README.md) ×2 · [0001. Two Sum](02-Hashmap/0001-two-sum/README.md) · [2996. Smallest Missing Integer Greater Than Sequential Prefix Sum](02-Hashmap/2996-smallest-missing-integer-greater-than-sequential-prefix-sum/README.md) |
 | 🟡 **#루프상한혼동** | 2 | 08-19 | [0014. Longest Common Prefix](01-Array-String/0014-longest-common-prefix/README.md) ×2 |
 | 🔴 **#패턴오적용** | **4** | **09-08** | [0392. Is Subsequence](03-Two-Pointers/0392-is-subsequence/README.md) · [0383. Ransom Note](02-Hashmap/0383-ransom-note/README.md) · [0290. Word Pattern](02-Hashmap/0290-word-pattern/README.md) · **[0242. Valid Anagram](02-Hashmap/0242-valid-anagram/README.md)** |
 | ⚪ **#복사후미변경** | 1 | 08-20 | [0383. Ransom Note](02-Hashmap/0383-ransom-note/README.md) |
@@ -19,7 +19,7 @@
 | 🔴 **#변수명불명확** | **4** | 08-12 | [0169. Majority Element](01-Array-String/0169-majority-element/README.md) · [0013. Roman to Integer](01-Array-String/0013-roman-to-integer/README.md) · [0014. Longest Common Prefix](01-Array-String/0014-longest-common-prefix/README.md) · [0383. Ransom Note](02-Hashmap/0383-ransom-note/README.md) |
 | 🟡 **#Constraints미확인** | 2 | 08-10 | [0121. Best Time to Buy and Sell Stock](01-Array-String/0121-best-time-to-buy-and-sell-stock/README.md) · [0392. Is Subsequence](03-Two-Pointers/0392-is-subsequence/README.md) |
 | 🟡 **#엣지케이스누락** | 2 | 08-10 | [0125. Valid Palindrome](03-Two-Pointers/0125-valid-palindrome/README.md) · [0392. Is Subsequence](03-Two-Pointers/0392-is-subsequence/README.md) |
-| 🔴 **#공간복잡도오판** | **4** | **09-08** | [0013. Roman to Integer](01-Array-String/0013-roman-to-integer/README.md) · [0014. Longest Common Prefix](01-Array-String/0014-longest-common-prefix/README.md) · [0205. Isomorphic Strings](02-Hashmap/0205-isomorphic-strings/README.md) · **[0387. First Unique Character in a String](02-Hashmap/0387-first-unique-character-in-a-string/README.md)** |
+| 🔴 **#공간복잡도오판** | **5** | **09-09** | [0013. Roman to Integer](01-Array-String/0013-roman-to-integer/README.md) · [0014. Longest Common Prefix](01-Array-String/0014-longest-common-prefix/README.md) · [0205. Isomorphic Strings](02-Hashmap/0205-isomorphic-strings/README.md) · [0387. First Unique Character in a String](02-Hashmap/0387-first-unique-character-in-a-string/README.md) · **[0202. Happy Number](02-Hashmap/0202-happy-number/README.md)** |
 | 🟡 **#우연히맞는코드** | 2 | 08-03 | [0088. Merge Sorted Array](01-Array-String/0088-merge-sorted-array/README.md) · [0013. Roman to Integer](01-Array-String/0013-roman-to-integer/README.md) |
 | 🔴 **#쓰기포인터오해** | **3** | 08-12 | [0026. Remove Duplicates from Sorted Array](01-Array-String/0026-remove-duplicates-from-sorted-array/README.md) ×2 · [0088. Merge Sorted Array](01-Array-String/0088-merge-sorted-array/README.md) |
 | 🔴 **#인덱스오프바이원** | **4** | 08-19 | [0026. Remove Duplicates from Sorted Array](01-Array-String/0026-remove-duplicates-from-sorted-array/README.md) · [0028. Find the Index of the First Occurrence in a String](01-Array-String/0028-find-the-index-of-the-first-occurrence-in-a-string/README.md) · [2996. Smallest Missing Integer Greater Than Sequential Prefix Sum](02-Hashmap/2996-smallest-missing-integer-greater-than-sequential-prefix-sum/README.md) ×2 |
@@ -58,6 +58,7 @@
 - 2026-08-12 [0014. Longest Common Prefix](01-Array-String/0014-longest-common-prefix/README.md) — **재발.** 복습에서 또 `O(n²)`. *"크기를 결정하는 값이 두 개다, 기호를 정의하라"* 고 **명시적으로 요청한 뒤에도** 뭉갬
 - 2026-08-18 [0001. Two Sum](02-Hashmap/0001-two-sum/README.md) — **반대 방향 실수.** 입력 배열이 **하나뿐인데** 축을 둘로 나눠 `O(m×n)` 이라 답함. 게다가 중첩 루프를 처음엔 `O(m+n)`(덧셈)으로 셌다
 - 2026-08-19 [2996. Smallest Missing Integer Greater Than Sequential Prefix Sum](02-Hashmap/2996-smallest-missing-integer-greater-than-sequential-prefix-sum/README.md) — **복습에서 재발.** 08-11에도 `O(M+n)` 으로 틀렸던 문제인데 또 `O(m+n)` → `O(m×n)`. 입력은 `nums` 하나뿐
+- 2026-09-09 [0392. Is Subsequence](03-Two-Pointers/0392-is-subsequence/README.md) — **같은 문제 2회째.** 08-10에 *"`n` 이 `s`인지 `t`인지 정의 없음"* 을 지적받았는데 또 정의 없는 `O(n)` → `s length` (**오답**) → `O(m+n)` (**안 조여짐**) → `O(n)`. **힌트 3회 소진 → `3일` 단계 리셋**
 
 > ### 🔑 판별 순서
 > ```
@@ -66,9 +67,22 @@
 >      2개 → 기호를 둘 정의한다                             ([0383. Ransom Note](02-Hashmap/0383-ransom-note/README.md) → O(m+n))
 > ② 루프가 순차인가 중첩인가?
 >      순차(나란히) → 더한다     중첩(안에) → 곱한다
+> ③ 한 루프 안에서 포인터가 둘이면 → **더하지 않는다. 상한이 큰 쪽 하나.**
+>      [0242. Valid Anagram](02-Hashmap/0242-valid-anagram/README.md)  for(s) → for(t)   순차 두 루프    →  O(m + n)  ✅
+>      [0392. Is Subsequence](03-Two-Pointers/0392-is-subsequence/README.md) while 하나에 i, j  함께 전진      →  O(n)      ✅ (m+n 아님)
 > ```
 
-> ⚠️ **6회 누적 — 압도적 1위.** [0014. Longest Common Prefix](01-Array-String/0014-longest-common-prefix/README.md) · [2996. Smallest Missing Integer Greater Than Sequential Prefix Sum](02-Hashmap/2996-smallest-missing-integer-greater-than-sequential-prefix-sum/README.md) 는 **각각 2회씩** 같은 문제에서 반복했다.
+> ### 🔑 루프 횟수는 **"탈출 조건의 변수"가 아니라 "매번 전진하는 변수"** 가 정한다 (2026-09-09 추가)
+> ```ts
+> while (i < s.length) {           // ← 탈출 조건에는 i 가 적혀 있지만
+>     if (s[i] === t[j]) i++       //   i 는 일치할 때만 늘고
+>     j++                          //   j 는 무조건 는다  →  루프 횟수는 j 가 정한다
+> }
+> ```
+> 실측: `s=1, t=10000` → **10001회**. `s` 길이와 무관하게 `t` 를 끝까지 훑는다.
+> **`while` 조건만 보고 복잡도를 말하면 틀린다. 루프 몸통에서 "무조건 증가하는 변수"를 찾을 것.**
+
+> ⚠️ **7회 누적 — 압도적 1위.** [0014. Longest Common Prefix](01-Array-String/0014-longest-common-prefix/README.md) · [2996. Smallest Missing Integer Greater Than Sequential Prefix Sum](02-Hashmap/2996-smallest-missing-integer-greater-than-sequential-prefix-sum/README.md) · [0392. Is Subsequence](03-Two-Pointers/0392-is-subsequence/README.md) 는 **각각 2회씩** 같은 문제에서 반복했다.
 > **매번 지적받은 뒤에는 맞히지만, 처음 쓸 때 습관이 안 잡혀 있다.**
 > **코드를 보기 전에, 문제를 읽자마자 먼저 적을 것:**
 > ```
@@ -141,6 +155,16 @@ Constraints에서 반드시 볼 두 가지:
 - 2026-08-27 [0205. Isomorphic Strings](02-Hashmap/0205-isomorphic-strings/README.md) — **ASCII 128개 상한**인 두 맵을 `O(n)` 으로 오판 (24일 만에 재발)
 - 2026-09-08 [0387. First Unique Character in a String](02-Hashmap/0387-first-unique-character-in-a-string/README.md) — 키가 **소문자 26가지뿐**인 `Map` 을 `O(n)` 으로 오판.
   **같은 날 [0242. Valid Anagram](02-Hashmap/0242-valid-anagram/README.md) 에서는 `new Array(26)` 이라 `O(1)` 을 맞혔다** — 규칙은 아는데 **자료구조 모양에 판단이 끌려감**
+
+- 2026-09-09 [0202. Happy Number](02-Hashmap/0202-happy-number/README.md) — 제곱합을 담는 `Set` 을 `O(n)` 으로 오판. **첫 스텝에서 값이 810 이하로 떨어져** Set 크기가 20을 넘지 않는다 (n=1~100만 측정: 최대 19개)
+
+> ### 🔑 `Set`/`Map` 을 쓰면 반드시 이 질문 (2026-09-09 확정)
+> ### **"여기 들어갈 수 있는 서로 다른 값이 최대 몇 개인가?"**
+> - **세어지면**(알파벳 26 · ASCII 128 · 값 범위 810 …) → **`O(1)`**
+> - **못 세면**(임의의 정수 · 임의의 문자열) → **`O(n)`**
+>
+> *"n이 커지면 이것도 커지나"* 보다 **"몇 종류인가"** 를 묻는 게 훨씬 잘 걸린다.
+> 상한이 **알파벳**일 때(0242·0387)보다 **값의 범위**일 때(0202) 더 안 보인다.
 
 > ### 🔑 `Map` 이라고 `O(n)` 이 아니다 (2026-09-08 추가)
 > | | 자료구조 | 상한이 코드에 | 판단 |

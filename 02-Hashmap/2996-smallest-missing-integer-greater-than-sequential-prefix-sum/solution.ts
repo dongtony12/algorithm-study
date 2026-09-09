@@ -1,18 +1,13 @@
 function missingInteger(nums: number[]): number {
-    let x = nums[0]
-    let numsSet = new Set(nums)
+    let i = 1
+    let sum = nums[0]
+    const numSet = new Set(nums)
 
-    for (let i = 1; i < nums.length; i++) {
-        if (nums[i] === nums[i-1] + 1) {
-            x += nums[i]
-        } else {
-            break
+    while (i < nums.length + 1) {
+        if (nums[i-1] + 1 === nums[i]) { sum += nums[i]; i++ }
+        else {
+            if (numSet.has(sum)) { sum += 1 }
+            else { return sum }
         }
     }
-
-    while (numsSet.has(x)) {
-        x++
-    }
-
-    return x
 }

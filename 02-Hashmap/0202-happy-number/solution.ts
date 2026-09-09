@@ -10,11 +10,7 @@ function isHappy(n: number): boolean {
             sum += (Number(numToString[i]) * Number(numToString[i]))
         }
 
-        if (nSet.has(sum)) {
-            return false
-        } else {
-            nSet.add(sum)
-        }
+        if (nSet.has(sum)) { return false } else { nSet.add(sum) }
 
         n = sum
         sum = 0

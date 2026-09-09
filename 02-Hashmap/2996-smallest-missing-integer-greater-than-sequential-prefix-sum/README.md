@@ -375,3 +375,129 @@ i=2: 4 === 3+1=4 ?  예!    → x += 4  →  x = 5   ❌
 → **간격이 벌어지면 "알던 것"부터 빠진다.** 확장 간격에서 `1일` 단계에 머문 문제를 6일 방치한 결과.
 
 **판정**: `break` 누락 + 복잡도 1차 오답 → `1일` 단계 유지 (다음 복습 08-27)
+
+### 2026-09-09 (3회차) — 통과 · **과거 실패 3종 전부 클리어** · `1일` → `3일` 단계
+
+```
+고정 15/15  (참조 구현 기준)
+랜덤 40만건 불일치 0건
+전체가 sequential 인 입력 20만건 불일치 0건
+undefined 반환 0건
+```
+
+```ts
+function missingInteger(nums: number[]): number {
+    let i = 1
+    let sum = nums[0]
+    const numSet = new Set(nums)
+
+    while (i < nums.length + 1) {
+        if (nums[i-1] + 1 === nums[i]) { sum += nums[i]; i++ }
+        else {
+            if (numSet.has(sum)) { sum += 1 }
+            else { return sum }
+        }
+    }
+}
+```
+
+#### ⭐ 세 번의 실패 지점이 전부 클리어
+
+| | 실패 | 09-09 |
+|---|---|---|
+| 08-11 최초 | 검사 범위 오답 | ✅ |
+| 08-19 복습 | `#인덱스오프바이원` ×2 · `#복잡도차원뭉개기` | ✅ |
+| 08-26 복습 | `break` 누락 | ✅ |
+
+**이 문제에서 가장 많이 틀렸는데 이번엔 첫 시도 통과.**
+
+---
+
+#### ⭐ 공간 `O(n)` 이 여기서는 **맞다** — 같은 날 [0202. Happy Number](../0202-happy-number/README.md) 와 반대
+
+오늘 0202에서 `Set` 을 `O(n)` 이라 해서 오판이었는데, 여기서는 `O(n)` 이 정답이다. 같은 질문을 적용하면:
+
+> **"여기 들어갈 수 있는 서로 다른 값이 최대 몇 개인가?"**
+
+```
+1 <= nums.length <= 50      ← n ≤ 50
+1 <= nums[i]     <= 50      ← |Σ| = 50
+
+min(n, |Σ|) = min(50, 50) = 50 = n    →  O(n)
+```
+
+**`|Σ|` 와 `n` 이 똑같이 50이라 상한이 도움을 주지 못한다.**
+
+| | `\|Σ\|` | `n` 최대 | 승자 | 공간 |
+|---|---|---|---|---|
+| [0202. Happy Number](../0202-happy-number/README.md) (09-09) | **810** | 2^31 | 알파벳 | **`O(1)`** — `O(n)` 이라 답함 ❌ |
+| [0349. Intersection of Two Arrays](../0349-intersection-of-two-arrays/README.md) | 1001 | 1000 | `n` | `O(n)` ✅ |
+| **2996 (09-09)** | **50** | **50** | **`n`** | **`O(n)`** ✅ |
+
+**같은 질문을 던졌더니 답이 갈렸다.** 이것이 `O(min(n, |Σ|))` 를 외워야 하는 이유.
+→ [시간·공간 복잡도](../../concepts/complexity.md)
+
+---
+
+#### ⚠️ `return` 문이 없다
+
+```ts
+while (i < nums.length + 1) { ... }
+}   // ← 루프 밖 return 없음
+```
+
+TypeScript strict:
+
+```
+error TS2366: Function lacks ending return statement and
+              return type does not include 'undefined'.
+```
+
+**LeetCode(strict off)는 통과하지만 실무 설정에선 컴파일이 안 된다.** [0013. Roman to Integer](../../01-Array-String/0013-roman-to-integer/README.md) 에 정리해둔 함정과 같은 자리.
+
+논리적으로는 도달 불가능하다 — `else` 분기에서 `i` 가 안 늘어나므로 루프가 정상 종료될 길이 없다.
+**하지만 그건 사람이 아는 사실이지 컴파일러가 아는 사실이 아니다.**
+
+---
+
+#### ⚠️ 한 루프에 두 가지 일이 섞여 있다
+
+```ts
+while (i < nums.length + 1) {
+    if (...) { /* 1단계: prefix 합 구하기 */ }
+    else     { /* 2단계: 답 찾기 */ }
+}
+```
+
+2단계에 들어가면 `i` 가 **영원히 고정**되고 `if` 조건은 두 번 다시 참이 될 수 없다.
+즉 **한 번 else로 넘어가면 그 뒤로는 완전히 다른 루프**다.
+
+그리고 `i < nums.length + 1` 은 `i <= nums.length` 인데 **`+1` 이 왜 필요한지가 코드에 드러나지 않는다.**
+(prefix가 배열 끝까지 이어질 때 `nums[i]` 를 `undefined` 로 만들어 else로 떨어뜨리려는 것 — `#우연히맞는코드` 계열)
+
+```ts
+function missingInteger(nums: number[]): number {
+    // 1단계: 가장 긴 sequential prefix 의 합
+    let x = nums[0]
+    for (let i = 1; i < nums.length && nums[i] === nums[i - 1] + 1; i++) {
+        x += nums[i]
+    }
+
+    // 2단계: x 이상이면서 nums 에 없는 최솟값
+    const seen = new Set(nums)
+    while (seen.has(x)) x++
+    return x
+}
+```
+
+**두 단계를 분리하면:**
+
+- `undefined` 비교에 기대지 않음 (`i < nums.length` 로 정직하게 끊음)
+- `return` 이 항상 실행됨 → TS 에러 소멸
+- `while (seen.has(x)) x++` 한 줄이 *"없을 때까지 올린다"* 를 그대로 말함
+
+> 💡 **2단계가 무한루프가 아닌 이유**도 말할 수 있어야 한다: `seen` 의 값은 전부 `≤ 50` 이므로 `x` 가 51을 넘는 순간 반드시 탈출한다.
+> 그래서 2단계는 **최대 50회 → `O(1)`**.
+> 측정: `else` 최대 반복 **3회**, 답의 최댓값 **51**. `[1..50]` 입력에서 합은 1275.
+
+**판정**: 정답 · 복잡도 정확 · 과거 실패 3종 전부 클리어 / `return` 누락은 TS 지적 → `1일` → **`3일` 단계** (다음 09-14)

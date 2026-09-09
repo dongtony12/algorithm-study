@@ -348,3 +348,115 @@ if (j === m) return i        // 루프가 끝까지 갔는가를 j 하나로 판
 `occurCount` 변수가 사라지고 **조기 종료가 조건에 자연스럽게 들어간다.**
 
 **판정**: 피드백 0회 + 실수 미재발 → `1일` → **`3일` 단계** (다음 복습 08-23)
+
+### 2026-09-09 (3회차) — 통과 · **복잡도 3연속 클리어** · `3일` → `7일` 단계
+
+```
+고정 15/15  (needle이 더 김 · 길이 1 · 전부 동일 · 부분 일치 후 실패 포함)
+랜덤 40만건 불일치 0건
+```
+
+```ts
+function strStr(haystack: string, needle: string): number {
+    const m = haystack.length
+    const n = needle.length
+
+    for (let i = 0; i < m - n + 1; i++) {
+        let isOccur = false
+
+        for (let j = 0; j < needle.length; j++) {
+            if (haystack[i+j] !== needle[j]) { isOccur = false; break }
+            else { isOccur = true }
+        }
+
+        if (isOccur) return i
+    }
+    return -1
+}
+```
+
+#### ⭐ `#복잡도차원뭉개기` 3연속 클리어
+
+```
+m = haystack.length
+n = needle.length
+시간 O(m × n) / 공간 O(1)      ✅
+```
+
+**이 문제는 `#복잡도차원뭉개기` 가 처음 기록된 자리다** (08-03, `O(n × m)` 을 `O(n²)` 로).
+08-03 ❌ → 08-20 ✅ → **09-09 ✅**. 두 축을 정의하고 곱셈으로 셌다.
+
+같은 날 [0392. Is Subsequence](../../03-Two-Pointers/0392-is-subsequence/README.md) 에서는 힌트 3회로 리셋이 났는데 **여기서는 첫 시도에 맞혔다.**
+차이는 **입력이 눈에 띄게 둘**(haystack / needle)이라는 것 — 392는 둘 다 문자열이라 뭉개기 쉬웠다.
+
+**실측 — 최악은 부분 일치가 길게 이어지다 마지막에 실패할 때:**
+
+```
+교차 패턴 (m=10000, n=5000)  →  12,502,501회 비교
+                                 ≈ (m-n+1) × n = 5001 × 5000
+a×10000 / a×9999+b            →     10,000회   (첫 글자부터 어긋나면 빨리 끝남)
+```
+
+> 💡 `i < m - n + 1` 로 **범위를 정확히 잘라낸 것도 좋다.**
+> `i < m` 으로 두면 뒤쪽에서 `haystack[i+j]` 가 `undefined` 가 되고, 답은 맞아도 `#우연히맞는코드` 가 된다.
+> 같은 날 [0392. Is Subsequence](../../03-Two-Pointers/0392-is-subsequence/README.md) 에서 지적한 그 형태.
+
+---
+
+#### ⚠️ `isOccur` 플래그가 불필요
+
+```ts
+let isOccur = false
+for (let j = 0; j < needle.length; j++) {
+    if (haystack[i+j] !== needle[j]) { isOccur = false; break }
+    else { isOccur = true }        // ← 매 반복 true 를 다시 씀
+}
+if (isOccur) return i
+```
+
+**`else` 에서 `true` 를 `n`번 반복 대입**한다. `break` 직전의 `isOccur = false` 는 **이미 false거나 곧 버려질 값**이다.
+
+정보는 이미 `j` 가 갖고 있다:
+
+```
+j === n  →  끝까지 갔다   →  일치
+j < n    →  중간에 break  →  불일치
+```
+
+```ts
+function strStr(haystack: string, needle: string): number {
+    const m = haystack.length, n = needle.length
+
+    for (let i = 0; i + n <= m; i++) {
+        let j = 0
+        while (j < n && haystack[i + j] === needle[j]) j++
+        if (j === n) return i
+    }
+    return -1
+}
+```
+
+> 검증: 랜덤 40만건에서 제출본과 불일치 0건.
+>
+> ### 🔑 루프 변수가 이미 답을 갖고 있으면 플래그를 따로 두지 않는다
+> `#죽은코드방치`(4회)와 같은 계열 — 동작엔 문제없지만 *"이 변수가 왜 있지"* 를 읽는 사람이 되묻게 된다.
+
+작은 것 하나 더 — **`n` 을 정의해놓고 안쪽 루프에선 `needle.length` 를 다시 쓴다.** 기호를 정의했으면 끝까지 쓸 것.
+
+---
+
+#### 참고 — 실무에서는 내장 함수
+
+```
+최악 입력 (m=10000, n=10000) × 100회
+  제출본       : 2ms
+  j===n 버전   : 2ms
+  indexOf 내장 : 0ms
+```
+
+`haystack.indexOf(needle)` 은 엔진이 **Boyer-Moore-Horspool** 계열을 쓰기 때문에 훨씬 빠르다.
+
+> ⚠️ 면접에서는 **직접 구현을 요구**한다. 다만 *"실무면 `indexOf` 를 쓰고, 여기서는 직접 구현하겠습니다"* 한 줄을 붙이면 좋다.
+> *"더 빠르게 할 수 있나요?"* 가 나오면 **KMP `O(m + n)`** 이 답 — 실패 함수로 이미 비교한 부분을 다시 안 보는 방식이고, 이 문제의 정식 후속이다.
+
+**판정**: 정답 · 복잡도 정확(3연속) · 범위 계산 정확 / 플래그는 스타일 → `3일` → **`7일` 단계** (다음 09-18)
