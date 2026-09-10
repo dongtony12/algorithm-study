@@ -118,3 +118,90 @@ return nums.length !== numSet.size        // ✅ 같은 뜻
 ## 복습 기록
 
 **다음 복습**: 2026-08-27 (`1일` 단계) — **`new Set(nums)` 과 조기 종료 중 어느 쪽이 언제 유리한지**도 함께 말할 것
+
+### 2026-09-10 (1회차) — 통과, **피드백 0회** · `1일` → `3일` 단계
+
+```
+고정 10/10  (길이 1 · 음수 · ±10^9 경계 포함)
+랜덤 40만건 불일치 0건
+```
+
+```ts
+function containsDuplicate(nums: number[]): boolean {
+    const numSet = new Set()
+
+    for (let i = 0; i < nums.length; i++) {
+        if (numSet.has(nums[i])) { return true }
+        else { numSet.add(nums[i]) }
+    }
+    return false
+}
+```
+
+#### ⭐ 공간 `O(n)` — 전날 [0202. Happy Number](../0202-happy-number/README.md) 에서 틀렸던 판단을 이번엔 맞힘
+
+```
+-10^9 <= nums[i] <= 10^9   →  |Σ| ≈ 20억
+n ≤ 10^5
+
+min(n, |Σ|) = min(100000, 20억) = n     →  O(n)  ✅
+```
+
+| | `\|Σ\|` | `n` 최대 | 승자 | 공간 |
+|---|---|---|---|---|
+| [0202. Happy Number](../0202-happy-number/README.md) (09-09) | **810** | 21억 | 알파벳 | `O(1)` — `O(n)` 이라 답함 ❌ |
+| **0217 (09-10)** | **20억** | **10만** | **`n`** | **`O(n)`** ✅ |
+
+**정확히 반대 상황인데 구분해냈다.** → [시간·공간 복잡도](../../concepts/complexity.md) 「`O(min(n, |Σ|))`」
+
+---
+
+#### ⭐ 조기 종료가 살아 있다 — 이 코드의 값어치
+
+`new Set(nums).size !== nums.length` 한 줄로도 풀리지만 **루프 버전이 훨씬 나은 경우가 있다.**
+
+```
+[측정] Set 최대 크기 (n = 100,000)
+  앞쪽에 중복 :      1개
+  끝에 중복   : 99,999개
+  중복 없음   : 100,000개
+```
+
+```
+앞쪽에 중복 × 2000회
+  루프 + 조기종료:    0ms      ← 두 번째 원소에서 끝남
+  new Set 한 줄  : 4770ms      ← 10만 개를 전부 넣고 나서 비교
+
+중복 없음 × 2000회
+  루프 + 조기종료: 4944ms
+  new Set 한 줄  : 4684ms      ← 최악에서는 비슷
+```
+
+**최악은 같지만 평균이 완전히 다르다.** 한 줄 버전은 *"답이 이미 정해졌는데도"* 끝까지 넣는다.
+
+> ### 🔑 `new Set(arr).size` 는 "전부 넣은 뒤"에만 답을 준다
+> 조기 종료가 의미 있는 문제에서는 직접 루프를 도는 게 맞다.
+> [0383. Ransom Note](../0383-ransom-note/README.md) · [0242. Valid Anagram](../0242-valid-anagram/README.md) 의 **가드 절 / 조기 종료**와 같은 계열.
+
+---
+
+#### 사소한 것 — `else` 가 필요 없다
+
+```ts
+if (numSet.has(nums[i])) { return true }
+else { numSet.add(nums[i]) }
+```
+
+`if` 안에서 **`return` 으로 함수를 나가므로** `else` 뒤 코드는 어차피 *"중복이 아닐 때만"* 실행된다.
+
+```ts
+for (const x of nums) {
+    if (seen.has(x)) return true
+    seen.add(x)
+}
+```
+
+> `return` / `break` / `continue` 뒤의 `else` 는 **들여쓰기만 늘리고 정보를 안 더한다.**
+> [0058. Length of Last Word](../../01-Array-String/0058-length-of-last-word/README.md) 의 *"상호배타적 조건은 `else` 로 묶는다"* 의 짝 — 이번엔 반대로 **`else` 를 빼는** 쪽.
+
+**판정**: 정답 · 복잡도 정확(`|Σ|` vs `n` 구분 성공) · 조기 종료 유지 · 피드백 0회 → `1일` → **`3일` 단계** (다음 09-15)

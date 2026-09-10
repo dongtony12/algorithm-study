@@ -170,3 +170,82 @@ const diff  = [...a].filter(x => !b.has(x))    // 차집합
 ## 복습 기록
 
 **다음 복습**: 2026-08-31 (`1일` 단계 · 평일 기준)
+
+### 2026-09-10 (1회차) — 통과, **피드백 0회 · 복잡도 두 축 정확** · `1일` → `3일` 단계
+
+```
+고정 9/9  ·  랜덤 30만건 불일치 0건 · 결과 중복 0건
+```
+
+```ts
+function intersection(nums1: number[], nums2: number[]): number[] {
+    const nums1Set = new Set(nums1)
+    const nums2Set = new Set(nums2)
+
+    const intersection = new Set([...nums1Set].filter((x) => nums2Set.has(x)))
+
+    return Array.from(intersection)
+}
+```
+
+#### ⭐ 08-28엔 `O(n)`, 오늘은 **`O(n + m)`** — 축을 둘로 씀
+
+08-28 최초 풀이에서는 축 하나로 답했는데 이번엔 **처음부터 두 축**으로 답했다.
+같은 날 [0242. Valid Anagram](../0242-valid-anagram/README.md) · [0392. Is Subsequence](../../03-Two-Pointers/0392-is-subsequence/README.md) 에서 계속 짚은 게 반영됐다.
+
+#### ⭐ `|Σ| = 1001` 이 도움이 안 되는 걸 정확히 판단
+
+```
+[측정] Set 최대 크기 (값 범위 0~1000)
+  n=  10  →  Set   10개
+  n= 100  →  Set  100개
+  n=1000  →  Set 1000개      ← 1001 상한에 안 걸림
+```
+
+```
+0 <= nums[i] <= 1000   →  |Σ| = 1001
+n, m ≤ 1000
+
+min(n, 1001) = n        →  상한이 n보다 커서 아무 역할도 못 함
+```
+
+**이틀에 걸쳐 네 문제가 전부 이 판단이었는데 마지막 두 개를 연속으로 맞혔다:**
+
+| | `\|Σ\|` | `n` 최대 | 승자 | 답변 |
+|---|---|---|---|---|
+| [0202. Happy Number](../0202-happy-number/README.md) (09-09) | 810 | 21억 | 알파벳 | ❌ |
+| [0217. Contains Duplicate](../0217-contains-duplicate/README.md) (09-10) | 20억 | 10만 | `n` | ✅ |
+| **0349 (09-10)** | **1001** | **1000** | **`n`** | **✅** |
+
+→ [시간·공간 복잡도](../../concepts/complexity.md) 「`O(min(n, |Σ|))`」
+
+---
+
+#### 08-28 지적 두 개는 그대로
+
+**① 바깥 `new Set(...)` 이 여전히 불필요**
+
+```ts
+const intersection = new Set([...nums1Set].filter(x => nums2Set.has(x)))
+                     ^^^^^^^
+```
+
+`nums1Set` 은 **이미 중복이 없으므로** 걸러낸 결과도 중복이 없다.
+
+```
+바깥 Set 제거해도 결과 동일: 30만건 불일치 0건
+
+제출본 (Set 3개)       : 455ms
+바깥 Set 제거 (Set 2개) : 372ms      ← 18% 빠름
+```
+
+```ts
+return [...nums1Set].filter(x => nums2Set.has(x))    // Array.from() 도 같이 사라짐
+```
+
+**② 변수명 `intersection` 이 함수명을 가린다**(shadowing) — `common` 이나 `result` 로.
+
+> 두 지적 모두 08-28 노트에 적혀 있는데 이번에도 같은 코드로 왔다. 정답이라 카운트는 안 올리지만,
+> **복습 직후 이전 노트를 한 번 읽는 습관**이 있으면 이런 게 줄어든다.
+
+**판정**: 정답 · 복잡도 두 축 정확 · `|Σ|` 판단 성공 · 피드백 0회 → `1일` → **`3일` 단계** (다음 09-15)

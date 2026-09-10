@@ -23,7 +23,7 @@
 | 🟡 **#우연히맞는코드** | 2 | 08-03 | [0088. Merge Sorted Array](01-Array-String/0088-merge-sorted-array/README.md) · [0013. Roman to Integer](01-Array-String/0013-roman-to-integer/README.md) |
 | 🔴 **#쓰기포인터오해** | **3** | 08-12 | [0026. Remove Duplicates from Sorted Array](01-Array-String/0026-remove-duplicates-from-sorted-array/README.md) ×2 · [0088. Merge Sorted Array](01-Array-String/0088-merge-sorted-array/README.md) |
 | 🔴 **#인덱스오프바이원** | **4** | 08-19 | [0026. Remove Duplicates from Sorted Array](01-Array-String/0026-remove-duplicates-from-sorted-array/README.md) · [0028. Find the Index of the First Occurrence in a String](01-Array-String/0028-find-the-index-of-the-first-occurrence-in-a-string/README.md) · [2996. Smallest Missing Integer Greater Than Sequential Prefix Sum](02-Hashmap/2996-smallest-missing-integer-greater-than-sequential-prefix-sum/README.md) ×2 |
-| 🟡 **#그리디증명생략** | 2 | **08-28** | [0122. Best Time to Buy and Sell Stock II](01-Array-String/0122-best-time-to-buy-and-sell-stock-ii/README.md) · **[0011. Container With Most Water](03-Two-Pointers/0011-container-with-most-water/README.md)** |
+| 🔴 **#그리디증명생략** | **3** | **09-10** | [0122. Best Time to Buy and Sell Stock II](01-Array-String/0122-best-time-to-buy-and-sell-stock-ii/README.md) ×2 · [0011. Container With Most Water](03-Two-Pointers/0011-container-with-most-water/README.md) |
 | ⚪ **#센티널값** | 1 | 08-03 | [0121. Best Time to Buy and Sell Stock](01-Array-String/0121-best-time-to-buy-and-sell-stock/README.md) |
 | ⚪ **#함수참조vs호출** | 1 | 08-03 | [0125. Valid Palindrome](03-Two-Pointers/0125-valid-palindrome/README.md) |
 | ⚪ **#숨은반복문** | 1 | 08-03 | [0169. Majority Element](01-Array-String/0169-majority-element/README.md) |
@@ -330,9 +330,18 @@ map.set(k, (map.get(k) ?? 0) + 1)      // has 분기가 사라진다
 > 그리디로 **정답을 맞혔지만 왜 최적인지 설명하지 못한다.** "알기 때문에" 로 넘어간다.
 
 - 2026-08-27 [0122. Best Time to Buy and Sell Stock II](01-Array-String/0122-best-time-to-buy-and-sell-stock-ii/README.md) — *"이득 날 때마다 다 더한 게 무조건 최대라는 걸 알기 때문에"* → 결론은 맞지만 근거 없음
+- 2026-09-10 [0122. Best Time to Buy and Sell Stock II](01-Array-String/0122-best-time-to-buy-and-sell-stock-ii/README.md) — **같은 문제 2회째.** 시작 전에 *"「내가 ___ 하는 게 최대인 이유는 ___ 때문이다」 문장을 반드시 포함하라"* 고 **명시했는데도 코드만 제출.** 힌트 3회로 ①상한 ②달성을 완성
 - 2026-08-28 [0011. Container With Most Water](03-Two-Pointers/0011-container-with-most-water/README.md) — 투 포인터 코드는 첫 시도에 정확했으나 *"왜 짧은 쪽을 버려도 되는가"* 를 제시하지 않음. **힌트 2회**(높이 축 → 너비 축) 후 지배 논증 완성
 
-> **이틀 연속 같은 자리.** 진전은 있다 — 08-27은 논증이 아예 없었고, 08-28은 유도하니 두 축을 다 찾아냈다. 다만 **묻기 전에 먼저 나와야** 한다.
+> **세 번 다 코드는 첫 시도에 정확했다.** 빠지는 건 언제나 논증뿐이다.
+> 진전도 있다 — 08-27은 논증이 아예 없었고, 08-28·09-10은 유도하면 전부 찾아낸다. **아는데 먼저 말하지 않는다.**
+>
+> ### 🔑 상한 논법은 **두 단계 다** 말해야 한다 (2026-09-10 확정)
+> ```
+> ① 상한 : 어떤 답도 이 값을 못 넘는다        ← 대부분 여기까지는 나온다
+> ② 달성 : 그 값에 실제로 도달할 수 있다       ← 이걸 빠뜨린다
+> ```
+> **①만 하면 [0121. Best Time to Buy and Sell Stock](01-Array-String/0121-best-time-to-buy-and-sell-stock/README.md) 에서 틀린다.** 같은 상한 계산인데 거래 1회 제약 때문에 도달할 수 없어 답이 `7`이 아니라 `5`다.
 
 > 💡 **투 포인터 · 그리디 문제의 접근 서술에 이 한 줄을 고정으로 넣을 것:**
 > *"내가 버리는 후보는 ___ 때문에 지금 계산한 것보다 클 수 없다"*

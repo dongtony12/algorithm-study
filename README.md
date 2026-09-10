@@ -391,15 +391,15 @@ LeetCode 문제를 풀며 남긴 학습 기록입니다. **정답 코드만이 �
 | [0058. Length of Last Word](01-Array-String/0058-length-of-last-word/README.md) | 08-28 (복습2) | 7일 | 09-17 | 통과 · `O(1)` 유지, 지적 3건 전부 스타일 |
 | [0125. Valid Palindrome](03-Two-Pointers/0125-valid-palindrome/README.md) | 08-28 (복습2) | 7일 | 09-17 | 통과 · 피드백 0회, 실수 4개 **2연속** 미재발 |
 | [0011. Container With Most Water](03-Two-Pointers/0011-container-with-most-water/README.md) | 08-28 (복습1) | 3일 | 09-11 | 통과 · 코드 정확, 논증 힌트 2회 |
-| [0242. Valid Anagram](02-Hashmap/0242-valid-anagram/README.md) | 09-08 (복습1) | 1일 | 09-09 | ❌ 길이 검사 누락 → 수정 통과, 유지 |
+| [0242. Valid Anagram](02-Hashmap/0242-valid-anagram/README.md) | 09-10 (복습2) | 1일 | 09-11 | 정답 · 오답 미재발, 시간복잡도 힌트 1회 |
 | [0001. Two Sum](02-Hashmap/0001-two-sum/README.md) | 09-08 (복습1) | 3일 | 09-11 | 통과 · 피드백 0회, 조회 후 삽입 정확 |
 | [0205. Isomorphic Strings](02-Hashmap/0205-isomorphic-strings/README.md) | 08-27 (복습1) | 3일 | 09-10 | 통과 · 역방향 검사 획득, 공간복잡도 오판 |
-| [0122. Best Time to Buy and Sell Stock II](01-Array-String/0122-best-time-to-buy-and-sell-stock-ii/README.md) | 08-27 | 1일 | 09-08 | 신규 · 복습 0회 |
+| [0122. Best Time to Buy and Sell Stock II](01-Array-String/0122-best-time-to-buy-and-sell-stock-ii/README.md) | 09-10 (복습1) | 1일 | 09-11 | 코드 정답 · **논증 힌트 3회 → 유지** |
 | [0290. Word Pattern](02-Hashmap/0290-word-pattern/README.md) | 09-09 (복습2) | 3일 | 09-14 | 🎓 졸업판정 2/2 · 실수 미재발 |
 | [0202. Happy Number](02-Hashmap/0202-happy-number/README.md) | 09-09 (복습1) | 1일 | 09-10 | 로직 통과 · 공간복잡도 오판 → 유지 |
 | [0219. Contains Duplicate II](02-Hashmap/0219-contains-duplicate-ii/README.md) | 09-09 (복습1) | 3일 | 09-14 | 🎓 졸업판정 1/2 · 힌트 0 통과 |
-| [0217. Contains Duplicate](02-Hashmap/0217-contains-duplicate/README.md) | 08-26 | 1일 | 09-07 | 복습 0회 |
-| [0349. Intersection of Two Arrays](02-Hashmap/0349-intersection-of-two-arrays/README.md) | 08-28 | 1일 | 09-09 | 신규 · 복습 0회 |
+| [0217. Contains Duplicate](02-Hashmap/0217-contains-duplicate/README.md) | 09-10 (복습1) | 3일 | 09-15 | 통과 · 피드백 0회, 복잡도 정확 |
+| [0349. Intersection of Two Arrays](02-Hashmap/0349-intersection-of-two-arrays/README.md) | 09-10 (복습1) | 3일 | 09-15 | 통과 · 피드백 0회, 복잡도 두 축 정확 |
 | [0015. 3Sum](03-Two-Pointers/0015-3sum/README.md) | 09-09 | 1일 | 09-10 | 신규 · Medium, 중복 제거 ① 방향 재확인 |
 | [0387. First Unique Character in a String](02-Hashmap/0387-first-unique-character-in-a-string/README.md) | 09-08 | 1일 | 09-09 | 신규 · 복습 0회 |
 
