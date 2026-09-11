@@ -431,3 +431,77 @@ n = minJLength             가장 짧은 문자열 길이 (= 비교할 열의 �
 *"각 str의 비교할 **단어**의 개수"* 라고 답했는데 **"글자"** 가 맞고, 정확히는 **가장 짧은 문자열의 길이**다.
 
 **판정**: 피드백 0회 + 실수 미재발 + 복잡도 정확 → `1일` → **`3일` 단계** (다음 복습 08-29)
+
+### 2026-09-11 (4회차) — 통과 · **복잡도 곱셈 형태 첫 성공** · `3일` → `7일` 단계
+
+```
+고정 15/15  (빈 문자열 · 길이 1 · 전부 동일 · 접두사 없음 포함)
+랜덤 30만건 불일치 0건
+```
+
+```ts
+function longestCommonPrefix(strs: string[]): string {
+    const strLength = strs.length
+    let minWordLength = strs[0].length
+    let result = ''
+
+    for (let i = 0; i < strLength; i++) {
+        minWordLength = Math.min(minWordLength, strs[i].length)
+    }
+
+    for (let i = 0; i < minWordLength; i++) {
+        let currentChar = strs[0][i]
+        for (let j = 0; j < strLength; j++) {
+            if (strs[j][i] !== currentChar) return result
+        }
+        result += currentChar
+    }
+    return result
+}
+```
+
+#### ⭐ `#복잡도차원뭉개기` — 세 번째 만에 통과
+
+```
+08-03  O(n²)      ❌
+08-12  O(n²)      ❌  ("크기를 결정하는 값이 두 개다, 기호를 정의하라"고 명시한 뒤에도)
+09-11  O(m × n)   ✅   m = minWordLength,  n = strs.length
+```
+
+**측정 — 두 축을 각각 바꿔봄:**
+
+```
+n=200, m=200 전부동일  →  40,000회   (n×m = 40,000)
+n=2,   m=200           →     400회   (n×m = 400)
+n=200, m=2             →     400회   (n×m = 400)
+```
+
+정확히 곱에 비례한다.
+
+#### ⭐ `m = minWordLength` 라고 한 것이 핵심 — `#루프상한혼동` 클리어
+
+```
+m = minWordLength      ← strs[0].length 가 아니다
+n = strs.length
+```
+
+`strs[0].length` 로 잡았으면 **`["abcd","abc"]` 에서 범위를 벗어난다.**
+`#루프상한혼동`(2회)이 **이 문제에서만** 났던 이유가 정확히 그것. **기호를 고를 때부터 구분했다.**
+
+빈 문자열도 자연히 처리된다 — `minWordLength = 0` 이면 두 번째 루프가 안 돌고 `""` 를 반환.
+
+> 💡 **기호 정의를 답과 같이 줄 것.** `O(m × n)` 만 있으면 채점하는 쪽에서 *"m이 뭐지"* 를 되물어야 한다.
+> 면접에서는 그 되물음 자체가 감점이다. **`m = 최소 길이, n = 개수일 때 O(m × n)`** — 한 줄이면 끝난다.
+
+---
+
+#### 공간 `O(1)` — 맞다, 다만 문자열 누적 주의
+
+`result` 가 최대 `m` 만큼 자라지만 **그건 반환값**이다. 출력 공간은 관례상 제외하고,
+그 외에 쓰는 건 `minWordLength`·`currentChar` 같은 스칼라뿐.
+
+> ⚠️ `result += currentChar` 는 JS에서 **매번 새 문자열을 만든다**(문자열이 불변이라).
+> 최악 `O(m²)` 문자 복사가 일어날 수 있다. 이 문제는 `m ≤ 200` 이라 무관하지만,
+> **긴 문자열을 누적할 때는 배열에 모아 `join('')`** 하는 게 정석이다.
+
+**판정**: 정답 · 복잡도 곱셈 형태 첫 성공 · `#루프상한혼동` 클리어 · 빈 문자열 처리 · 피드백 0회 → `3일` → **`7일` 단계** (다음 09-22)

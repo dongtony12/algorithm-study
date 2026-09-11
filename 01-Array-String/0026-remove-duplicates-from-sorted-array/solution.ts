@@ -4,11 +4,10 @@ function removeDuplicates(nums: number[]): number {
 
     while (i < nums.length) {
         if (nums[i-1] !== nums[i]) {
-            nums[k] = nums[i]        // ← 쓰기 동작이 처음부터 있다
+            nums[k] = nums[i]
             k++
         }
         i++
     }
-
     return k
 }

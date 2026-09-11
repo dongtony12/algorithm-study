@@ -11,7 +11,7 @@
 | 태그 | 횟수 | 마지막 | 문제 |
 |---|---|---|---|
 | 🔴 **#죽은코드방치** | 4 | 08-03 | [0027. Remove Element](01-Array-String/0027-remove-element/README.md) · [0121. Best Time to Buy and Sell Stock](01-Array-String/0121-best-time-to-buy-and-sell-stock/README.md) · [0058. Length of Last Word](01-Array-String/0058-length-of-last-word/README.md) · [0125. Valid Palindrome](03-Two-Pointers/0125-valid-palindrome/README.md) |
-| 🔴 **#복잡도차원뭉개기** | **8** | **09-09** | [0014. Longest Common Prefix](01-Array-String/0014-longest-common-prefix/README.md) ×2 · [0028. Find the Index of the First Occurrence in a String](01-Array-String/0028-find-the-index-of-the-first-occurrence-in-a-string/README.md) · [0392. Is Subsequence](03-Two-Pointers/0392-is-subsequence/README.md) ×2 · [0001. Two Sum](02-Hashmap/0001-two-sum/README.md) · [2996. Smallest Missing Integer Greater Than Sequential Prefix Sum](02-Hashmap/2996-smallest-missing-integer-greater-than-sequential-prefix-sum/README.md) · [0290. Word Pattern](02-Hashmap/0290-word-pattern/README.md) |
+| 🔴 **#복잡도차원뭉개기** | **9** | **09-11** | [0014. Longest Common Prefix](01-Array-String/0014-longest-common-prefix/README.md) ×2 · [0028. Find the Index of the First Occurrence in a String](01-Array-String/0028-find-the-index-of-the-first-occurrence-in-a-string/README.md) · [0392. Is Subsequence](03-Two-Pointers/0392-is-subsequence/README.md) ×2 · [0001. Two Sum](02-Hashmap/0001-two-sum/README.md) · [2996. Smallest Missing Integer Greater Than Sequential Prefix Sum](02-Hashmap/2996-smallest-missing-integer-greater-than-sequential-prefix-sum/README.md) · [0290. Word Pattern](02-Hashmap/0290-word-pattern/README.md) · **[0088. Merge Sorted Array](01-Array-String/0088-merge-sorted-array/README.md)** |
 | 🟡 **#루프상한혼동** | 2 | 08-19 | [0014. Longest Common Prefix](01-Array-String/0014-longest-common-prefix/README.md) ×2 |
 | 🔴 **#패턴오적용** | **4** | **09-08** | [0392. Is Subsequence](03-Two-Pointers/0392-is-subsequence/README.md) · [0383. Ransom Note](02-Hashmap/0383-ransom-note/README.md) · [0290. Word Pattern](02-Hashmap/0290-word-pattern/README.md) · **[0242. Valid Anagram](02-Hashmap/0242-valid-anagram/README.md)** |
 | ⚪ **#복사후미변경** | 1 | 08-20 | [0383. Ransom Note](02-Hashmap/0383-ransom-note/README.md) |
@@ -58,6 +58,7 @@
 - 2026-08-12 [0014. Longest Common Prefix](01-Array-String/0014-longest-common-prefix/README.md) — **재발.** 복습에서 또 `O(n²)`. *"크기를 결정하는 값이 두 개다, 기호를 정의하라"* 고 **명시적으로 요청한 뒤에도** 뭉갬
 - 2026-08-18 [0001. Two Sum](02-Hashmap/0001-two-sum/README.md) — **반대 방향 실수.** 입력 배열이 **하나뿐인데** 축을 둘로 나눠 `O(m×n)` 이라 답함. 게다가 중첩 루프를 처음엔 `O(m+n)`(덧셈)으로 셌다
 - 2026-08-19 [2996. Smallest Missing Integer Greater Than Sequential Prefix Sum](02-Hashmap/2996-smallest-missing-integer-greater-than-sequential-prefix-sum/README.md) — **복습에서 재발.** 08-11에도 `O(M+n)` 으로 틀렸던 문제인데 또 `O(m+n)` → `O(m×n)`. 입력은 `nums` 하나뿐
+- 2026-09-11 [0088. Merge Sorted Array](01-Array-String/0088-merge-sorted-array/README.md) — **새로운 형태의 오판.** `0 <= m, n <= 200` 을 보고 *"상수니까"* `O(1)` 이라 답함. 지적 후 `O(n)` 으로 정정(정석 `O(m+n)` 보다 조인 답)
 - 2026-09-09 [0290. Word Pattern](02-Hashmap/0290-word-pattern/README.md) — 졸업 판정에서 `O(n)`/`O(n)`. `pattern` 을 고정하고 `s` 길이만 10배로 늘리자 159ms → 226ms. **`split` 과 문자열 키 해싱이 전체 문자 수에 비례** → `O(L)`, `L = s.length`
 - 2026-09-09 [0392. Is Subsequence](03-Two-Pointers/0392-is-subsequence/README.md) — **같은 문제 2회째.** 08-10에 *"`n` 이 `s`인지 `t`인지 정의 없음"* 을 지적받았는데 또 정의 없는 `O(n)` → `s length` (**오답**) → `O(m+n)` (**안 조여짐**) → `O(n)`. **힌트 3회 소진 → `3일` 단계 리셋**
 
@@ -83,7 +84,17 @@
 > 실측: `s=1, t=10000` → **10001회**. `s` 길이와 무관하게 `t` 를 끝까지 훑는다.
 > **`while` 조건만 보고 복잡도를 말하면 틀린다. 루프 몸통에서 "무조건 증가하는 변수"를 찾을 것.**
 
-> ⚠️ **8회 누적 — 압도적 1위.** [0014. Longest Common Prefix](01-Array-String/0014-longest-common-prefix/README.md) · [2996. Smallest Missing Integer Greater Than Sequential Prefix Sum](02-Hashmap/2996-smallest-missing-integer-greater-than-sequential-prefix-sum/README.md) · [0392. Is Subsequence](03-Two-Pointers/0392-is-subsequence/README.md) 는 **각각 2회씩** 같은 문제에서 반복했다.
+> ### 🔑 **Constraints에 상한이 있다 ≠ `O(1)`** (2026-09-11 추가)
+> ```
+> 0387 의 Map  :  상한이 자료구조 크기(알파벳 26)   →  n 이 커져도 26   →  O(1)
+> 0088 의 루프 :  상한이 입력 크기 n 자체            →  n 이 커지면 증가  →  O(n)
+> ```
+> **거의 모든 문제에 상한이 있다.** 그 논리면 전부 `O(1)` 이 된다.
+> `O(1)` 은 **"입력 크기와 무관하게 고정"** 일 때만. 복잡도는 *"기호가 커질 때 어떻게 증가하는가"* 이지
+> **기호의 최댓값을 대입하는 게 아니다.**
+> ⚠️ `O(min(n, |Σ|))` 를 반복해서 다룬 직후라 **상한 개념이 섞이기 쉽다.**
+
+> ⚠️ **9회 누적 — 압도적 1위.** [0014. Longest Common Prefix](01-Array-String/0014-longest-common-prefix/README.md) · [2996. Smallest Missing Integer Greater Than Sequential Prefix Sum](02-Hashmap/2996-smallest-missing-integer-greater-than-sequential-prefix-sum/README.md) · [0392. Is Subsequence](03-Two-Pointers/0392-is-subsequence/README.md) 는 **각각 2회씩** 같은 문제에서 반복했다.
 > **매번 지적받은 뒤에는 맞히지만, 처음 쓸 때 습관이 안 잡혀 있다.**
 > **코드를 보기 전에, 문제를 읽자마자 먼저 적을 것:**
 > ```

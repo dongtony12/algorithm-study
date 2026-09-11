@@ -403,12 +403,12 @@ LeetCode 문제를 풀며 남긴 학습 기록입니다. **정답 코드만이 �
 |---|---|---|---|---|
 | [0392. Is Subsequence](03-Two-Pointers/0392-is-subsequence/README.md) | 09-09 (복습2) | 1일 | 09-10 | 코드 정답 · **복잡도 힌트 3회 → 리셋** |
 | [2996. Smallest Missing Integer Greater Than Sequential Prefix Sum](02-Hashmap/2996-smallest-missing-integer-greater-than-sequential-prefix-sum/README.md) | 09-09 (복습3) | 3일 | 09-14 | 통과 · **과거 실패 3종 클리어** |
-| [0026. Remove Duplicates from Sorted Array](01-Array-String/0026-remove-duplicates-from-sorted-array/README.md) | 08-26 (복습3) | 3일 | 09-09 | 통과 · `#쓰기동작누락` 클리어 |
-| [0014. Longest Common Prefix](01-Array-String/0014-longest-common-prefix/README.md) | 08-26 (복습3) | 3일 | 09-09 | 통과 · `#루프상한혼동` 클리어 |
+| [0026. Remove Duplicates from Sorted Array](01-Array-String/0026-remove-duplicates-from-sorted-array/README.md) | 09-11 (복습4) | 7일 | 09-22 | 통과 · 피드백 0회, 인덱스 초기값 정확 |
+| [0014. Longest Common Prefix](01-Array-String/0014-longest-common-prefix/README.md) | 09-11 (복습4) | 7일 | 09-22 | 통과 · **복잡도 곱셈 형태 첫 성공** |
 | [0028. Find the Index of the First Occurrence in a String](01-Array-String/0028-find-the-index-of-the-first-occurrence-in-a-string/README.md) | 09-09 (복습3) | 7일 | 09-18 | 통과 · **복잡도 3연속 클리어** |
 | [0383. Ransom Note](02-Hashmap/0383-ransom-note/README.md) | 09-08 (복습2) | 3일 | 09-11 | 통과 · 피드백 0회, `#패턴오적용` 회피 |
 | [0167. Two Sum II - Input Array Is Sorted](03-Two-Pointers/0167-two-sum-ii-input-array-is-sorted/README.md) | 09-08 (복습2) | 3일 | 09-11 | 통과 · `return` 누락 미재발, 종료 조건 지적 |
-| [0088. Merge Sorted Array](01-Array-String/0088-merge-sorted-array/README.md) | 08-20 (복습2) | 7일 | 09-09 | 통과 · 피드백 0회, 실수 4개 2연속 미재발 |
+| [0088. Merge Sorted Array](01-Array-String/0088-merge-sorted-array/README.md) | 09-11 (복습3) | 1일 | 09-14 | 코드 완벽 · **시간복잡도 `O(1)` 오답 → 리셋** |
 | [0027. Remove Element](01-Array-String/0027-remove-element/README.md) | 08-26 (복습2) | 7일 | 09-15 | 통과 · 피드백 0회, 실수 2개 2연속 미재발 |
 | [0169. Majority Element](01-Array-String/0169-majority-element/README.md) | 08-27 (복습2) | 7일 | 09-16 | 통과 · 피드백 0회, 실수 5개 미재발 |
 | [0121. Best Time to Buy and Sell Stock](01-Array-String/0121-best-time-to-buy-and-sell-stock/README.md) | 08-27 (복습2) | 7일 | 09-16 | 통과 · 피드백 0회, 실수 4개 미재발 |
@@ -426,7 +426,7 @@ LeetCode 문제를 풀며 남긴 학습 기록입니다. **정답 코드만이 �
 | [0217. Contains Duplicate](02-Hashmap/0217-contains-duplicate/README.md) | 09-10 (복습1) | 3일 | 09-15 | 통과 · 피드백 0회, 복잡도 정확 |
 | [0349. Intersection of Two Arrays](02-Hashmap/0349-intersection-of-two-arrays/README.md) | 09-10 (복습1) | 3일 | 09-15 | 통과 · 피드백 0회, 복잡도 두 축 정확 |
 | [0015. 3Sum](03-Two-Pointers/0015-3sum/README.md) | 09-09 | 1일 | 09-10 | 신규 · Medium, 중복 제거 ① 방향 재확인 |
-| [0387. First Unique Character in a String](02-Hashmap/0387-first-unique-character-in-a-string/README.md) | 09-08 | 1일 | 09-09 | 신규 · 복습 0회 |
+| [0387. First Unique Character in a String](02-Hashmap/0387-first-unique-character-in-a-string/README.md) | 09-11 (복습1) | 3일 | 09-16 | 통과 · **공간복잡도 오판 교정** |
 
 ---
 

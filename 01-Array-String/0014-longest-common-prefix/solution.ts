@@ -1,27 +1,18 @@
 function longestCommonPrefix(strs: string[]): string {
-    let minJLength = strs[0].length
-    let prefix = ''
+    const strLength = strs.length
+    let minWordLength = strs[0].length
+    let result = ''
 
-    for (const str of strs) {
-        minJLength = Math.min(minJLength, str.length)
+    for (let i = 0; i < strLength; i++) {
+        minWordLength = Math.min(minWordLength, strs[i].length)
     }
 
-    // i는 글자들의 개수          ← ⚠️ "문자열의 개수" 가 맞다 (오기)
-    // i는 strs.length만큼 비교
-    // j는 각 글자들의 열을 하나씩 비교
-    // j는 minJLength만큼 비교
-
-    for (let j = 0; j < minJLength; j++) {         // j = 글자 위치 (열)
-        let char = strs[0][j]
-
-        for (let i = 0; i < strs.length; i++) {    // i = 문자열 번호 (행)
-            if (strs[i][j] !== char) {
-                return prefix
-            }
+    for (let i = 0; i < minWordLength; i++) {
+        let currentChar = strs[0][i]
+        for (let j = 0; j < strLength; j++) {
+            if (strs[j][i] !== currentChar) return result
         }
-
-        prefix += char
+        result += currentChar
     }
-
-    return prefix
+    return result
 }
